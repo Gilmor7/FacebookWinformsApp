@@ -36,6 +36,7 @@
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.LabelLikes = new System.Windows.Forms.Label();
             this.listBox3 = new System.Windows.Forms.ListBox();
@@ -43,7 +44,6 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -145,6 +145,14 @@
             this.tabPage2.Text = "Most Engaged Friends";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(768, 153);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(234, 74);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Most Active Overall (likes and comments)";
+            // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(502, 173);
@@ -160,7 +168,6 @@
             this.LabelLikes.Size = new System.Drawing.Size(200, 23);
             this.LabelLikes.TabIndex = 4;
             this.LabelLikes.Text = "Most Likes";
-            this.LabelLikes.Click += new System.EventHandler(this.LabelLikes_Click);
             // 
             // listBox3
             // 
@@ -197,7 +204,6 @@
             this.label2.Size = new System.Drawing.Size(1187, 89);
             this.label2.TabIndex = 0;
             this.label2.Text = "Discover which of your friends have been the most engaged with your posts recentl" + "y! See who\'s liking and commenting on your profile.";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // tabPage3
             // 
@@ -208,14 +214,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Find Matches";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(768, 153);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(234, 74);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Most Active Overall (likes and comments)";
             // 
             // FormMain
             // 
