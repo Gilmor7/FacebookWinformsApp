@@ -73,8 +73,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(831, 52);
             this.label1.TabIndex = 53;
-            this.label1.Text = "This is the AppID of \"Design Patterns App 2.4\". The grader will use it to test yo" +
-    "ur app.\r\nType here your own AppID to test it:";
+            this.label1.Text = "This is the AppID of \"Design Patterns App 2.4\". The grader will use it to test yo" + "ur app.\r\nType here your own AppID to test it:";
             // 
             // tabControl1
             // 
@@ -116,9 +115,10 @@
             // 
             this.textBoxAppID.Location = new System.Drawing.Point(317, 61);
             this.textBoxAppID.Name = "textBoxAppID";
+            this.textBoxAppID.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBoxAppID.Size = new System.Drawing.Size(237, 32);
             this.textBoxAppID.TabIndex = 54;
-            this.textBoxAppID.Text = "1450160541956417";
+            this.textBoxAppID.Text = "1444657766108962";
             // 
             // tabPage2
             // 
@@ -127,7 +127,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1235, 658);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Find Stockers";
+            this.tabPage2.Text = "Find Stalkers";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
@@ -157,7 +157,6 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.ResumeLayout(false);
-
         }
 
 		#endregion
