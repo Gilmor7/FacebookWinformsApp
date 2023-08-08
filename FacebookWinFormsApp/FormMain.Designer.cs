@@ -28,34 +28,206 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.buttonLogout = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageHome = new System.Windows.Forms.TabPage();
+            this.listBoxEvents = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.listBoxAlbums = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.listBoxPages = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.listBoxFriends = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.listBoxPosts = new System.Windows.Forms.ListBox();
+            this.buttonPost = new System.Windows.Forms.Button();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelUserName = new System.Windows.Forms.Label();
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
-            this.textBoxAppID = new System.Windows.Forms.TextBox();
+            this.buttonLogout = new System.Windows.Forms.Button();
+            this.buttonLogin = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonLogin
+            // tabControl1
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(18, 17);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(268, 32);
-            this.buttonLogin.TabIndex = 36;
-            this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            this.tabControl1.Controls.Add(this.tabPageHome);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1920, 1074);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // tabPageHome
+            // 
+            this.tabPageHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
+            this.tabPageHome.Controls.Add(this.listBoxEvents);
+            this.tabPageHome.Controls.Add(this.label5);
+            this.tabPageHome.Controls.Add(this.listBoxAlbums);
+            this.tabPageHome.Controls.Add(this.label4);
+            this.tabPageHome.Controls.Add(this.listBoxPages);
+            this.tabPageHome.Controls.Add(this.label3);
+            this.tabPageHome.Controls.Add(this.listBoxFriends);
+            this.tabPageHome.Controls.Add(this.label2);
+            this.tabPageHome.Controls.Add(this.listBoxPosts);
+            this.tabPageHome.Controls.Add(this.buttonPost);
+            this.tabPageHome.Controls.Add(this.textBoxStatus);
+            this.tabPageHome.Controls.Add(this.label1);
+            this.tabPageHome.Controls.Add(this.labelUserName);
+            this.tabPageHome.Controls.Add(this.pictureBoxProfile);
+            this.tabPageHome.Controls.Add(this.buttonLogout);
+            this.tabPageHome.Controls.Add(this.buttonLogin);
+            this.tabPageHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.tabPageHome.Location = new System.Drawing.Point(4, 35);
+            this.tabPageHome.Name = "tabPageHome";
+            this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHome.Size = new System.Drawing.Size(1912, 1035);
+            this.tabPageHome.TabIndex = 0;
+            this.tabPageHome.Text = "Home";
+            // 
+            // listBoxEvents
+            // 
+            this.listBoxEvents.FormattingEnabled = true;
+            this.listBoxEvents.ItemHeight = 26;
+            this.listBoxEvents.Location = new System.Drawing.Point(957, 357);
+            this.listBoxEvents.Name = "listBoxEvents";
+            this.listBoxEvents.Size = new System.Drawing.Size(289, 212);
+            this.listBoxEvents.TabIndex = 66;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label5.Location = new System.Drawing.Point(643, 325);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(301, 22);
+            this.label5.TabIndex = 65;
+            this.label5.Text = "(Click on an album to view it\'s cover)";
+            // 
+            // listBoxAlbums
+            // 
+            this.listBoxAlbums.FormattingEnabled = true;
+            this.listBoxAlbums.ItemHeight = 26;
+            this.listBoxAlbums.Location = new System.Drawing.Point(648, 357);
+            this.listBoxAlbums.Name = "listBoxAlbums";
+            this.listBoxAlbums.Size = new System.Drawing.Size(289, 212);
+            this.listBoxAlbums.TabIndex = 64;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label4.Location = new System.Drawing.Point(333, 325);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(293, 22);
+            this.label4.TabIndex = 63;
+            this.label4.Text = "(Click on a page to view it\'s picture)";
+            // 
+            // listBoxPages
+            // 
+            this.listBoxPages.FormattingEnabled = true;
+            this.listBoxPages.ItemHeight = 26;
+            this.listBoxPages.Location = new System.Drawing.Point(338, 357);
+            this.listBoxPages.Name = "listBoxPages";
+            this.listBoxPages.Size = new System.Drawing.Size(289, 212);
+            this.listBoxPages.TabIndex = 62;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label3.Location = new System.Drawing.Point(23, 325);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(299, 22);
+            this.label3.TabIndex = 61;
+            this.label3.Text = "(Click on a friend to view his picture)";
+            // 
+            // listBoxFriends
+            // 
+            this.listBoxFriends.FormattingEnabled = true;
+            this.listBoxFriends.ItemHeight = 26;
+            this.listBoxFriends.Location = new System.Drawing.Point(28, 357);
+            this.listBoxFriends.Name = "listBoxFriends";
+            this.listBoxFriends.Size = new System.Drawing.Size(289, 212);
+            this.listBoxFriends.TabIndex = 60;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label2.Location = new System.Drawing.Point(359, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(287, 22);
+            this.label2.TabIndex = 59;
+            this.label2.Text = "(Click on a post to view comments)";
+            // 
+            // listBoxPosts
+            // 
+            this.listBoxPosts.FormattingEnabled = true;
+            this.listBoxPosts.ItemHeight = 26;
+            this.listBoxPosts.Location = new System.Drawing.Point(364, 120);
+            this.listBoxPosts.Name = "listBoxPosts";
+            this.listBoxPosts.Size = new System.Drawing.Size(651, 186);
+            this.listBoxPosts.TabIndex = 58;
+            // 
+            // buttonPost
+            // 
+            this.buttonPost.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonPost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
+            this.buttonPost.Location = new System.Drawing.Point(1028, 11);
+            this.buttonPost.Name = "buttonPost";
+            this.buttonPost.Size = new System.Drawing.Size(86, 33);
+            this.buttonPost.TabIndex = 6;
+            this.buttonPost.Text = "Post";
+            this.buttonPost.UseVisualStyleBackColor = true;
+            // 
+            // textBoxStatus
+            // 
+            this.textBoxStatus.Location = new System.Drawing.Point(485, 15);
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.Size = new System.Drawing.Size(530, 32);
+            this.textBoxStatus.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(359, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 26);
+            this.label1.TabIndex = 57;
+            this.label1.Text = "Post Status:";
+            // 
+            // labelUserName
+            // 
+            this.labelUserName.AutoSize = true;
+            this.labelUserName.Location = new System.Drawing.Point(23, 108);
+            this.labelUserName.Name = "labelUserName";
+            this.labelUserName.Size = new System.Drawing.Size(217, 26);
+            this.labelUserName.TabIndex = 56;
+            this.labelUserName.Text = "No user logged in yet";
+            this.labelUserName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pictureBoxProfile
+            // 
+            this.pictureBoxProfile.Location = new System.Drawing.Point(18, 150);
+            this.pictureBoxProfile.Name = "pictureBoxProfile";
+            this.pictureBoxProfile.Size = new System.Drawing.Size(248, 156);
+            this.pictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxProfile.TabIndex = 55;
+            this.pictureBoxProfile.TabStop = false;
             // 
             // buttonLogout
             // 
+            this.buttonLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonLogout.Enabled = false;
+            this.buttonLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.buttonLogout.Location = new System.Drawing.Point(18, 57);
             this.buttonLogout.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLogout.Name = "buttonLogout";
@@ -65,112 +237,81 @@
             this.buttonLogout.UseVisualStyleBackColor = true;
             this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
-            // label1
+            // buttonLogin
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(314, 17);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(831, 52);
-            this.label1.TabIndex = 53;
-            this.label1.Text = "This is the AppID of \"Design Patterns App 2.4\". The grader will use it to test yo" +
-    "ur app.\r\nType here your own AppID to test it:";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1243, 697);
-            this.tabControl1.TabIndex = 54;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.pictureBoxProfile);
-            this.tabPage1.Controls.Add(this.textBoxAppID);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.buttonLogout);
-            this.tabPage1.Controls.Add(this.buttonLogin);
-            this.tabPage1.Location = new System.Drawing.Point(4, 35);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1235, 658);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Home";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // pictureBoxProfile
-            // 
-            this.pictureBoxProfile.Location = new System.Drawing.Point(18, 96);
-            this.pictureBoxProfile.Name = "pictureBoxProfile";
-            this.pictureBoxProfile.Size = new System.Drawing.Size(79, 78);
-            this.pictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxProfile.TabIndex = 55;
-            this.pictureBoxProfile.TabStop = false;
-            // 
-            // textBoxAppID
-            // 
-            this.textBoxAppID.Location = new System.Drawing.Point(317, 61);
-            this.textBoxAppID.Name = "textBoxAppID";
-            this.textBoxAppID.Size = new System.Drawing.Size(237, 32);
-            this.textBoxAppID.TabIndex = 54;
-            this.textBoxAppID.Text = "1450160541956417";
+            this.buttonLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
+            this.buttonLogin.Location = new System.Drawing.Point(18, 17);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(268, 32);
+            this.buttonLogin.TabIndex = 4;
+            this.buttonLogin.Text = "Login";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.tabPage2.Location = new System.Drawing.Point(4, 35);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1235, 658);
+            this.tabPage2.Size = new System.Drawing.Size(1913, 1035);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Find Stockers";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.tabPage3.Location = new System.Drawing.Point(4, 35);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1235, 658);
+            this.tabPage3.Size = new System.Drawing.Size(1913, 1035);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Find Matches";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1243, 697);
+            this.ClientSize = new System.Drawing.Size(1280, 716);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1295, 753);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Desktop Facebook";
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabPageHome.ResumeLayout(false);
+            this.tabPageHome.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.ResumeLayout(false);
 
         }
 
 		#endregion
-
-		private System.Windows.Forms.Button buttonLogin;
-		private System.Windows.Forms.Button buttonLogout;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox textBoxAppID;
-        private System.Windows.Forms.PictureBox pictureBoxProfile;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPageHome;
+        private System.Windows.Forms.PictureBox pictureBoxProfile;
+        private System.Windows.Forms.Button buttonLogout;
+        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Label labelUserName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonPost;
+        private System.Windows.Forms.TextBox textBoxStatus;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox listBoxPosts;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox listBoxFriends;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox listBoxAlbums;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox listBoxPages;
+        private System.Windows.Forms.ListBox listBoxEvents;
     }
 }
 

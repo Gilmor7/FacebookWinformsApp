@@ -13,6 +13,8 @@ namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
+        private const string k_NoUserLoggedInMessage = "No user logged in yet";
+
         public FormMain()
         {
             InitializeComponent();
@@ -48,8 +50,9 @@ namespace BasicFacebookFeatures
 
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
             {
-                buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
-                buttonLogin.BackColor = Color.LightGreen;
+                labelUserName.Text = $"Hello, {m_LoginResult.LoggedInUser.Name}";
+                //buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
+                //buttonLogin.BackColor = Color.LightGreen;
                 pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
                 buttonLogin.Enabled = false;
                 buttonLogout.Enabled = true;
@@ -59,8 +62,9 @@ namespace BasicFacebookFeatures
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
-            buttonLogin.Text = "Login";
-            buttonLogin.BackColor = buttonLogout.BackColor;
+            //buttonLogin.Text = "Login";
+            //buttonLogin.BackColor = buttonLogout.BackColor;
+            labelUserName.Text = k_NoUserLoggedInMessage;
             m_LoginResult = null;
             buttonLogin.Enabled = true;
             buttonLogout.Enabled = false;
