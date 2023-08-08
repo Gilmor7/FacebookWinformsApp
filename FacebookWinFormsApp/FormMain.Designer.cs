@@ -48,9 +48,16 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.listBoxPostComments = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -62,12 +69,16 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1920, 1074);
+            this.tabControl1.Size = new System.Drawing.Size(1921, 1074);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPageHome
             // 
             this.tabPageHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
+            this.tabPageHome.Controls.Add(this.listBoxPostComments);
+            this.tabPageHome.Controls.Add(this.pictureBox3);
+            this.tabPageHome.Controls.Add(this.pictureBox1);
+            this.tabPageHome.Controls.Add(this.pictureBox2);
             this.tabPageHome.Controls.Add(this.listBoxEvents);
             this.tabPageHome.Controls.Add(this.label5);
             this.tabPageHome.Controls.Add(this.listBoxAlbums);
@@ -88,7 +99,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 35);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(1912, 1035);
+            this.tabPageHome.Size = new System.Drawing.Size(1913, 1035);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             // 
@@ -270,12 +281,49 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Find Matches";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.pictureBox2.Location = new System.Drawing.Point(860, 503);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(89, 80);
+            this.pictureBox2.TabIndex = 68;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.pictureBox1.Location = new System.Drawing.Point(553, 503);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(89, 80);
+            this.pictureBox1.TabIndex = 69;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.pictureBox3.Location = new System.Drawing.Point(243, 503);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(89, 80);
+            this.pictureBox3.TabIndex = 70;
+            this.pictureBox3.TabStop = false;
+            // 
+            // listBoxPostComments
+            // 
+            this.listBoxPostComments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.listBoxPostComments.FormattingEnabled = true;
+            this.listBoxPostComments.ItemHeight = 26;
+            this.listBoxPostComments.Location = new System.Drawing.Point(957, 169);
+            this.listBoxPostComments.Name = "listBoxPostComments";
+            this.listBoxPostComments.Size = new System.Drawing.Size(289, 160);
+            this.listBoxPostComments.TabIndex = 71;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1280, 716);
+            this.ClientSize = new System.Drawing.Size(1921, 1074);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -287,6 +335,9 @@
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -312,6 +363,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBoxPages;
         private System.Windows.Forms.ListBox listBoxEvents;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ListBox listBoxPostComments;
     }
 }
 
