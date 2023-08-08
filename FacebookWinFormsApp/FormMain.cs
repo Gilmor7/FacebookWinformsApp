@@ -34,12 +34,16 @@ namespace BasicFacebookFeatures
         private void login()
         {
             m_LoginResult = FacebookService.Login(
-                /// (This is Desig Patter's App ID. replace it with your own)
-                textBoxAppID.Text,
-                /// requested permissions:
+                "1444657766108962",
                 "email",
-                "public_profile"
-                /// add any relevant permissions
+                "public_profile",
+                "user_gender",
+                "user_age_range",
+                "user_birthday",
+                "user_hometown",
+                "user_photos",
+                "user_posts",
+                "user_friends"
                 );
 
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
