@@ -47,6 +47,13 @@
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ButtonSelectFriend = new System.Windows.Forms.Button();
+            this.LabelFriends = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -263,13 +270,83 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.pictureBox1);
+            this.tabPage2.Controls.Add(this.ButtonSelectFriend);
+            this.tabPage2.Controls.Add(this.LabelFriends);
+            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.tabPage2.Location = new System.Drawing.Point(4, 35);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1913, 1035);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Find Stockers";
+            this.tabPage2.Text = "Friends Analytics";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(627, 307);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(231, 23);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Number of comments: ";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(627, 224);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(218, 23);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Number of likes:\r\n";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(301, 224);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(231, 260);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // ButtonSelectFriend
+            // 
+            this.ButtonSelectFriend.Location = new System.Drawing.Point(301, 504);
+            this.ButtonSelectFriend.Name = "ButtonSelectFriend";
+            this.ButtonSelectFriend.Size = new System.Drawing.Size(231, 62);
+            this.ButtonSelectFriend.TabIndex = 3;
+            this.ButtonSelectFriend.Text = "Select";
+            this.ButtonSelectFriend.UseVisualStyleBackColor = true;
+            // 
+            // LabelFriends
+            // 
+            this.LabelFriends.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelFriends.Location = new System.Drawing.Point(79, 169);
+            this.LabelFriends.Name = "LabelFriends";
+            this.LabelFriends.Size = new System.Drawing.Size(206, 37);
+            this.LabelFriends.TabIndex = 2;
+            this.LabelFriends.Text = "Friends:";
+            this.LabelFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 26;
+            this.listBox1.Location = new System.Drawing.Point(79, 224);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(206, 342);
+            this.listBox1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(23, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(1184, 101);
+            this.label2.TabIndex = 0;
+            this.label2.Text = resources.GetString("label2.Text");
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPage3
             // 
@@ -338,9 +415,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-
         }
+
+        private System.Windows.Forms.Button ButtonSelectFriend;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label LabelFriends;
+
+        private System.Windows.Forms.Label label2;
 
 		#endregion
 		private System.Windows.Forms.TabControl tabControl1;
