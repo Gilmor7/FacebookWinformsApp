@@ -89,8 +89,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\eEngagmentType.cs" />
-    <Compile Include="Features\FriendsAnalyticsFeature.cs" />
+    <Compile Include="Features\FriendsAnalyticsFeature\eEngagmentType.cs" />
+    <Compile Include="Features\FriendsAnalyticsFeature\FriendsAnalyticsFeature.cs" />
+    <Compile Include="Features\RelationshipFeature\RelationshipFeature.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
