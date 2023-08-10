@@ -32,7 +32,7 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
         {
             bool isSingle = i_PossibleMatch.RelationshipStatus == User.eRelationshipStatus.Single;
             bool isPreferencedGender = i_PossibleMatch.Gender == GenderPreference;
-            bool isHomeTownPreferenceConditionMet = !SameCityLimitPreference || i_PossibleMatch.Hometown.Name == SelectedFriend.Location.Name;
+            bool isHomeTownPreferenceConditionMet = !SameCityLimitPreference || i_PossibleMatch.Location.Name == SelectedFriend.Location.Name;
             bool isAgePreferenceMet = checkIfAgePreferenceIsMet(i_PossibleMatch);
             
             return isSingle && isPreferencedGender && isHomeTownPreferenceConditionMet && isAgePreferenceMet;
