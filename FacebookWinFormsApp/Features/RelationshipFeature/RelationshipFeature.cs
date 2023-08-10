@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
         public static User.eGender GenderPreference { get; set; }
         public static int MinAgePreference { get; set; }    // probably should check that age < 18 is not allowed if user is above 18 //
         public static int MaxAgePreference { get; set; }
-        public static bool SameHomeTownLimitPreference { get; set; }     // True if user wants to match with people from the same hometown //
+        public static bool SameCityLimitPreference { get; set; }     // True if user wants to match with people from the same hometown //
 
         public static FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
         {
@@ -32,7 +32,7 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
         {
             bool isSingle = i_PossibleMatch.RelationshipStatus == User.eRelationshipStatus.Single;
             bool isPreferencedGender = i_PossibleMatch.Gender == GenderPreference;
-            bool isHomeTownPreferenceConditionMet = !SameHomeTownLimitPreference || i_PossibleMatch.Hometown.Name == SelectedFriend.Hometown.Name;
+            bool isHomeTownPreferenceConditionMet = !SameCityLimitPreference || i_PossibleMatch.Hometown.Name == SelectedFriend.Location.Name;
             bool isAgePreferenceMet = checkIfAgePreferenceIsMet(i_PossibleMatch);
             
             return isSingle && isPreferencedGender && isHomeTownPreferenceConditionMet && isAgePreferenceMet;
