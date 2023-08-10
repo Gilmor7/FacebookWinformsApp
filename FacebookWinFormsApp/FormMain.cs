@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
@@ -14,14 +8,20 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private const string k_NoUserLoggedInMessage = "No user logged in yet";
-
+        private LoginResult m_LoginResult;
+        private User m_LoggedInUser;
+        
         public FormMain()
         {
             InitializeComponent();
-            FacebookWrapper.FacebookService.s_CollectionLimit = 25;
+            FacebookService.s_CollectionLimit = 25;
         }
 
-        FacebookWrapper.LoginResult m_LoginResult;
+        // protected override void OnShown(EventArgs e)
+        // {
+        //     base.OnShown(e);
+        //     fetchDataAndPopulateListBoxes();
+        // }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -50,24 +50,156 @@ namespace BasicFacebookFeatures
 
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
             {
+                m_LoggedInUser = m_LoginResult.LoggedInUser;
                 labelUserName.Text = $"Hello, {m_LoginResult.LoggedInUser.Name}";
-                //buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
-                //buttonLogin.BackColor = Color.LightGreen;
                 pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
                 buttonLogin.Enabled = false;
+                buttonLogin.Cursor = Cursors.No;
                 buttonLogout.Enabled = true;
+                buttonLogout.Cursor = Cursors.Hand;
+                fetchDataAndPopulateListBoxes();
             }
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
-            //buttonLogin.Text = "Login";
-            //buttonLogin.BackColor = buttonLogout.BackColor;
             labelUserName.Text = k_NoUserLoggedInMessage;
             m_LoginResult = null;
             buttonLogin.Enabled = true;
+            buttonLogin.Cursor = Cursors.Hand;
             buttonLogout.Enabled = false;
+            buttonLogout.Cursor = Cursors.No;
+        }
+
+        private void fetchDataAndPopulateListBoxes()
+        {
+            fetchPostsAndPopulateListBox();
+            fetchFriendsAndPopulateListBox();
+            fetchPagesAndPopulateListBox();
+            fetchAlbumsAndPopulateListBox();
+            fetchEventsAndPopulateListBox();
+        }
+
+        private void fetchPagesAndPopulateListBox()
+        {
+            listBoxPages.Items.Clear();
+            
+            try
+            {
+                foreach (Page page in m_LoggedInUser.LikedPages)
+                {
+                    listBoxPages.Items.Add(page.Name);
+                }
+
+                if (listBoxPages.Items.Count == 0)
+                {
+                    listBoxPages.Items.Add("There are no liked pages");
+                }
+            }
+            catch (Exception)
+            {
+                listBoxPages.Items.Add("Couldn't fetch liked pages");
+            }
+        }
+        
+        private void fetchAlbumsAndPopulateListBox()
+        {
+            listBoxAlbums.Items.Clear();
+            
+            try
+            {
+                foreach (Album album in m_LoggedInUser.Albums)
+                {
+                    listBoxAlbums.Items.Add(album.Name);
+                }
+
+                if (listBoxAlbums.Items.Count == 0)
+                {
+                    listBoxAlbums.Items.Add("There are no albums available");
+                }
+            }
+            catch (Exception)
+            {
+                listBoxAlbums.Items.Add("Couldn't fetch albums");
+            }
+        }
+
+        private void fetchFriendsAndPopulateListBox()
+        {
+            listBoxFriends.Items.Clear();
+            
+            try
+            {
+                foreach (User friend in m_LoggedInUser.Friends)
+                {
+                    listBoxFriends.Items.Add(friend.Name);
+                }
+
+                if (listBoxFriends.Items.Count == 0)
+                {
+                    listBoxFriends.Items.Add("There are no facebook friends available");
+                }
+            }
+            catch (Exception)
+            {
+                listBoxFriends.Items.Add("Couldn't fetch facebook friends");
+            }
+        }
+
+        private void fetchPostsAndPopulateListBox()
+        {
+            listBoxPosts.Items.Clear();
+            
+            try
+            {
+                foreach (Post post in m_LoggedInUser.Posts)
+                {
+                    if (post.Message != null)
+                    {
+                        listBoxPosts.Items.Add(post.Message);
+                    }
+                    else if (post.Caption != null)
+                    {
+                        listBoxPosts.Items.Add(post.Caption);
+                    }
+                    else
+                    {
+                        listBoxPosts.Items.Add(string.Format("[{0}]", post.Type));
+                    }
+                }
+
+                if (listBoxPosts.Items.Count == 0)
+                {
+                    listBoxPosts.Items.Add("There are no posts available");
+                }
+            }
+            catch (Exception)
+            {
+                listBoxPosts.Items.Add("Couldn't fetch posts");
+            }
+        }
+
+        private void fetchEventsAndPopulateListBox()
+        {
+            listBoxEvents.Items.Clear();
+            
+            try
+            {
+                foreach (Event facebookEvent in m_LoggedInUser.Events)
+                {
+                    listBoxEvents.Items.Add(facebookEvent.Name);
+                }
+
+                if (listBoxEvents.Items.Count == 0)
+                {
+                    listBoxEvents.Items.Add("There are no events available");
+                }
+            }
+            catch (Exception)
+            {
+                listBoxEvents.Items.Add("Couldn't fetch events");
+            }
         }
     }
 }
