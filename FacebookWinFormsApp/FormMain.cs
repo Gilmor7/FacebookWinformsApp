@@ -9,7 +9,8 @@ namespace BasicFacebookFeatures
     {
         private const string k_NoUserLoggedInMessage = "No user logged in yet";
         private const string k_DefaultListBoxDisplayMember = "Name";
-        private const string k_NoFirstStatusMessage = "This is my first status!";
+        private const string k_DefaultErrorCaption = "Error";
+        private const string k_DefaultSuccessCaption = "Success";
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
         
@@ -39,7 +40,7 @@ namespace BasicFacebookFeatures
                 "user_videos"
                 );
 
-            if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
+            if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
                 fetchUserInfo();
@@ -66,8 +67,10 @@ namespace BasicFacebookFeatures
             }
             else
             {
-                textBoxStatus.Text = k_NoFirstStatusMessage;
+                textBoxStatus.Text = "This is my first status!";
             }
+
+            textBoxStatus.SelectionLength = 0;
         }
 
         private void handleLogout()
@@ -266,6 +269,45 @@ namespace BasicFacebookFeatures
             }
         }
 
+        private void displayPostComments()
+        {
+            Post selectedPost = m_LoggedInUser.Posts[listBoxPosts.SelectedIndex];
+            FacebookObjectCollection<Comment> postComments = selectedPost.Comments;
+
+            listBoxPostComments.Items.Clear();
+            if (postComments.Count > 0)
+            {
+                listBoxPostComments.DataSource = postComments;
+                listBoxPostComments.DisplayMember = "Message";
+            }
+            else
+            {
+                listBoxPostComments.Items.Add("No comments available :(");
+            }
+        }
+
+        private void postStatus()
+        {
+            try
+            {
+                if (m_LoggedInUser != null)
+                {
+                    m_LoggedInUser.PostStatus(textBoxStatus.Text);
+                    MessageBox.Show("The status was Posted!", k_DefaultSuccessCaption);
+                    fetchPostsAndPopulateListBox();
+                }
+                else
+                {
+                    throw new Exception("You have to login first!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, k_DefaultErrorCaption);
+            }
+        }
+
         private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
         {
             displaySelectedFriendPhoto();
@@ -279,6 +321,16 @@ namespace BasicFacebookFeatures
         private void listBoxAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
             displaySelectedAlbumPhoto();
+        }
+
+        private void buttonPost_Click(object sender, EventArgs e)
+        {
+           postStatus();
+        }
+
+        private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displayPostComments();
         }
     }
 }
