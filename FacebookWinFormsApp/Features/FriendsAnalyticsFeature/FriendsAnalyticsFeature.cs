@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Features
+namespace BasicFacebookFeatures.Features.FriendsAnalyticsFeature
 {
     public static class FriendsAnalyticsFeature
     {
