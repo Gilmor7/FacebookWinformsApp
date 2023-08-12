@@ -32,9 +32,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageHome = new System.Windows.Forms.TabPage();
             this.listBoxPostComments = new System.Windows.Forms.ListBox();
-            this.pictureBoxAlbum = new System.Windows.Forms.PictureBox();
             this.pictureBoxFriend = new System.Windows.Forms.PictureBox();
             this.pictureBoxPage = new System.Windows.Forms.PictureBox();
+            this.pictureBoxAlbum = new System.Windows.Forms.PictureBox();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
@@ -62,9 +62,9 @@
             this.tabPageFindMatch = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPageHome.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabPageAnalytics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -79,16 +79,16 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1921, 1074);
+            this.tabControl1.Size = new System.Drawing.Size(1920, 1074);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPageHome
             // 
             this.tabPageHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.tabPageHome.Controls.Add(this.listBoxPostComments);
-            this.tabPageHome.Controls.Add(this.pictureBoxAlbum);
             this.tabPageHome.Controls.Add(this.pictureBoxFriend);
             this.tabPageHome.Controls.Add(this.pictureBoxPage);
+            this.tabPageHome.Controls.Add(this.pictureBoxAlbum);
             this.tabPageHome.Controls.Add(this.listBoxEvents);
             this.tabPageHome.Controls.Add(this.label5);
             this.tabPageHome.Controls.Add(this.listBoxAlbums);
@@ -109,7 +109,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 35);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(1913, 1035);
+            this.tabPageHome.Size = new System.Drawing.Size(1912, 1035);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             // 
@@ -123,38 +123,41 @@
             this.listBoxPostComments.Size = new System.Drawing.Size(289, 160);
             this.listBoxPostComments.TabIndex = 71;
             // 
-            // pictureBoxAlbum
-            // 
-            this.pictureBoxAlbum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
-            this.pictureBoxAlbum.Location = new System.Drawing.Point(243, 503);
-            this.pictureBoxAlbum.Name = "pictureBoxAlbum";
-            this.pictureBoxAlbum.Size = new System.Drawing.Size(89, 80);
-            this.pictureBoxAlbum.TabIndex = 70;
-            this.pictureBoxAlbum.TabStop = false;
-            // 
             // pictureBoxFriend
             // 
             this.pictureBoxFriend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
-            this.pictureBoxFriend.Location = new System.Drawing.Point(553, 503);
+            this.pictureBoxFriend.Location = new System.Drawing.Point(243, 531);
             this.pictureBoxFriend.Name = "pictureBoxFriend";
             this.pictureBoxFriend.Size = new System.Drawing.Size(89, 80);
-            this.pictureBoxFriend.TabIndex = 69;
+            this.pictureBoxFriend.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFriend.TabIndex = 70;
             this.pictureBoxFriend.TabStop = false;
             // 
             // pictureBoxPage
             // 
             this.pictureBoxPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
-            this.pictureBoxPage.Location = new System.Drawing.Point(860, 503);
+            this.pictureBoxPage.Location = new System.Drawing.Point(553, 531);
             this.pictureBoxPage.Name = "pictureBoxPage";
             this.pictureBoxPage.Size = new System.Drawing.Size(89, 80);
-            this.pictureBoxPage.TabIndex = 68;
+            this.pictureBoxPage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPage.TabIndex = 69;
             this.pictureBoxPage.TabStop = false;
+            // 
+            // pictureBoxAlbum
+            // 
+            this.pictureBoxAlbum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.pictureBoxAlbum.Location = new System.Drawing.Point(860, 531);
+            this.pictureBoxAlbum.Name = "pictureBoxAlbum";
+            this.pictureBoxAlbum.Size = new System.Drawing.Size(89, 80);
+            this.pictureBoxAlbum.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxAlbum.TabIndex = 68;
+            this.pictureBoxAlbum.TabStop = false;
             // 
             // listBoxEvents
             // 
             this.listBoxEvents.FormattingEnabled = true;
             this.listBoxEvents.ItemHeight = 26;
-            this.listBoxEvents.Location = new System.Drawing.Point(957, 357);
+            this.listBoxEvents.Location = new System.Drawing.Point(957, 385);
             this.listBoxEvents.Name = "listBoxEvents";
             this.listBoxEvents.Size = new System.Drawing.Size(289, 212);
             this.listBoxEvents.TabIndex = 66;
@@ -163,7 +166,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label5.Location = new System.Drawing.Point(643, 325);
+            this.label5.Location = new System.Drawing.Point(643, 353);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(301, 22);
             this.label5.TabIndex = 65;
@@ -173,16 +176,17 @@
             // 
             this.listBoxAlbums.FormattingEnabled = true;
             this.listBoxAlbums.ItemHeight = 26;
-            this.listBoxAlbums.Location = new System.Drawing.Point(648, 357);
+            this.listBoxAlbums.Location = new System.Drawing.Point(648, 385);
             this.listBoxAlbums.Name = "listBoxAlbums";
             this.listBoxAlbums.Size = new System.Drawing.Size(289, 212);
             this.listBoxAlbums.TabIndex = 64;
+            this.listBoxAlbums.SelectedIndexChanged += new System.EventHandler(this.listBoxAlbums_SelectedIndexChanged);
             // 
             // labelExtendView3
             // 
             this.labelExtendView3.AutoSize = true;
             this.labelExtendView3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.labelExtendView3.Location = new System.Drawing.Point(333, 325);
+            this.labelExtendView3.Location = new System.Drawing.Point(333, 353);
             this.labelExtendView3.Name = "labelExtendView3";
             this.labelExtendView3.Size = new System.Drawing.Size(293, 22);
             this.labelExtendView3.TabIndex = 63;
@@ -192,16 +196,17 @@
             // 
             this.listBoxPages.FormattingEnabled = true;
             this.listBoxPages.ItemHeight = 26;
-            this.listBoxPages.Location = new System.Drawing.Point(338, 357);
+            this.listBoxPages.Location = new System.Drawing.Point(338, 385);
             this.listBoxPages.Name = "listBoxPages";
             this.listBoxPages.Size = new System.Drawing.Size(289, 212);
             this.listBoxPages.TabIndex = 62;
+            this.listBoxPages.SelectedIndexChanged += new System.EventHandler(this.listBoxPages_SelectedIndexChanged);
             // 
             // labelExtendView2
             // 
             this.labelExtendView2.AutoSize = true;
             this.labelExtendView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.labelExtendView2.Location = new System.Drawing.Point(23, 325);
+            this.labelExtendView2.Location = new System.Drawing.Point(23, 353);
             this.labelExtendView2.Name = "labelExtendView2";
             this.labelExtendView2.Size = new System.Drawing.Size(299, 22);
             this.labelExtendView2.TabIndex = 61;
@@ -211,10 +216,11 @@
             // 
             this.listBoxFriends.FormattingEnabled = true;
             this.listBoxFriends.ItemHeight = 26;
-            this.listBoxFriends.Location = new System.Drawing.Point(28, 357);
+            this.listBoxFriends.Location = new System.Drawing.Point(28, 385);
             this.listBoxFriends.Name = "listBoxFriends";
             this.listBoxFriends.Size = new System.Drawing.Size(289, 212);
             this.listBoxFriends.TabIndex = 60;
+            this.listBoxFriends.SelectedIndexChanged += new System.EventHandler(this.listBoxFriends_SelectedIndexChanged);
             // 
             // labelExtendView1
             // 
@@ -409,7 +415,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1921, 1074);
+            this.ClientSize = new System.Drawing.Size(1280, 716);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -420,9 +426,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.tabPageAnalytics.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -461,9 +467,9 @@
         private System.Windows.Forms.Label labelExtendView3;
         private System.Windows.Forms.ListBox listBoxPages;
         private System.Windows.Forms.ListBox listBoxEvents;
-        private System.Windows.Forms.PictureBox pictureBoxAlbum;
         private System.Windows.Forms.PictureBox pictureBoxFriend;
         private System.Windows.Forms.PictureBox pictureBoxPage;
+        private System.Windows.Forms.PictureBox pictureBoxAlbum;
         private System.Windows.Forms.ListBox listBoxPostComments;
     }
 }

@@ -8,6 +8,8 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private const string k_NoUserLoggedInMessage = "No user logged in yet";
+        private const string k_DefaultListBoxDisplayMember = "Name";
+        private const string k_NoFirstStatusMessage = "This is my first status!";
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
         
@@ -17,51 +19,58 @@ namespace BasicFacebookFeatures
             FacebookService.s_CollectionLimit = 25;
         }
 
-        // protected override void OnShown(EventArgs e)
-        // {
-        //     base.OnShown(e);
-        //     fetchDataAndPopulateListBoxes();
-        // }
-
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText("design.patterns");
-
-            if (m_LoginResult == null)
-            {
-                login();
-            }
-        }
-
-        private void login()
+        private void loginAndPopulateUserData()
         {
             m_LoginResult = FacebookService.Login(
                 "1444657766108962",
                 "email",
                 "public_profile",
-                "user_gender",
                 "user_age_range",
                 "user_birthday",
+                "user_events",
+                "user_friends",
+                "user_gender",
                 "user_hometown",
+                "user_likes",
+                "user_link",
+                "user_location",
                 "user_photos",
                 "user_posts",
-                "user_friends"
+                "user_videos"
                 );
 
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
             {
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
-                labelUserName.Text = $"Hello, {m_LoginResult.LoggedInUser.Name}";
-                pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
+                fetchUserInfo();
                 buttonLogin.Enabled = false;
                 buttonLogin.Cursor = Cursors.No;
                 buttonLogout.Enabled = true;
                 buttonLogout.Cursor = Cursors.Hand;
                 fetchDataAndPopulateListBoxes();
             }
+            else
+            {
+                MessageBox.Show(m_LoginResult.ErrorMessage, "Login Failed");
+            }
         }
 
-        private void buttonLogout_Click(object sender, EventArgs e)
+        private void fetchUserInfo()
+        {
+            labelUserName.Text = $"Hello, {m_LoggedInUser.Name}";
+            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
+
+            if (m_LoggedInUser.Posts.Count > 0 && m_LoggedInUser.Posts[0].Message != null)
+            {
+                textBoxStatus.Text = m_LoggedInUser.Posts[0].Message;
+            }
+            else
+            {
+                textBoxStatus.Text = k_NoFirstStatusMessage;
+            }
+        }
+
+        private void handleLogout()
         {
             FacebookService.LogoutWithUI();
             labelUserName.Text = k_NoUserLoggedInMessage;
@@ -70,6 +79,21 @@ namespace BasicFacebookFeatures
             buttonLogin.Cursor = Cursors.Hand;
             buttonLogout.Enabled = false;
             buttonLogout.Cursor = Cursors.No;
+        }
+        
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText("design.patterns");
+
+            if (m_LoginResult == null)
+            {
+                loginAndPopulateUserData();
+            }
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            handleLogout();
         }
 
         private void fetchDataAndPopulateListBoxes()
@@ -84,12 +108,13 @@ namespace BasicFacebookFeatures
         private void fetchPagesAndPopulateListBox()
         {
             listBoxPages.Items.Clear();
+            listBoxPages.DisplayMember = k_DefaultListBoxDisplayMember;
             
             try
             {
                 foreach (Page page in m_LoggedInUser.LikedPages)
                 {
-                    listBoxPages.Items.Add(page.Name);
+                    listBoxPages.Items.Add(page);
                 }
 
                 if (listBoxPages.Items.Count == 0)
@@ -106,12 +131,13 @@ namespace BasicFacebookFeatures
         private void fetchAlbumsAndPopulateListBox()
         {
             listBoxAlbums.Items.Clear();
+            listBoxAlbums.DisplayMember = k_DefaultListBoxDisplayMember;
             
             try
             {
                 foreach (Album album in m_LoggedInUser.Albums)
                 {
-                    listBoxAlbums.Items.Add(album.Name);
+                    listBoxAlbums.Items.Add(album);
                 }
 
                 if (listBoxAlbums.Items.Count == 0)
@@ -128,12 +154,13 @@ namespace BasicFacebookFeatures
         private void fetchFriendsAndPopulateListBox()
         {
             listBoxFriends.Items.Clear();
+            listBoxFriends.DisplayMember = k_DefaultListBoxDisplayMember;
             
             try
             {
                 foreach (User friend in m_LoggedInUser.Friends)
                 {
-                    listBoxFriends.Items.Add(friend.Name);
+                    listBoxFriends.Items.Add(friend);
                 }
 
                 if (listBoxFriends.Items.Count == 0)
@@ -150,7 +177,7 @@ namespace BasicFacebookFeatures
         private void fetchPostsAndPopulateListBox()
         {
             listBoxPosts.Items.Clear();
-            
+
             try
             {
                 foreach (Post post in m_LoggedInUser.Posts)
@@ -183,12 +210,13 @@ namespace BasicFacebookFeatures
         private void fetchEventsAndPopulateListBox()
         {
             listBoxEvents.Items.Clear();
+            listBoxEvents.DisplayMember = k_DefaultListBoxDisplayMember;
             
             try
             {
                 foreach (Event facebookEvent in m_LoggedInUser.Events)
                 {
-                    listBoxEvents.Items.Add(facebookEvent.Name);
+                    listBoxEvents.Items.Add(facebookEvent);
                 }
 
                 if (listBoxEvents.Items.Count == 0)
@@ -200,6 +228,57 @@ namespace BasicFacebookFeatures
             {
                 listBoxEvents.Items.Add("Couldn't fetch events");
             }
+        }
+
+        private void displaySelectedFriendPhoto()
+        {
+            if (listBoxFriends.SelectedItems.Count == 1)
+            {
+                User selectedFriend = listBoxFriends.SelectedItem as User;
+                if(selectedFriend != null)
+                {
+                    pictureBoxFriend.LoadAsync(selectedFriend.PictureSmallURL);
+                }
+            }
+        }
+        
+        private void displaySelectedPagePhoto()
+        {
+            if (listBoxPages.SelectedItems.Count == 1)
+            {
+                Page selectedPage = listBoxPages.SelectedItem as Page;
+                if(selectedPage != null)
+                {
+                    pictureBoxPage.LoadAsync(selectedPage.PictureSmallURL);
+                }
+            }
+        }
+        
+        private void displaySelectedAlbumPhoto()
+        {
+            if (listBoxAlbums.SelectedItems.Count == 1)
+            {
+                Album selectedAlbum = listBoxAlbums.SelectedItem as Album;
+                if(selectedAlbum != null)
+                {
+                    pictureBoxAlbum.LoadAsync(selectedAlbum.PictureSmallURL);
+                }
+            }
+        }
+
+        private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displaySelectedFriendPhoto();
+        }
+
+        private void listBoxPages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displaySelectedPagePhoto();
+        }
+
+        private void listBoxAlbums_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displaySelectedAlbumPhoto();
         }
     }
 }
