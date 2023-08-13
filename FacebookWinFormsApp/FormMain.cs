@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
@@ -22,23 +23,29 @@ namespace BasicFacebookFeatures
 
         private void loginAndPopulateUserData()
         {
-            m_LoginResult = FacebookService.Login(
-                "1444657766108962",
-                "email",
-                "public_profile",
-                "user_age_range",
-                "user_birthday",
-                "user_events",
-                "user_friends",
-                "user_gender",
-                "user_hometown",
-                "user_likes",
-                "user_link",
-                "user_location",
-                "user_photos",
-                "user_posts",
-                "user_videos"
-                );
+            try
+            {
+                m_LoginResult = FacebookService.Login(
+                    "1444657766108962",
+                    "email",
+                    "public_profile",
+                    "user_age_range",
+                    "user_birthday",
+                    "user_events",
+                    "user_friends",
+                    "user_gender",
+                    "user_hometown",
+                    "user_likes",
+                    "user_link",
+                    "user_location",
+                    "user_photos",
+                    "user_posts",
+                    "user_videos");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
@@ -157,6 +164,8 @@ namespace BasicFacebookFeatures
         private void fetchFriendsAndPopulateListBox()
         {
             listBoxFriends.Items.Clear();
+            ListBoxFriendsAnalytics.Items.Clear();
+            ListBoxFriendsAnalytics.DisplayMember = k_DefaultListBoxDisplayMember;
             listBoxFriends.DisplayMember = k_DefaultListBoxDisplayMember;
             
             try
@@ -164,16 +173,19 @@ namespace BasicFacebookFeatures
                 foreach (User friend in m_LoggedInUser.Friends)
                 {
                     listBoxFriends.Items.Add(friend);
+                    ListBoxFriendsAnalytics.Items.Add(friend);
                 }
 
                 if (listBoxFriends.Items.Count == 0)
                 {
                     listBoxFriends.Items.Add("There are no facebook friends available");
+                    ListBoxFriendsAnalytics.Items.Add("There are no facebook friends available");
                 }
             }
             catch (Exception)
             {
                 listBoxFriends.Items.Add("Couldn't fetch facebook friends");
+                ListBoxFriendsAnalytics.Items.Add("Couldn't fetch facebook friends");
             }
         }
 
@@ -331,6 +343,44 @@ namespace BasicFacebookFeatures
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
             displayPostComments();
+        }
+
+        private void ButtonSelectFriend_Click(object sender, EventArgs e)
+        {
+            showSelectedFriendsAnalytics();
+        }
+
+        private void showSelectedFriendsAnalytics()
+        {
+            if (ListBoxFriendsAnalytics.SelectedItems.Count == 1)
+            {
+                User selectedFriend = ListBoxFriendsAnalytics.SelectedItem as User;
+                try
+                {
+                    if(selectedFriend != null)
+                    {
+                        PictureBoxFriendsAnalytics.LoadAsync(selectedFriend.PictureNormalURL);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Couldn't fetch friend's profile picture");
+                }
+
+                int numOfLikes = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
+                    m_LoggedInUser,
+                    selectedFriend,
+                    eEngagmentType.Likes);
+                int numOfComments = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
+                    m_LoggedInUser,
+                    selectedFriend,
+                    eEngagmentType.Comments);
+                int numOfAll = numOfLikes + numOfComments;
+                
+                LabelLikesNum.Text = numOfLikes.ToString();
+                LabelCommentsNum.Text = numOfComments.ToString();
+                LabelOverallEngagments.Text = $"The user {selectedFriend.Name} has {numOfAll} engagments with you";
+            }
         }
     }
 }
