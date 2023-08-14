@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
+using BasicFacebookFeatures.Features.RelationshipFeature;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
@@ -165,8 +166,10 @@ namespace BasicFacebookFeatures
         {
             listBoxFriends.Items.Clear();
             ListBoxFriendsAnalytics.Items.Clear();
+            ListBoxRelationship.Items.Clear();
             ListBoxFriendsAnalytics.DisplayMember = k_DefaultListBoxDisplayMember;
             listBoxFriends.DisplayMember = k_DefaultListBoxDisplayMember;
+            ListBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
             
             try
             {
@@ -174,18 +177,21 @@ namespace BasicFacebookFeatures
                 {
                     listBoxFriends.Items.Add(friend);
                     ListBoxFriendsAnalytics.Items.Add(friend);
+                    ListBoxRelationship.Items.Add(friend);
                 }
 
                 if (listBoxFriends.Items.Count == 0)
                 {
                     listBoxFriends.Items.Add("There are no facebook friends available");
                     ListBoxFriendsAnalytics.Items.Add("There are no facebook friends available");
+                    ListBoxRelationship.Items.Add("There are no facebook friends available");
                 }
             }
             catch (Exception)
             {
                 listBoxFriends.Items.Add("Couldn't fetch facebook friends");
                 ListBoxFriendsAnalytics.Items.Add("Couldn't fetch facebook friends");
+                ListBoxRelationship.Items.Add("Couldn't fetch facebook friends");
             }
         }
 
@@ -382,6 +388,59 @@ namespace BasicFacebookFeatures
                 LabelLikesNum.Text = numOfLikes.ToString();
                 LabelCommentsNum.Text = numOfComments.ToString();
                 LabelOverallEngagments.Text = $"The user {selectedFriend.Name} has {numOfAll} engagments with you";
+            }
+        }
+        
+        private void ListBoxRelationship_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ListBoxRelationship.SelectedItems.Count == 1)
+            {
+                User selectedFriend = ListBoxRelationship.SelectedItem as User;
+                if(selectedFriend != null)
+                {
+                    RelationshipFeature.SelectedFriend = selectedFriend;
+                }
+            }
+        }
+
+        private void CheckBoxMale_CheckedChanged(object sender, EventArgs e)
+        {
+            RelationshipFeature.InterestedInMales = CheckBoxMale.Checked;
+        }
+
+        private void CheckBoxFemale_CheckedChanged(object sender, EventArgs e)
+        {
+            RelationshipFeature.InterestedInFemales = CheckBoxFemale.Checked;
+        }
+
+        private void checkBoxSameCity_CheckedChanged(object sender, EventArgs e)
+        {
+            RelationshipFeature.SameCityLimitPreference = checkBoxSameCity.Checked;
+        }
+
+        private void numericUpDownMinAge_ValueChanged(object sender, EventArgs e)
+        {
+            RelationshipFeature.MinAgePreference = (int)numericUpDownMinAge.Value;
+        }
+
+        private void numericUpDownMaxAge_ValueChanged(object sender, EventArgs e)
+        {
+            RelationshipFeature.MaxAgePreference = (int)numericUpDownMaxAge.Value;
+        }
+
+        private void buttonSubmit_Click(object sender, EventArgs e)
+        {
+            FacebookObjectCollection<User> possibleMathces = RelationshipFeature.FindMatchesBasedOnPreferences();
+
+            listBoxMatches.Items.Clear();
+            if (possibleMathces.Count > 0)
+            {
+                listBoxMatches.DataSource = possibleMathces;
+                listBoxMatches.DisplayMember = "Name";
+            }
+            else
+            {
+                listBoxMatches.Items.Add("No matches found :(");
             }
         }
     }

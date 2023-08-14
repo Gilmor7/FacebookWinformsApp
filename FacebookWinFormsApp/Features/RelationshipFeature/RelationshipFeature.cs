@@ -59,5 +59,10 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
             
             return isAgePreferenceMet;
         }
+
+        public static bool IsAgeRangeValid()
+        {
+            return MaxAgePreference > MinAgePreference;
+        }
     }
 }
