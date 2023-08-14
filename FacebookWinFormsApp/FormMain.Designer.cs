@@ -411,7 +411,7 @@
             this.tabPageAnalytics.Location = new System.Drawing.Point(4, 35);
             this.tabPageAnalytics.Name = "tabPageAnalytics";
             this.tabPageAnalytics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAnalytics.Size = new System.Drawing.Size(2045, 1193);
+            this.tabPageAnalytics.Size = new System.Drawing.Size(1916, 1011);
             this.tabPageAnalytics.TabIndex = 1;
             this.tabPageAnalytics.Text = "Friends Analytics";
             // 
@@ -588,19 +588,20 @@
             // numericUpDownMaxAge
             // 
             this.numericUpDownMaxAge.Location = new System.Drawing.Point(780, 215);
+            this.numericUpDownMaxAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             this.numericUpDownMaxAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMaxAge.Name = "numericUpDownMaxAge";
-            this.numericUpDownMaxAge.Size = new System.Drawing.Size(50, 32);
+            this.numericUpDownMaxAge.Size = new System.Drawing.Size(65, 32);
             this.numericUpDownMaxAge.TabIndex = 10;
-            this.numericUpDownMaxAge.Value = new decimal(new int[] { 25, 0, 0, 0 });
+            this.numericUpDownMaxAge.Value = new decimal(new int[] { 120, 0, 0, 0 });
             this.numericUpDownMaxAge.ValueChanged += new System.EventHandler(this.numericUpDownMaxAge_ValueChanged);
             // 
             // numericUpDownMinAge
             // 
-            this.numericUpDownMinAge.Location = new System.Drawing.Point(782, 152);
+            this.numericUpDownMinAge.Location = new System.Drawing.Point(780, 152);
             this.numericUpDownMinAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMinAge.Name = "numericUpDownMinAge";
-            this.numericUpDownMinAge.Size = new System.Drawing.Size(48, 32);
+            this.numericUpDownMinAge.Size = new System.Drawing.Size(65, 32);
             this.numericUpDownMinAge.TabIndex = 9;
             this.numericUpDownMinAge.Value = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMinAge.ValueChanged += new System.EventHandler(this.numericUpDownMinAge_ValueChanged);
