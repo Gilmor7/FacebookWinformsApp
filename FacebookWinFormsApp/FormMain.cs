@@ -424,6 +424,17 @@ namespace BasicFacebookFeatures
             }
         }
 
+        private void lowerMaxAgeToMinAgeIfNeeded()
+        {
+            int minAge = (int)numericUpDownMinAge.Value;
+            int maxAge = (int)numericUpDownMaxAge.Value;
+
+            if(maxAge < minAge)
+            {
+                numericUpDownMaxAge.Value = minAge;
+            }
+        }
+
         private void CheckBoxMale_CheckedChanged(object sender, EventArgs e)
         {
             RelationshipFeature.InterestedInMales = CheckBoxMale.Checked;
@@ -442,11 +453,13 @@ namespace BasicFacebookFeatures
         private void numericUpDownMinAge_ValueChanged(object sender, EventArgs e)
         {
             RelationshipFeature.MinAgePreference = (int)numericUpDownMinAge.Value;
+            lowerMaxAgeToMinAgeIfNeeded();
         }
 
         private void numericUpDownMaxAge_ValueChanged(object sender, EventArgs e)
         {
             RelationshipFeature.MaxAgePreference = (int)numericUpDownMaxAge.Value;
+            lowerMaxAgeToMinAgeIfNeeded();
         }
 
         private void buttonSubmit_Click(object sender, EventArgs e)
