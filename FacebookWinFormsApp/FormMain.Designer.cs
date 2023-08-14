@@ -68,6 +68,16 @@
             this.ListBoxFriendsAnalytics = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPageFindMatch = new System.Windows.Forms.TabPage();
+            this.buttonSubmit = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.listBoxMatches = new System.Windows.Forms.ListBox();
+            this.labelMaxAge = new System.Windows.Forms.Label();
+            this.labelMinAge = new System.Windows.Forms.Label();
+            this.numericUpDownMaxAge = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownMinAge = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxSameCity = new System.Windows.Forms.CheckBox();
+            this.labelCityPref = new System.Windows.Forms.Label();
+            this.labelAgePref = new System.Windows.Forms.Label();
             this.LabelGender = new System.Windows.Forms.Label();
             this.CheckBoxFemale = new System.Windows.Forms.CheckBox();
             this.CheckBoxMale = new System.Windows.Forms.CheckBox();
@@ -83,6 +93,8 @@
             this.tabPageAnalytics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFriendsAnalytics)).BeginInit();
             this.tabPageFindMatch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxAge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinAge)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -90,11 +102,12 @@
             this.tabControl1.Controls.Add(this.tabPageHome);
             this.tabControl1.Controls.Add(this.tabPageAnalytics);
             this.tabControl1.Controls.Add(this.tabPageFindMatch);
+            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1921, 1050);
+            this.tabControl1.Size = new System.Drawing.Size(2053, 1232);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPageHome
@@ -129,7 +142,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 35);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(1913, 1011);
+            this.tabPageHome.Size = new System.Drawing.Size(2045, 1210);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             // 
@@ -398,7 +411,7 @@
             this.tabPageAnalytics.Location = new System.Drawing.Point(4, 35);
             this.tabPageAnalytics.Name = "tabPageAnalytics";
             this.tabPageAnalytics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAnalytics.Size = new System.Drawing.Size(1913, 1011);
+            this.tabPageAnalytics.Size = new System.Drawing.Size(2039, 1193);
             this.tabPageAnalytics.TabIndex = 1;
             this.tabPageAnalytics.Text = "Friends Analytics";
             // 
@@ -498,6 +511,16 @@
             // tabPageFindMatch
             // 
             this.tabPageFindMatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
+            this.tabPageFindMatch.Controls.Add(this.buttonSubmit);
+            this.tabPageFindMatch.Controls.Add(this.label1);
+            this.tabPageFindMatch.Controls.Add(this.listBoxMatches);
+            this.tabPageFindMatch.Controls.Add(this.labelMaxAge);
+            this.tabPageFindMatch.Controls.Add(this.labelMinAge);
+            this.tabPageFindMatch.Controls.Add(this.numericUpDownMaxAge);
+            this.tabPageFindMatch.Controls.Add(this.numericUpDownMinAge);
+            this.tabPageFindMatch.Controls.Add(this.checkBoxSameCity);
+            this.tabPageFindMatch.Controls.Add(this.labelCityPref);
+            this.tabPageFindMatch.Controls.Add(this.labelAgePref);
             this.tabPageFindMatch.Controls.Add(this.LabelGender);
             this.tabPageFindMatch.Controls.Add(this.CheckBoxFemale);
             this.tabPageFindMatch.Controls.Add(this.CheckBoxMale);
@@ -507,38 +530,143 @@
             this.tabPageFindMatch.Location = new System.Drawing.Point(4, 35);
             this.tabPageFindMatch.Name = "tabPageFindMatch";
             this.tabPageFindMatch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFindMatch.Size = new System.Drawing.Size(1913, 1011);
+            this.tabPageFindMatch.Size = new System.Drawing.Size(2045, 1193);
             this.tabPageFindMatch.TabIndex = 2;
             this.tabPageFindMatch.Text = "Find Matches";
+            // 
+            // buttonSubmit
+            // 
+            this.buttonSubmit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSubmit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
+            this.buttonSubmit.Location = new System.Drawing.Point(599, 437);
+            this.buttonSubmit.Name = "buttonSubmit";
+            this.buttonSubmit.Size = new System.Drawing.Size(231, 62);
+            this.buttonSubmit.TabIndex = 15;
+            this.buttonSubmit.Text = "Do The Magic !";
+            this.buttonSubmit.UseVisualStyleBackColor = true;
+            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
+            // 
+            // label1
+            // 
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.label1.Location = new System.Drawing.Point(1163, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(237, 36);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Possible Mathces";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // listBoxMatches
+            // 
+            this.listBoxMatches.FormattingEnabled = true;
+            this.listBoxMatches.ItemHeight = 26;
+            this.listBoxMatches.Location = new System.Drawing.Point(1163, 138);
+            this.listBoxMatches.Name = "listBoxMatches";
+            this.listBoxMatches.Size = new System.Drawing.Size(237, 576);
+            this.listBoxMatches.TabIndex = 13;
+            // 
+            // labelMaxAge
+            // 
+            this.labelMaxAge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.labelMaxAge.Location = new System.Drawing.Point(617, 206);
+            this.labelMaxAge.Name = "labelMaxAge";
+            this.labelMaxAge.Size = new System.Drawing.Size(163, 41);
+            this.labelMaxAge.TabIndex = 12;
+            this.labelMaxAge.Text = "Maximum age:";
+            this.labelMaxAge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelMinAge
+            // 
+            this.labelMinAge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.labelMinAge.Location = new System.Drawing.Point(617, 143);
+            this.labelMinAge.Name = "labelMinAge";
+            this.labelMinAge.Size = new System.Drawing.Size(152, 41);
+            this.labelMinAge.TabIndex = 11;
+            this.labelMinAge.Text = "Minimum age:";
+            this.labelMinAge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numericUpDownMaxAge
+            // 
+            this.numericUpDownMaxAge.Location = new System.Drawing.Point(780, 215);
+            this.numericUpDownMaxAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
+            this.numericUpDownMaxAge.Name = "numericUpDownMaxAge";
+            this.numericUpDownMaxAge.Size = new System.Drawing.Size(50, 32);
+            this.numericUpDownMaxAge.TabIndex = 10;
+            this.numericUpDownMaxAge.Value = new decimal(new int[] { 25, 0, 0, 0 });
+            this.numericUpDownMaxAge.ValueChanged += new System.EventHandler(this.numericUpDownMaxAge_ValueChanged);
+            // 
+            // numericUpDownMinAge
+            // 
+            this.numericUpDownMinAge.Location = new System.Drawing.Point(782, 152);
+            this.numericUpDownMinAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
+            this.numericUpDownMinAge.Name = "numericUpDownMinAge";
+            this.numericUpDownMinAge.Size = new System.Drawing.Size(48, 32);
+            this.numericUpDownMinAge.TabIndex = 9;
+            this.numericUpDownMinAge.Value = new decimal(new int[] { 18, 0, 0, 0 });
+            this.numericUpDownMinAge.ValueChanged += new System.EventHandler(this.numericUpDownMinAge_ValueChanged);
+            // 
+            // checkBoxSameCity
+            // 
+            this.checkBoxSameCity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.checkBoxSameCity.Location = new System.Drawing.Point(902, 138);
+            this.checkBoxSameCity.Name = "checkBoxSameCity";
+            this.checkBoxSameCity.Size = new System.Drawing.Size(236, 53);
+            this.checkBoxSameCity.TabIndex = 8;
+            this.checkBoxSameCity.Text = "Same city as mine";
+            this.checkBoxSameCity.UseVisualStyleBackColor = true;
+            this.checkBoxSameCity.CheckedChanged += new System.EventHandler(this.checkBoxSameCity_CheckedChanged);
+            // 
+            // labelCityPref
+            // 
+            this.labelCityPref.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.labelCityPref.Location = new System.Drawing.Point(902, 89);
+            this.labelCityPref.Name = "labelCityPref";
+            this.labelCityPref.Size = new System.Drawing.Size(236, 41);
+            this.labelCityPref.TabIndex = 7;
+            this.labelCityPref.Text = "4. Pick city prefrence";
+            this.labelCityPref.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelAgePref
+            // 
+            this.labelAgePref.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.labelAgePref.Location = new System.Drawing.Point(617, 89);
+            this.labelAgePref.Name = "labelAgePref";
+            this.labelAgePref.Size = new System.Drawing.Size(228, 41);
+            this.labelAgePref.TabIndex = 6;
+            this.labelAgePref.Text = "3. Pick age prefrence";
+            this.labelAgePref.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LabelGender
             // 
             this.LabelGender.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
-            this.LabelGender.Location = new System.Drawing.Point(332, 94);
+            this.LabelGender.Location = new System.Drawing.Point(325, 89);
             this.LabelGender.Name = "LabelGender";
-            this.LabelGender.Size = new System.Drawing.Size(271, 41);
+            this.LabelGender.Size = new System.Drawing.Size(258, 41);
             this.LabelGender.TabIndex = 5;
             this.LabelGender.Text = "2. Pick gender prefrence";
+            this.LabelGender.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CheckBoxFemale
             // 
             this.CheckBoxFemale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
-            this.CheckBoxFemale.Location = new System.Drawing.Point(332, 197);
+            this.CheckBoxFemale.Location = new System.Drawing.Point(325, 197);
             this.CheckBoxFemale.Name = "CheckBoxFemale";
-            this.CheckBoxFemale.Size = new System.Drawing.Size(167, 60);
+            this.CheckBoxFemale.Size = new System.Drawing.Size(258, 60);
             this.CheckBoxFemale.TabIndex = 4;
             this.CheckBoxFemale.Text = "Female";
             this.CheckBoxFemale.UseVisualStyleBackColor = true;
+            this.CheckBoxFemale.CheckedChanged += new System.EventHandler(this.CheckBoxFemale_CheckedChanged);
             // 
             // CheckBoxMale
             // 
             this.CheckBoxMale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
-            this.CheckBoxMale.Location = new System.Drawing.Point(332, 138);
+            this.CheckBoxMale.Location = new System.Drawing.Point(325, 138);
             this.CheckBoxMale.Name = "CheckBoxMale";
-            this.CheckBoxMale.Size = new System.Drawing.Size(159, 53);
+            this.CheckBoxMale.Size = new System.Drawing.Size(258, 53);
             this.CheckBoxMale.TabIndex = 3;
             this.CheckBoxMale.Text = "Male";
             this.CheckBoxMale.UseVisualStyleBackColor = true;
+            this.CheckBoxMale.CheckedChanged += new System.EventHandler(this.CheckBoxMale_CheckedChanged);
             // 
             // LabelRelationshipFriends
             // 
@@ -548,7 +676,7 @@
             this.LabelRelationshipFriends.Size = new System.Drawing.Size(237, 36);
             this.LabelRelationshipFriends.TabIndex = 2;
             this.LabelRelationshipFriends.Text = "1. Select a friend";
-            this.LabelRelationshipFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelRelationshipFriends.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ListBoxRelationship
             // 
@@ -558,6 +686,7 @@
             this.ListBoxRelationship.Name = "ListBoxRelationship";
             this.ListBoxRelationship.Size = new System.Drawing.Size(237, 576);
             this.ListBoxRelationship.TabIndex = 1;
+            this.ListBoxRelationship.SelectedIndexChanged += new System.EventHandler(this.ListBoxRelationship_SelectedIndexChanged);
             // 
             // LabelRelationshipFeature
             // 
@@ -574,7 +703,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1921, 1050);
+            this.ClientSize = new System.Drawing.Size(2053, 1232);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -592,8 +721,20 @@
             this.tabPageAnalytics.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFriendsAnalytics)).EndInit();
             this.tabPageFindMatch.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxAge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinAge)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listBoxMatches;
+        private System.Windows.Forms.Button buttonSubmit;
+
+        private System.Windows.Forms.CheckBox checkBoxSameCity;
+
+        private System.Windows.Forms.Label labelCityPref;
+
+        private System.Windows.Forms.Label labelAgePref;
 
         private System.Windows.Forms.CheckBox CheckBoxMale;
         private System.Windows.Forms.CheckBox CheckBoxFemale;
@@ -649,6 +790,10 @@
         private System.Windows.Forms.Label labelEventsTitle;
         private System.Windows.Forms.Label labelAlbumsTitle;
         private System.Windows.Forms.Label labelPagesTitle;
+        private System.Windows.Forms.Label labelMaxAge;
+        private System.Windows.Forms.Label labelMinAge;
+        private System.Windows.Forms.NumericUpDown numericUpDownMaxAge;
+        private System.Windows.Forms.NumericUpDown numericUpDownMinAge;
     }
 }
 
