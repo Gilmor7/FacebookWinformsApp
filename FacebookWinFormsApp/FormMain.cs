@@ -366,7 +366,9 @@ namespace BasicFacebookFeatures
                 {
                     MessageBox.Show("Couldn't fetch friend's profile picture");
                 }
-
+                
+                // TODO: add error handling for when server can't fetch the data //
+                // maybe this should be done in the feature itself //
                 int numOfLikes = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
                     m_LoggedInUser,
                     selectedFriend,
