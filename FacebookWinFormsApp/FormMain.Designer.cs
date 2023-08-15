@@ -711,6 +711,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Desktop Facebook";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.tabControlFormMain.ResumeLayout(false);
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();

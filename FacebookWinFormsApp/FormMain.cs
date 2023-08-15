@@ -517,7 +517,11 @@ namespace BasicFacebookFeatures
         private void FormMain_Load(object sender, EventArgs e)
         {
             hideTabPages();
-            MessageBox.Show("To see and use the features of this app, you have to login first", "Welcome");
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            MessageBox.Show("after successful login, new tabs will be available for you", "Welcome!");
         }
     }
 }
