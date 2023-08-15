@@ -54,16 +54,27 @@ namespace BasicFacebookFeatures
             {
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
                 fetchUserInfo();
-                buttonLogin.Enabled = false;
-                buttonLogin.Cursor = Cursors.No;
-                buttonLogout.Enabled = true;
-                buttonLogout.Cursor = Cursors.Hand;
+                changeLoginAndLogoutButtonsState();
                 fetchDataAndPopulateListBoxes();
+                showTabPages();
             }
             else
             {
                 MessageBox.Show(m_LoginResult.ErrorMessage, "Login Failed");
             }
+        }
+        
+        private void changeLoginAndLogoutButtonsState()
+        {
+            buttonLogin.Enabled = false;
+            buttonLogin.Cursor = Cursors.No;
+            buttonLogout.Enabled = true;
+            buttonLogout.Cursor = Cursors.Hand;
+        }
+        
+        private void showTabPages()
+        {
+            tabControlFormMain.Visible = true;
         }
 
         private void fetchUserInfo()
