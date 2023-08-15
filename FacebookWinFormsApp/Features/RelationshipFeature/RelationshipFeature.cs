@@ -5,12 +5,47 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
 {
     public static class RelationshipFeature
     {
-        public static User SelectedFriend { get; set; }
-        public static bool InterestedInMales { get; set; }
-        public static bool InterestedInFemales { get; set; }
-        public static int MinAgePreference { get; set; }
-        public static int MaxAgePreference { get; set; }
-        public static bool SameCityLimitPreference { get; set; }
+        private static int s_MinAgeLimit = 18;
+        private static int s_MaxAgeLimit = 120;
+        
+        public static User SelectedFriend { get; set; } = null;
+        public static bool InterestedInMales { get; set; } = false;
+
+        public static bool InterestedInFemales { get; set; } = false;
+
+        public static bool SameCityLimitPreference { get; set; } = false;
+        
+        public static int MinAgePreference
+        {
+            get => s_MinAgeLimit;
+            set
+            {
+                if(value >= s_MinAgeLimit && value <= s_MaxAgeLimit)
+                {
+                    s_MinAgeLimit = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("MinAgePreference");
+                }
+            }
+        }
+        
+        public static int MaxAgePreference
+        {
+            get => s_MaxAgeLimit;
+            set
+            {
+                if(value >= s_MinAgeLimit && value <= s_MaxAgeLimit)
+                {
+                    s_MaxAgeLimit = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("MaxAgePreference");
+                }
+            }
+        }
 
         public static FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
         {
