@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControlFormMain = new System.Windows.Forms.TabControl();
             this.tabPageHome = new System.Windows.Forms.TabPage();
             this.labelPostsTitle = new System.Windows.Forms.Label();
@@ -505,7 +504,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(1850, 77);
             this.label2.TabIndex = 0;
-            this.label2.Text = resources.GetString("label2.Text");
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPageFindMatch
@@ -712,6 +710,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Desktop Facebook";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.tabControlFormMain.ResumeLayout(false);
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();

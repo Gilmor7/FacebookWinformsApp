@@ -74,7 +74,14 @@ namespace BasicFacebookFeatures
         
         private void showTabPages()
         {
-            tabControlFormMain.Visible = true;
+            tabControlFormMain.TabPages.Add(tabPageAnalytics);
+            tabControlFormMain.TabPages.Add(tabPageFindMatch);
+        }
+        
+        private void hideTabPages()
+        {
+            tabControlFormMain.TabPages.Remove(tabPageAnalytics);
+            tabControlFormMain.TabPages.Remove(tabPageFindMatch);
         }
 
         private void fetchUserInfo()
@@ -505,6 +512,11 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show("Couldn't fetch matches, unknown error occured");
             }
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            hideTabPages();
         }
     }
 }
