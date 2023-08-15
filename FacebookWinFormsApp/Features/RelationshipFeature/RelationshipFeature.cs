@@ -8,13 +8,13 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
         public static User SelectedFriend { get; set; }
         public static bool InterestedInMales { get; set; }
         public static bool InterestedInFemales { get; set; }
-        public static int MinAgePreference { get; set; }    // probably should check that age < 18 is not allowed if user is above 18 //
+        public static int MinAgePreference { get; set; }
         public static int MaxAgePreference { get; set; }
-        public static bool SameCityLimitPreference { get; set; }     // True if user wants to match with people from the same hometown //
+        public static bool SameCityLimitPreference { get; set; }
 
         public static FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
         {
-            // maybe need to add here a check if all preferences are selected //
+            throwExceptionIfSelectedFriendIsNull();
             
             FacebookObjectCollection<User> matches = new FacebookObjectCollection<User>();
 
@@ -28,22 +28,35 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
             
             return matches;
         }
-
-        private static bool checkGenderPreferences(User.eGender? i_Gender)
+        
+        private static void throwExceptionIfSelectedFriendIsNull()
         {
-            return i_Gender != null && 
-                   (InterestedInMales && i_Gender == User.eGender.male ||
-                   InterestedInFemales && i_Gender == User.eGender.female);
+            if(SelectedFriend == null)
+            {
+                throw new ArgumentNullException("SelectedFriend");
+            }
         }
 
         private static bool checkIfMatchPreferencesAreMet(User i_PossibleMatch)
         {
             bool isSingle = i_PossibleMatch.RelationshipStatus == User.eRelationshipStatus.Single;
             bool isPreferencedGender = checkGenderPreferences(i_PossibleMatch.Gender);
-            bool isHomeTownPreferenceConditionMet = !SameCityLimitPreference || i_PossibleMatch.Location.Name == SelectedFriend.Location.Name;
+            bool isHomeTownPreferenceConditionMet = checkSameCityPreference(i_PossibleMatch);
             bool isAgePreferenceMet = checkIfAgePreferenceIsMet(i_PossibleMatch);
             
             return isSingle && isPreferencedGender && isHomeTownPreferenceConditionMet && isAgePreferenceMet;
+        }
+        
+        private static bool checkGenderPreferences(User.eGender? i_Gender)
+        {
+            return i_Gender != null && 
+                   (InterestedInMales && i_Gender == User.eGender.male ||
+                    InterestedInFemales && i_Gender == User.eGender.female);
+        }
+        
+        private static bool checkSameCityPreference(User i_PossibleMatch)
+        {
+            return !SameCityLimitPreference || i_PossibleMatch.Location.Name == SelectedFriend.Location.Name;
         }
         
         private static bool checkIfAgePreferenceIsMet(User i_PossibleMatch)

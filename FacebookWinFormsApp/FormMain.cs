@@ -464,17 +464,35 @@ namespace BasicFacebookFeatures
 
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
-            FacebookObjectCollection<User> possibleMathces = RelationshipFeature.FindMatchesBasedOnPreferences();
+            try
+            {
+                FacebookObjectCollection<User> matches = RelationshipFeature.FindMatchesBasedOnPreferences();
+                listBoxMatches.Items.Clear();
+                listBoxMatches.DisplayMember = k_DefaultListBoxDisplayMember;
 
-            listBoxMatches.Items.Clear();
-            if (possibleMathces.Count > 0)
-            {
-                listBoxMatches.DataSource = possibleMathces;
-                listBoxMatches.DisplayMember = "Name";
+                if (matches.Count > 0)
+                {
+                    foreach (User match in matches)
+                    {
+                        listBoxMatches.Items.Add(match);
+                    }
+                }
+                else
+                {
+                    listBoxMatches.Items.Add("There are no matches for you :(");
+                }
             }
-            else
+            catch (ArgumentNullException)
             {
-                listBoxMatches.Items.Add("No matches found :(");
+                MessageBox.Show("You have to select a friend first");
+            }
+            catch (FacebookOAuthException)
+            {
+                MessageBox.Show("Couldn't fetch matches, there is an issue with the server");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Couldn't fetch matches, unknown error occured");
             }
         }
     }
