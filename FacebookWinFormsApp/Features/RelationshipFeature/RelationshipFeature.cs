@@ -5,8 +5,11 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
 {
     public static class RelationshipFeature
     {
-        private static int s_MinAgeLimit = 18;
-        private static int s_MaxAgeLimit = 120;
+        private static readonly int sr_MinAgeLimit = 18;
+        private static readonly int sr_MaxAgeLimit = 120;
+        
+        private static int s_MinAgePreference = sr_MinAgeLimit;
+        private static int s_MaxAgePreference = sr_MaxAgeLimit;
         
         public static User SelectedFriend { get; set; } = null;
         public static bool InterestedInMales { get; set; } = false;
@@ -17,12 +20,15 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
         
         public static int MinAgePreference
         {
-            get => s_MinAgeLimit;
+            get
+            {
+                return s_MinAgePreference;
+            }
             set
             {
-                if(value >= s_MinAgeLimit && value <= s_MaxAgeLimit)
+                if(value >= sr_MinAgeLimit && value <= sr_MaxAgeLimit)
                 {
-                    s_MinAgeLimit = value;
+                    s_MinAgePreference = value;
                 }
                 else
                 {
@@ -33,12 +39,15 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
         
         public static int MaxAgePreference
         {
-            get => s_MaxAgeLimit;
+            get
+            {
+                return s_MaxAgePreference;
+            }
             set
             {
-                if(value >= s_MinAgeLimit && value <= s_MaxAgeLimit)
+                if(value >= sr_MinAgeLimit && value <= sr_MaxAgeLimit)
                 {
-                    s_MaxAgeLimit = value;
+                    s_MaxAgePreference = value;
                 }
                 else
                 {
