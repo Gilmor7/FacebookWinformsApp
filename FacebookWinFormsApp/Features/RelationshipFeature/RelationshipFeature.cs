@@ -11,6 +11,7 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
         private static int s_MinAgePreference = sr_MinAgeLimit;
         private static int s_MaxAgePreference = sr_MaxAgeLimit;
         
+        public static User LoggedInUser { get; set; } = null;
         public static User SelectedFriend { get; set; } = null;
         public static bool InterestedInMales { get; set; } = false;
 
@@ -58,13 +59,13 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
 
         public static FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
         {
-            throwExceptionIfSelectedFriendIsNull();
+            throwExceptionIfParametersAreNull();
             
             FacebookObjectCollection<User> matches = new FacebookObjectCollection<User>();
 
             foreach (User possibleMatchUser in SelectedFriend.Friends)
             {
-                if(checkIfMatchPreferencesAreMet(possibleMatchUser))
+                if(checkIfPossibleMatchIsDistinct(possibleMatchUser) && checkIfMatchPreferencesAreMet(possibleMatchUser))
                 {
                     matches.Add(possibleMatchUser);
                 }
@@ -72,14 +73,29 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
             
             return matches;
         }
-        
-        private static void throwExceptionIfSelectedFriendIsNull()
+
+        private static bool checkIfPossibleMatchIsDistinct(User i_PossibleMatchUser)
         {
+            bool isPossibleMatchIsTheLoggedInUser = i_PossibleMatchUser.Id == LoggedInUser.Id;
+            bool isPossibleMatchInLoggedInUserFriends = LoggedInUser.Friends.Contains(i_PossibleMatchUser);
+            
+            return !isPossibleMatchIsTheLoggedInUser && !isPossibleMatchInLoggedInUserFriends;
+        }
+
+        private static void throwExceptionIfParametersAreNull()
+        {
+            if(LoggedInUser == null)
+            {
+                throw new ArgumentNullException("LoggedInUser");
+            }
+            
             if(SelectedFriend == null)
             {
                 throw new ArgumentNullException("SelectedFriend");
             }
         }
+        
+
 
         private static bool checkIfMatchPreferencesAreMet(User i_PossibleMatch)
         {
@@ -115,11 +131,6 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
             }
             
             return isAgePreferenceMet;
-        }
-
-        public static bool IsAgeRangeValid()
-        {
-            return MaxAgePreference > MinAgePreference;
         }
     }
 }

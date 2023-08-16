@@ -53,6 +53,7 @@ namespace BasicFacebookFeatures
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
+                RelationshipFeature.LoggedInUser = m_LoggedInUser;
                 fetchUserInfo();
                 changeLoginAndLogoutButtonsState();
                 fetchDataAndPopulateListBoxes();
