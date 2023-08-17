@@ -111,6 +111,8 @@
             // 
             // tabPageHome
             // 
+            this.tabPageHome.AutoScroll = true;
+            this.tabPageHome.AutoScrollMargin = new System.Drawing.Size(50, 50);
             this.tabPageHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.tabPageHome.Controls.Add(this.labelPostsTitle);
             this.tabPageHome.Controls.Add(this.labelEventsTitle);
@@ -509,6 +511,8 @@
             // 
             // tabPageFindMatch
             // 
+            this.tabPageFindMatch.AutoScroll = true;
+            this.tabPageFindMatch.AutoScrollMargin = new System.Drawing.Size(0, 100);
             this.tabPageFindMatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.tabPageFindMatch.Controls.Add(this.buttonSubmit);
             this.tabPageFindMatch.Controls.Add(this.label1);
