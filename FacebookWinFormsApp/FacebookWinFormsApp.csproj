@@ -89,9 +89,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\FriendsAnalyticsFeature\eEngagmentType.cs" />
-    <Compile Include="Features\FriendsAnalyticsFeature\FriendsAnalyticsFeature.cs" />
-    <Compile Include="Features\RelationshipFeature\RelationshipFeature.cs" />
+    <Compile Include="ApplicationLogic\Features\FriendsAnalyticsFeature\eEngagmentType.cs" />
+    <Compile Include="ApplicationLogic\Features\FriendsAnalyticsFeature\FriendsAnalyticsFeature.cs" />
+    <Compile Include="ApplicationLogic\Features\RelationshipFeature\RelationshipFeature.cs" />
+    <Compile Include="ApplicationLogic\UserManager.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

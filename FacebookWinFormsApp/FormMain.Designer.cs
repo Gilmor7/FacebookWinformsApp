@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControlFormMain = new System.Windows.Forms.TabControl();
             this.tabPageHome = new System.Windows.Forms.TabPage();
             this.labelPostsTitle = new System.Windows.Forms.Label();
@@ -106,7 +107,7 @@
             this.tabControlFormMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlFormMain.Name = "tabControlFormMain";
             this.tabControlFormMain.SelectedIndex = 0;
-            this.tabControlFormMain.Size = new System.Drawing.Size(1948, 1118);
+            this.tabControlFormMain.Size = new System.Drawing.Size(1954, 1135);
             this.tabControlFormMain.TabIndex = 1;
             // 
             // tabPageHome
@@ -143,7 +144,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 35);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(1934, 1062);
+            this.tabPageHome.Size = new System.Drawing.Size(1952, 1113);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             // 
@@ -412,7 +413,7 @@
             this.tabPageAnalytics.Location = new System.Drawing.Point(4, 35);
             this.tabPageAnalytics.Name = "tabPageAnalytics";
             this.tabPageAnalytics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAnalytics.Size = new System.Drawing.Size(1928, 1045);
+            this.tabPageAnalytics.Size = new System.Drawing.Size(1946, 1096);
             this.tabPageAnalytics.TabIndex = 1;
             this.tabPageAnalytics.Text = "Friends Analytics";
             // 
@@ -503,10 +504,11 @@
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(23, 22);
+            this.label2.Location = new System.Drawing.Point(89, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1850, 77);
+            this.label2.Size = new System.Drawing.Size(1126, 77);
             this.label2.TabIndex = 0;
+            this.label2.Text = resources.GetString("label2.Text");
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPageFindMatch
@@ -710,7 +712,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1948, 1118);
+            this.ClientSize = new System.Drawing.Size(1954, 1135);
             this.Controls.Add(this.tabControlFormMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);

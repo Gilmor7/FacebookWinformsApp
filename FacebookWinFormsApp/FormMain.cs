@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using BasicFacebookFeatures.ApplicationLogic;
 using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
 using BasicFacebookFeatures.Features.RelationshipFeature;
 using Facebook;
@@ -15,8 +16,7 @@ namespace BasicFacebookFeatures
         private const string k_DefaultErrorCaption = "Error";
         private const string k_DefaultSuccessCaption = "Success";
         private const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
-        private LoginResult m_LoginResult;
-        private User m_LoggedInUser;
+        private readonly UserManager r_User = new UserManager();
         
         public FormMain()
         {
@@ -28,49 +28,34 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                m_LoginResult = FacebookService.Login(
-                    "1444657766108962",
-                    "email",
-                    "public_profile",
-                    "user_age_range",
-                    "user_birthday",
-                    "user_events",
-                    "user_friends",
-                    "user_gender",
-                    "user_hometown",
-                    "user_likes",
-                    "user_link",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_videos");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
-            {
-                m_LoggedInUser = m_LoginResult.LoggedInUser;
-                RelationshipFeature.LoggedInUser = m_LoggedInUser;
+                r_User.Login();
+                RelationshipFeature.LoggedInUser = r_User.LoggedInUser;
                 fetchUserInfo();
-                changeLoginAndLogoutButtonsState();
+                changeLoginAndLogoutButtonsState(i_IsLogin: true);
                 fetchDataAndPopulateListBoxes();
                 showTabPages();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(m_LoginResult.ErrorMessage, "Login Failed");
+                MessageBox.Show(ex.Message, "Login Failed");
             }
         }
         
-        private void changeLoginAndLogoutButtonsState()
+        private void changeLoginAndLogoutButtonsState(bool i_IsLogin)
         {
-            buttonLogin.Enabled = false;
-            buttonLogin.Cursor = Cursors.No;
-            buttonLogout.Enabled = true;
-            buttonLogout.Cursor = Cursors.Hand;
+            buttonLogin.Enabled = !i_IsLogin;
+            buttonLogout.Enabled = i_IsLogin;
+
+            if (i_IsLogin)
+            {
+                buttonLogin.Cursor =  Cursors.No;
+                buttonLogout.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                buttonLogin.Cursor =  Cursors.Hand;
+                buttonLogout.Cursor = Cursors.No;
+            }
         }
         
         private void showTabPages()
@@ -87,12 +72,12 @@ namespace BasicFacebookFeatures
 
         private void fetchUserInfo()
         {
-            labelUserName.Text = $"Hello, {m_LoggedInUser.Name}";
-            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            labelUserName.Text = $"Hello, {r_User.LoggedInUser.Name}";
+            pictureBoxProfile.LoadAsync(r_User.LoggedInUser.PictureNormalURL);
 
-            if (m_LoggedInUser.Posts.Count > 0 && m_LoggedInUser.Posts[0].Message != null)
+            if (r_User.LoggedInUser.Posts.Count > 0 && r_User.LoggedInUser.Posts[0].Message != null)
             {
-                textBoxStatus.Text = m_LoggedInUser.Posts[0].Message;
+                textBoxStatus.Text = r_User.LoggedInUser.Posts[0].Message;
             }
             else
             {
@@ -104,23 +89,15 @@ namespace BasicFacebookFeatures
 
         private void handleLogout()
         {
-            FacebookService.LogoutWithUI();
+            r_User.Logout();
             labelUserName.Text = k_NoUserLoggedInMessage;
-            m_LoginResult = null;
-            buttonLogin.Enabled = true;
-            buttonLogin.Cursor = Cursors.Hand;
-            buttonLogout.Enabled = false;
-            buttonLogout.Cursor = Cursors.No;
+            changeLoginAndLogoutButtonsState(i_IsLogin: false);
         }
         
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             Clipboard.SetText("design.patterns");
-
-            if (m_LoginResult == null)
-            {
-                loginAndPopulateUserData();
-            }
+            loginAndPopulateUserData();
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -144,7 +121,7 @@ namespace BasicFacebookFeatures
             
             try
             {
-                foreach (Page page in m_LoggedInUser.LikedPages)
+                foreach (Page page in r_User.LoggedInUser.LikedPages)
                 {
                     listBoxPages.Items.Add(page);
                 }
@@ -167,7 +144,7 @@ namespace BasicFacebookFeatures
             
             try
             {
-                foreach (Album album in m_LoggedInUser.Albums)
+                foreach (Album album in r_User.LoggedInUser.Albums)
                 {
                     listBoxAlbums.Items.Add(album);
                 }
@@ -194,7 +171,7 @@ namespace BasicFacebookFeatures
             
             try
             {
-                foreach (User friend in m_LoggedInUser.Friends)
+                foreach (User friend in r_User.LoggedInUser.Friends)
                 {
                     listBoxFriends.Items.Add(friend);
                     listBoxFriendsAnalytics.Items.Add(friend);
@@ -222,7 +199,7 @@ namespace BasicFacebookFeatures
 
             try
             {
-                foreach (Post post in m_LoggedInUser.Posts)
+                foreach (Post post in r_User.LoggedInUser.Posts)
                 {
                     if (post.Message != null)
                     {
@@ -234,7 +211,7 @@ namespace BasicFacebookFeatures
                     }
                     else
                     {
-                        listBoxPosts.Items.Add(string.Format("[{0}]", post.Type));
+                        listBoxPosts.Items.Add($"[{post.Type}]");
                     }
                 }
 
@@ -256,7 +233,7 @@ namespace BasicFacebookFeatures
             
             try
             {
-                foreach (Event facebookEvent in m_LoggedInUser.Events)
+                foreach (Event facebookEvent in r_User.LoggedInUser.Events)
                 {
                     listBoxEvents.Items.Add(facebookEvent);
                 }
@@ -310,7 +287,7 @@ namespace BasicFacebookFeatures
 
         private void displayPostComments()
         {
-            Post selectedPost = m_LoggedInUser.Posts[listBoxPosts.SelectedIndex];
+            Post selectedPost = r_User.LoggedInUser.Posts[listBoxPosts.SelectedIndex];
             FacebookObjectCollection<Comment> postComments = selectedPost.Comments;
 
             listBoxPostComments.Items.Clear();
@@ -329,9 +306,9 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                if (m_LoggedInUser != null)
+                if (r_User.LoggedInUser != null)
                 {
-                    m_LoggedInUser.PostStatus(textBoxStatus.Text);
+                    r_User.LoggedInUser.PostStatus(textBoxStatus.Text);
                     MessageBox.Show("The status was Posted!", k_DefaultSuccessCaption);
                     fetchPostsAndPopulateListBox();
                 }
@@ -340,6 +317,10 @@ namespace BasicFacebookFeatures
                     throw new Exception("You have to login first!");
                 }
 
+            }
+            catch (FacebookOAuthException)
+            {
+                MessageBox.Show(k_DefaultServerErrorMessage, k_DefaultErrorCaption);
             }
             catch (Exception ex)
             {
@@ -379,48 +360,44 @@ namespace BasicFacebookFeatures
 
         private void showSelectedFriendAnalytics()
         {
-            if (listBoxFriendsAnalytics.SelectedItems.Count == 1)
+            if (listBoxFriendsAnalytics.SelectedItems.Count == 1 && listBoxFriendsAnalytics.SelectedItem is User selectedFriend)
             {
-                User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
                 string numOfLikesStr = k_DefaultServerErrorMessage;
                 string numOfCommentsStr = k_DefaultServerErrorMessage;
                 string numOfAllStr = k_DefaultServerErrorMessage;
                 
                 try
                 {
-                    if(selectedFriend != null)
-                    {
-                        PictureBoxFriendsAnalytics.LoadAsync(selectedFriend.PictureNormalURL);
-                    }
+                    PictureBoxFriendsAnalytics.LoadAsync(selectedFriend.PictureNormalURL);
                 }
-                catch (Exception)
+                catch (Exception )
                 {
-                    MessageBox.Show("Couldn't fetch friend's profile picture");
+                    MessageBox.Show("Couldn't fetch friend's profile picture", k_DefaultErrorCaption);
                 }
 
                 try
                 {
                     int numOfLikes = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                        m_LoggedInUser,
+                        r_User.LoggedInUser,
                         selectedFriend,
                         eEngagmentType.Likes);
                     int numOfComments = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                        m_LoggedInUser,
+                        r_User.LoggedInUser,
                         selectedFriend,
                         eEngagmentType.Comments);
                     int numOfAll = numOfLikes + numOfComments;
 
                     numOfLikesStr = numOfLikes.ToString();
                     numOfCommentsStr = numOfComments.ToString();
-                    numOfAllStr = $"The user {selectedFriend.Name} has {numOfAll} engagments with you";
+                    numOfAllStr = $"The user {selectedFriend.Name} has {numOfAll} engagements with you";
                 }
                 catch(FacebookOAuthException)
                 {
-                    MessageBox.Show("Couldn't fetch friend's analytics, there is an issue with the server");
+                    MessageBox.Show("Couldn't fetch friend's analytics, there is an issue with the server", k_DefaultErrorCaption);
                 }
                 catch(Exception)
                 {
-                    MessageBox.Show("Couldn't fetch friend's analytics, unknown error occured");
+                    MessageBox.Show("Couldn't fetch friend's analytics, unknown error occured", k_DefaultErrorCaption);
                 }
                 finally
                 {
@@ -503,15 +480,15 @@ namespace BasicFacebookFeatures
             }
             catch (ArgumentNullException)
             {
-                MessageBox.Show("You have to select a friend first");
+                MessageBox.Show("You have to select a friend first", k_DefaultErrorCaption);
             }
             catch (FacebookOAuthException)
             {
-                MessageBox.Show("Couldn't fetch matches, there is an issue with the server");
+                MessageBox.Show("Couldn't fetch matches, there is an issue with the server", k_DefaultErrorCaption);
             }
             catch (Exception)
             {
-                MessageBox.Show("Couldn't fetch matches, unknown error occured");
+                MessageBox.Show("Couldn't fetch matches, unknown error occured", k_DefaultErrorCaption);
             }
         }
 
@@ -522,7 +499,7 @@ namespace BasicFacebookFeatures
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            MessageBox.Show("after successful login, new tabs will be available for you", "Welcome!");
+            MessageBox.Show("New tabs with extra features will be available after login", "Welcome!");
         }
     }
 }
