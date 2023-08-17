@@ -78,8 +78,8 @@
             this.labelCityPref = new System.Windows.Forms.Label();
             this.labelAgePref = new System.Windows.Forms.Label();
             this.LabelGender = new System.Windows.Forms.Label();
-            this.CheckBoxFemale = new System.Windows.Forms.CheckBox();
-            this.CheckBoxMale = new System.Windows.Forms.CheckBox();
+            this.checkBoxFemale = new System.Windows.Forms.CheckBox();
+            this.checkBoxMale = new System.Windows.Forms.CheckBox();
             this.LabelRelationshipFriends = new System.Windows.Forms.Label();
             this.listBoxRelationship = new System.Windows.Forms.ListBox();
             this.LabelRelationshipFeature = new System.Windows.Forms.Label();
@@ -106,7 +106,7 @@
             this.tabControlFormMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlFormMain.Name = "tabControlFormMain";
             this.tabControlFormMain.SelectedIndex = 0;
-            this.tabControlFormMain.Size = new System.Drawing.Size(1924, 1050);
+            this.tabControlFormMain.Size = new System.Drawing.Size(1948, 1118);
             this.tabControlFormMain.TabIndex = 1;
             // 
             // tabPageHome
@@ -141,7 +141,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 35);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(1916, 1011);
+            this.tabPageHome.Size = new System.Drawing.Size(1934, 1062);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             // 
@@ -410,7 +410,7 @@
             this.tabPageAnalytics.Location = new System.Drawing.Point(4, 35);
             this.tabPageAnalytics.Name = "tabPageAnalytics";
             this.tabPageAnalytics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAnalytics.Size = new System.Drawing.Size(1916, 1011);
+            this.tabPageAnalytics.Size = new System.Drawing.Size(1928, 1045);
             this.tabPageAnalytics.TabIndex = 1;
             this.tabPageAnalytics.Text = "Friends Analytics";
             // 
@@ -521,15 +521,15 @@
             this.tabPageFindMatch.Controls.Add(this.labelCityPref);
             this.tabPageFindMatch.Controls.Add(this.labelAgePref);
             this.tabPageFindMatch.Controls.Add(this.LabelGender);
-            this.tabPageFindMatch.Controls.Add(this.CheckBoxFemale);
-            this.tabPageFindMatch.Controls.Add(this.CheckBoxMale);
+            this.tabPageFindMatch.Controls.Add(this.checkBoxFemale);
+            this.tabPageFindMatch.Controls.Add(this.checkBoxMale);
             this.tabPageFindMatch.Controls.Add(this.LabelRelationshipFriends);
             this.tabPageFindMatch.Controls.Add(this.listBoxRelationship);
             this.tabPageFindMatch.Controls.Add(this.LabelRelationshipFeature);
             this.tabPageFindMatch.Location = new System.Drawing.Point(4, 35);
             this.tabPageFindMatch.Name = "tabPageFindMatch";
             this.tabPageFindMatch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFindMatch.Size = new System.Drawing.Size(1916, 1011);
+            this.tabPageFindMatch.Size = new System.Drawing.Size(1940, 1079);
             this.tabPageFindMatch.TabIndex = 2;
             this.tabPageFindMatch.Text = "Find Matches";
             // 
@@ -647,29 +647,29 @@
             this.LabelGender.Text = "2. Pick gender prefrence";
             this.LabelGender.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // CheckBoxFemale
+            // checkBoxFemale
             // 
-            this.CheckBoxFemale.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CheckBoxFemale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
-            this.CheckBoxFemale.Location = new System.Drawing.Point(325, 197);
-            this.CheckBoxFemale.Name = "CheckBoxFemale";
-            this.CheckBoxFemale.Size = new System.Drawing.Size(258, 60);
-            this.CheckBoxFemale.TabIndex = 4;
-            this.CheckBoxFemale.Text = "Female";
-            this.CheckBoxFemale.UseVisualStyleBackColor = true;
-            this.CheckBoxFemale.CheckedChanged += new System.EventHandler(this.CheckBoxFemale_CheckedChanged);
+            this.checkBoxFemale.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxFemale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.checkBoxFemale.Location = new System.Drawing.Point(325, 197);
+            this.checkBoxFemale.Name = "checkBoxFemale";
+            this.checkBoxFemale.Size = new System.Drawing.Size(258, 60);
+            this.checkBoxFemale.TabIndex = 4;
+            this.checkBoxFemale.Text = "Female";
+            this.checkBoxFemale.UseVisualStyleBackColor = true;
+            this.checkBoxFemale.CheckedChanged += new System.EventHandler(this.CheckBoxFemale_CheckedChanged);
             // 
-            // CheckBoxMale
+            // checkBoxMale
             // 
-            this.CheckBoxMale.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CheckBoxMale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
-            this.CheckBoxMale.Location = new System.Drawing.Point(325, 138);
-            this.CheckBoxMale.Name = "CheckBoxMale";
-            this.CheckBoxMale.Size = new System.Drawing.Size(258, 53);
-            this.CheckBoxMale.TabIndex = 3;
-            this.CheckBoxMale.Text = "Male";
-            this.CheckBoxMale.UseVisualStyleBackColor = true;
-            this.CheckBoxMale.CheckedChanged += new System.EventHandler(this.CheckBoxMale_CheckedChanged);
+            this.checkBoxMale.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxMale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.checkBoxMale.Location = new System.Drawing.Point(325, 138);
+            this.checkBoxMale.Name = "checkBoxMale";
+            this.checkBoxMale.Size = new System.Drawing.Size(258, 53);
+            this.checkBoxMale.TabIndex = 3;
+            this.checkBoxMale.Text = "Male";
+            this.checkBoxMale.UseVisualStyleBackColor = true;
+            this.checkBoxMale.CheckedChanged += new System.EventHandler(this.CheckBoxMale_CheckedChanged);
             // 
             // LabelRelationshipFriends
             // 
@@ -706,7 +706,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.ClientSize = new System.Drawing.Size(1948, 1118);
             this.Controls.Add(this.tabControlFormMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -741,8 +741,8 @@
 
         private System.Windows.Forms.Label labelAgePref;
 
-        private System.Windows.Forms.CheckBox CheckBoxMale;
-        private System.Windows.Forms.CheckBox CheckBoxFemale;
+        private System.Windows.Forms.CheckBox checkBoxMale;
+        private System.Windows.Forms.CheckBox checkBoxFemale;
         private System.Windows.Forms.Label LabelGender;
 
         private System.Windows.Forms.ListBox listBoxRelationship;

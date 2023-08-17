@@ -94,8 +94,6 @@ namespace BasicFacebookFeatures.Features.RelationshipFeature
                 throw new ArgumentNullException("SelectedFriend");
             }
         }
-        
-
 
         private static bool checkIfMatchPreferencesAreMet(User i_PossibleMatch)
         {

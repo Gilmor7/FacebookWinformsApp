@@ -456,12 +456,12 @@ namespace BasicFacebookFeatures
 
         private void CheckBoxMale_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.InterestedInMales = CheckBoxMale.Checked;
+            RelationshipFeature.InterestedInMales = checkBoxMale.Checked;
         }
 
         private void CheckBoxFemale_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.InterestedInFemales = CheckBoxFemale.Checked;
+            RelationshipFeature.InterestedInFemales = checkBoxFemale.Checked;
         }
 
         private void checkBoxSameCity_CheckedChanged(object sender, EventArgs e)

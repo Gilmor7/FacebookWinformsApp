@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.Features.FriendsAnalyticsFeature
@@ -7,6 +7,12 @@ namespace BasicFacebookFeatures.Features.FriendsAnalyticsFeature
     {
         public static int GetNumberOfEngagementsFromFriend(User i_User, User i_Friend, eEngagmentType i_EngagmentType)
         {
+            if (i_User == null || i_Friend == null)
+            {
+                string invalidArgument = i_User == null ? "i_User" : "i_Friend";
+                throw new ArgumentNullException(invalidArgument);
+            }
+            
             int numberOfEngagments = 0;
 
             foreach(Post post in i_User.Posts)
