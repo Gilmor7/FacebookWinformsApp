@@ -460,6 +460,11 @@ namespace BasicFacebookFeatures
 
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
+            findAndDisplayMatches();
+        }
+
+        private void findAndDisplayMatches()
+        {
             try
             {
                 FacebookObjectCollection<User> matches = RelationshipFeature.FindMatchesBasedOnPreferences();
