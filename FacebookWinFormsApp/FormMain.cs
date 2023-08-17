@@ -186,33 +186,33 @@ namespace BasicFacebookFeatures
         private void fetchFriendsAndPopulateListBox()
         {
             listBoxFriends.Items.Clear();
-            ListBoxFriendsAnalytics.Items.Clear();
-            ListBoxRelationship.Items.Clear();
-            ListBoxFriendsAnalytics.DisplayMember = k_DefaultListBoxDisplayMember;
+            listBoxFriendsAnalytics.Items.Clear();
+            listBoxRelationship.Items.Clear();
+            listBoxFriendsAnalytics.DisplayMember = k_DefaultListBoxDisplayMember;
             listBoxFriends.DisplayMember = k_DefaultListBoxDisplayMember;
-            ListBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
+            listBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
             
             try
             {
                 foreach (User friend in m_LoggedInUser.Friends)
                 {
                     listBoxFriends.Items.Add(friend);
-                    ListBoxFriendsAnalytics.Items.Add(friend);
-                    ListBoxRelationship.Items.Add(friend);
+                    listBoxFriendsAnalytics.Items.Add(friend);
+                    listBoxRelationship.Items.Add(friend);
                 }
 
                 if (listBoxFriends.Items.Count == 0)
                 {
                     listBoxFriends.Items.Add("There are no facebook friends available");
-                    ListBoxFriendsAnalytics.Items.Add("There are no facebook friends available");
-                    ListBoxRelationship.Items.Add("There are no facebook friends available");
+                    listBoxFriendsAnalytics.Items.Add("There are no facebook friends available");
+                    listBoxRelationship.Items.Add("There are no facebook friends available");
                 }
             }
             catch (Exception)
             {
                 listBoxFriends.Items.Add("Couldn't fetch facebook friends");
-                ListBoxFriendsAnalytics.Items.Add("Couldn't fetch facebook friends");
-                ListBoxRelationship.Items.Add("Couldn't fetch facebook friends");
+                listBoxFriendsAnalytics.Items.Add("Couldn't fetch facebook friends");
+                listBoxRelationship.Items.Add("Couldn't fetch facebook friends");
             }
         }
 
@@ -374,14 +374,14 @@ namespace BasicFacebookFeatures
 
         private void ButtonSelectFriend_Click(object sender, EventArgs e)
         {
-            showSelectedFriendsAnalytics();
+            showSelectedFriendAnalytics();
         }
 
-        private void showSelectedFriendsAnalytics()
+        private void showSelectedFriendAnalytics()
         {
-            if (ListBoxFriendsAnalytics.SelectedItems.Count == 1)
+            if (listBoxFriendsAnalytics.SelectedItems.Count == 1)
             {
-                User selectedFriend = ListBoxFriendsAnalytics.SelectedItem as User;
+                User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
                 string numOfLikesStr = k_DefaultServerErrorMessage;
                 string numOfCommentsStr = k_DefaultServerErrorMessage;
                 string numOfAllStr = k_DefaultServerErrorMessage;
@@ -433,9 +433,9 @@ namespace BasicFacebookFeatures
         
         private void ListBoxRelationship_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ListBoxRelationship.SelectedItems.Count == 1)
+            if(listBoxRelationship.SelectedItems.Count == 1)
             {
-                User selectedFriend = ListBoxRelationship.SelectedItem as User;
+                User selectedFriend = listBoxRelationship.SelectedItem as User;
                 if(selectedFriend != null)
                 {
                     RelationshipFeature.SelectedFriend = selectedFriend;

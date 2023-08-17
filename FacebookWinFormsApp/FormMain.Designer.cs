@@ -64,7 +64,7 @@
             this.PictureBoxFriendsAnalytics = new System.Windows.Forms.PictureBox();
             this.ButtonSelectFriend = new System.Windows.Forms.Button();
             this.LabelFriends = new System.Windows.Forms.Label();
-            this.ListBoxFriendsAnalytics = new System.Windows.Forms.ListBox();
+            this.listBoxFriendsAnalytics = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPageFindMatch = new System.Windows.Forms.TabPage();
             this.buttonSubmit = new System.Windows.Forms.Button();
@@ -81,7 +81,7 @@
             this.CheckBoxFemale = new System.Windows.Forms.CheckBox();
             this.CheckBoxMale = new System.Windows.Forms.CheckBox();
             this.LabelRelationshipFriends = new System.Windows.Forms.Label();
-            this.ListBoxRelationship = new System.Windows.Forms.ListBox();
+            this.listBoxRelationship = new System.Windows.Forms.ListBox();
             this.LabelRelationshipFeature = new System.Windows.Forms.Label();
             this.tabControlFormMain.SuspendLayout();
             this.tabPageHome.SuspendLayout();
@@ -404,7 +404,7 @@
             this.tabPageAnalytics.Controls.Add(this.PictureBoxFriendsAnalytics);
             this.tabPageAnalytics.Controls.Add(this.ButtonSelectFriend);
             this.tabPageAnalytics.Controls.Add(this.LabelFriends);
-            this.tabPageAnalytics.Controls.Add(this.ListBoxFriendsAnalytics);
+            this.tabPageAnalytics.Controls.Add(this.listBoxFriendsAnalytics);
             this.tabPageAnalytics.Controls.Add(this.label2);
             this.tabPageAnalytics.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
             this.tabPageAnalytics.Location = new System.Drawing.Point(4, 35);
@@ -467,6 +467,7 @@
             // 
             // ButtonSelectFriend
             // 
+            this.ButtonSelectFriend.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ButtonSelectFriend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.ButtonSelectFriend.Location = new System.Drawing.Point(301, 504);
             this.ButtonSelectFriend.Name = "ButtonSelectFriend";
@@ -487,14 +488,14 @@
             this.LabelFriends.Text = "Friends:";
             this.LabelFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ListBoxFriendsAnalytics
+            // listBoxFriendsAnalytics
             // 
-            this.ListBoxFriendsAnalytics.FormattingEnabled = true;
-            this.ListBoxFriendsAnalytics.ItemHeight = 26;
-            this.ListBoxFriendsAnalytics.Location = new System.Drawing.Point(79, 224);
-            this.ListBoxFriendsAnalytics.Name = "ListBoxFriendsAnalytics";
-            this.ListBoxFriendsAnalytics.Size = new System.Drawing.Size(206, 342);
-            this.ListBoxFriendsAnalytics.TabIndex = 1;
+            this.listBoxFriendsAnalytics.FormattingEnabled = true;
+            this.listBoxFriendsAnalytics.ItemHeight = 26;
+            this.listBoxFriendsAnalytics.Location = new System.Drawing.Point(79, 224);
+            this.listBoxFriendsAnalytics.Name = "listBoxFriendsAnalytics";
+            this.listBoxFriendsAnalytics.Size = new System.Drawing.Size(206, 342);
+            this.listBoxFriendsAnalytics.TabIndex = 1;
             // 
             // label2
             // 
@@ -523,7 +524,7 @@
             this.tabPageFindMatch.Controls.Add(this.CheckBoxFemale);
             this.tabPageFindMatch.Controls.Add(this.CheckBoxMale);
             this.tabPageFindMatch.Controls.Add(this.LabelRelationshipFriends);
-            this.tabPageFindMatch.Controls.Add(this.ListBoxRelationship);
+            this.tabPageFindMatch.Controls.Add(this.listBoxRelationship);
             this.tabPageFindMatch.Controls.Add(this.LabelRelationshipFeature);
             this.tabPageFindMatch.Location = new System.Drawing.Point(4, 35);
             this.tabPageFindMatch.Name = "tabPageFindMatch";
@@ -606,6 +607,7 @@
             // 
             // checkBoxSameCity
             // 
+            this.checkBoxSameCity.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBoxSameCity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
             this.checkBoxSameCity.Location = new System.Drawing.Point(902, 138);
             this.checkBoxSameCity.Name = "checkBoxSameCity";
@@ -647,6 +649,7 @@
             // 
             // CheckBoxFemale
             // 
+            this.CheckBoxFemale.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CheckBoxFemale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
             this.CheckBoxFemale.Location = new System.Drawing.Point(325, 197);
             this.CheckBoxFemale.Name = "CheckBoxFemale";
@@ -658,6 +661,7 @@
             // 
             // CheckBoxMale
             // 
+            this.CheckBoxMale.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CheckBoxMale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
             this.CheckBoxMale.Location = new System.Drawing.Point(325, 138);
             this.CheckBoxMale.Name = "CheckBoxMale";
@@ -677,15 +681,15 @@
             this.LabelRelationshipFriends.Text = "1. Select a friend";
             this.LabelRelationshipFriends.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ListBoxRelationship
+            // listBoxRelationship
             // 
-            this.ListBoxRelationship.FormattingEnabled = true;
-            this.ListBoxRelationship.ItemHeight = 26;
-            this.ListBoxRelationship.Location = new System.Drawing.Point(42, 138);
-            this.ListBoxRelationship.Name = "ListBoxRelationship";
-            this.ListBoxRelationship.Size = new System.Drawing.Size(237, 576);
-            this.ListBoxRelationship.TabIndex = 1;
-            this.ListBoxRelationship.SelectedIndexChanged += new System.EventHandler(this.ListBoxRelationship_SelectedIndexChanged);
+            this.listBoxRelationship.FormattingEnabled = true;
+            this.listBoxRelationship.ItemHeight = 26;
+            this.listBoxRelationship.Location = new System.Drawing.Point(42, 138);
+            this.listBoxRelationship.Name = "listBoxRelationship";
+            this.listBoxRelationship.Size = new System.Drawing.Size(237, 576);
+            this.listBoxRelationship.TabIndex = 1;
+            this.listBoxRelationship.SelectedIndexChanged += new System.EventHandler(this.ListBoxRelationship_SelectedIndexChanged);
             // 
             // LabelRelationshipFeature
             // 
@@ -741,7 +745,7 @@
         private System.Windows.Forms.CheckBox CheckBoxFemale;
         private System.Windows.Forms.Label LabelGender;
 
-        private System.Windows.Forms.ListBox ListBoxRelationship;
+        private System.Windows.Forms.ListBox listBoxRelationship;
         private System.Windows.Forms.Label LabelRelationshipFriends;
 
         private System.Windows.Forms.Label LabelRelationshipFeature;
@@ -756,7 +760,7 @@
         private System.Windows.Forms.Label LabelLikes;
         private System.Windows.Forms.Label LabelComments;
 
-        private System.Windows.Forms.ListBox ListBoxFriendsAnalytics;
+        private System.Windows.Forms.ListBox listBoxFriendsAnalytics;
         private System.Windows.Forms.Label LabelFriends;
 
         private System.Windows.Forms.Label label2;
