@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
 using BasicFacebookFeatures.Features.RelationshipFeature;
+using Facebook;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
@@ -13,6 +14,7 @@ namespace BasicFacebookFeatures
         private const string k_DefaultListBoxDisplayMember = "Name";
         private const string k_DefaultErrorCaption = "Error";
         private const string k_DefaultSuccessCaption = "Success";
+        private const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
         private LoginResult m_LoginResult;
         private User m_LoggedInUser;
         
@@ -51,17 +53,36 @@ namespace BasicFacebookFeatures
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
+                RelationshipFeature.LoggedInUser = m_LoggedInUser;
                 fetchUserInfo();
-                buttonLogin.Enabled = false;
-                buttonLogin.Cursor = Cursors.No;
-                buttonLogout.Enabled = true;
-                buttonLogout.Cursor = Cursors.Hand;
+                changeLoginAndLogoutButtonsState();
                 fetchDataAndPopulateListBoxes();
+                showTabPages();
             }
             else
             {
                 MessageBox.Show(m_LoginResult.ErrorMessage, "Login Failed");
             }
+        }
+        
+        private void changeLoginAndLogoutButtonsState()
+        {
+            buttonLogin.Enabled = false;
+            buttonLogin.Cursor = Cursors.No;
+            buttonLogout.Enabled = true;
+            buttonLogout.Cursor = Cursors.Hand;
+        }
+        
+        private void showTabPages()
+        {
+            tabControlFormMain.TabPages.Add(tabPageAnalytics);
+            tabControlFormMain.TabPages.Add(tabPageFindMatch);
+        }
+        
+        private void hideTabPages()
+        {
+            tabControlFormMain.TabPages.Remove(tabPageAnalytics);
+            tabControlFormMain.TabPages.Remove(tabPageFindMatch);
         }
 
         private void fetchUserInfo()
@@ -361,6 +382,10 @@ namespace BasicFacebookFeatures
             if (ListBoxFriendsAnalytics.SelectedItems.Count == 1)
             {
                 User selectedFriend = ListBoxFriendsAnalytics.SelectedItem as User;
+                string numOfLikesStr = k_DefaultServerErrorMessage;
+                string numOfCommentsStr = k_DefaultServerErrorMessage;
+                string numOfAllStr = k_DefaultServerErrorMessage;
+                
                 try
                 {
                     if(selectedFriend != null)
@@ -372,22 +397,37 @@ namespace BasicFacebookFeatures
                 {
                     MessageBox.Show("Couldn't fetch friend's profile picture");
                 }
-                
-                // TODO: add error handling for when server can't fetch the data //
-                // maybe this should be done in the feature itself //
-                int numOfLikes = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                    m_LoggedInUser,
-                    selectedFriend,
-                    eEngagmentType.Likes);
-                int numOfComments = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                    m_LoggedInUser,
-                    selectedFriend,
-                    eEngagmentType.Comments);
-                int numOfAll = numOfLikes + numOfComments;
-                
-                LabelLikesNum.Text = numOfLikes.ToString();
-                LabelCommentsNum.Text = numOfComments.ToString();
-                LabelOverallEngagments.Text = $"The user {selectedFriend.Name} has {numOfAll} engagments with you";
+
+                try
+                {
+                    int numOfLikes = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
+                        m_LoggedInUser,
+                        selectedFriend,
+                        eEngagmentType.Likes);
+                    int numOfComments = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
+                        m_LoggedInUser,
+                        selectedFriend,
+                        eEngagmentType.Comments);
+                    int numOfAll = numOfLikes + numOfComments;
+
+                    numOfLikesStr = numOfLikes.ToString();
+                    numOfCommentsStr = numOfComments.ToString();
+                    numOfAllStr = $"The user {selectedFriend.Name} has {numOfAll} engagments with you";
+                }
+                catch(FacebookOAuthException)
+                {
+                    MessageBox.Show("Couldn't fetch friend's analytics, there is an issue with the server");
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Couldn't fetch friend's analytics, unknown error occured");
+                }
+                finally
+                {
+                    LabelLikesNum.Text = numOfLikesStr;
+                    LabelCommentsNum.Text = numOfCommentsStr;
+                    LabelOverallEngagments.Text = numOfAllStr;
+                }
             }
         }
         
@@ -400,6 +440,17 @@ namespace BasicFacebookFeatures
                 {
                     RelationshipFeature.SelectedFriend = selectedFriend;
                 }
+            }
+        }
+
+        private void lowerMaxAgeToMinAgeIfNeeded()
+        {
+            int minAge = (int)numericUpDownMinAge.Value;
+            int maxAge = (int)numericUpDownMaxAge.Value;
+
+            if(maxAge < minAge)
+            {
+                numericUpDownMaxAge.Value = minAge;
             }
         }
 
@@ -421,27 +472,57 @@ namespace BasicFacebookFeatures
         private void numericUpDownMinAge_ValueChanged(object sender, EventArgs e)
         {
             RelationshipFeature.MinAgePreference = (int)numericUpDownMinAge.Value;
+            lowerMaxAgeToMinAgeIfNeeded();
         }
 
         private void numericUpDownMaxAge_ValueChanged(object sender, EventArgs e)
         {
             RelationshipFeature.MaxAgePreference = (int)numericUpDownMaxAge.Value;
+            lowerMaxAgeToMinAgeIfNeeded();
         }
 
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
-            FacebookObjectCollection<User> possibleMathces = RelationshipFeature.FindMatchesBasedOnPreferences();
+            try
+            {
+                FacebookObjectCollection<User> matches = RelationshipFeature.FindMatchesBasedOnPreferences();
+                listBoxMatches.Items.Clear();
+                listBoxMatches.DisplayMember = k_DefaultListBoxDisplayMember;
 
-            listBoxMatches.Items.Clear();
-            if (possibleMathces.Count > 0)
-            {
-                listBoxMatches.DataSource = possibleMathces;
-                listBoxMatches.DisplayMember = "Name";
+                if (matches.Count > 0)
+                {
+                    foreach (User match in matches)
+                    {
+                        listBoxMatches.Items.Add(match);
+                    }
+                }
+                else
+                {
+                    listBoxMatches.Items.Add("There are no matches for you :(");
+                }
             }
-            else
+            catch (ArgumentNullException)
             {
-                listBoxMatches.Items.Add("No matches found :(");
+                MessageBox.Show("You have to select a friend first");
             }
+            catch (FacebookOAuthException)
+            {
+                MessageBox.Show("Couldn't fetch matches, there is an issue with the server");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Couldn't fetch matches, unknown error occured");
+            }
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            hideTabPages();
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            MessageBox.Show("after successful login, new tabs will be available for you", "Welcome!");
         }
     }
 }

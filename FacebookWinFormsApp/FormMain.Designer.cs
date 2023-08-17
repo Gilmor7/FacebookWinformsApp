@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlFormMain = new System.Windows.Forms.TabControl();
             this.tabPageHome = new System.Windows.Forms.TabPage();
             this.labelPostsTitle = new System.Windows.Forms.Label();
             this.labelEventsTitle = new System.Windows.Forms.Label();
@@ -84,7 +83,7 @@
             this.LabelRelationshipFriends = new System.Windows.Forms.Label();
             this.ListBoxRelationship = new System.Windows.Forms.ListBox();
             this.LabelRelationshipFeature = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
+            this.tabControlFormMain.SuspendLayout();
             this.tabPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPage)).BeginInit();
@@ -97,18 +96,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinAge)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControlFormMain
             // 
-            this.tabControl1.Controls.Add(this.tabPageHome);
-            this.tabControl1.Controls.Add(this.tabPageAnalytics);
-            this.tabControl1.Controls.Add(this.tabPageFindMatch);
-            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(2053, 1232);
-            this.tabControl1.TabIndex = 1;
+            this.tabControlFormMain.Controls.Add(this.tabPageHome);
+            this.tabControlFormMain.Controls.Add(this.tabPageAnalytics);
+            this.tabControlFormMain.Controls.Add(this.tabPageFindMatch);
+            this.tabControlFormMain.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tabControlFormMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlFormMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlFormMain.Name = "tabControlFormMain";
+            this.tabControlFormMain.SelectedIndex = 0;
+            this.tabControlFormMain.Size = new System.Drawing.Size(1924, 1050);
+            this.tabControlFormMain.TabIndex = 1;
             // 
             // tabPageHome
             // 
@@ -142,7 +141,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 35);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(2045, 1210);
+            this.tabPageHome.Size = new System.Drawing.Size(1916, 1011);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             // 
@@ -411,7 +410,7 @@
             this.tabPageAnalytics.Location = new System.Drawing.Point(4, 35);
             this.tabPageAnalytics.Name = "tabPageAnalytics";
             this.tabPageAnalytics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAnalytics.Size = new System.Drawing.Size(2039, 1193);
+            this.tabPageAnalytics.Size = new System.Drawing.Size(1916, 1011);
             this.tabPageAnalytics.TabIndex = 1;
             this.tabPageAnalytics.Text = "Friends Analytics";
             // 
@@ -505,7 +504,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(1850, 77);
             this.label2.TabIndex = 0;
-            this.label2.Text = resources.GetString("label2.Text");
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPageFindMatch
@@ -530,7 +528,7 @@
             this.tabPageFindMatch.Location = new System.Drawing.Point(4, 35);
             this.tabPageFindMatch.Name = "tabPageFindMatch";
             this.tabPageFindMatch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFindMatch.Size = new System.Drawing.Size(2045, 1193);
+            this.tabPageFindMatch.Size = new System.Drawing.Size(1916, 1011);
             this.tabPageFindMatch.TabIndex = 2;
             this.tabPageFindMatch.Text = "Find Matches";
             // 
@@ -588,19 +586,20 @@
             // numericUpDownMaxAge
             // 
             this.numericUpDownMaxAge.Location = new System.Drawing.Point(780, 215);
+            this.numericUpDownMaxAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             this.numericUpDownMaxAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMaxAge.Name = "numericUpDownMaxAge";
-            this.numericUpDownMaxAge.Size = new System.Drawing.Size(50, 32);
+            this.numericUpDownMaxAge.Size = new System.Drawing.Size(65, 32);
             this.numericUpDownMaxAge.TabIndex = 10;
-            this.numericUpDownMaxAge.Value = new decimal(new int[] { 25, 0, 0, 0 });
+            this.numericUpDownMaxAge.Value = new decimal(new int[] { 120, 0, 0, 0 });
             this.numericUpDownMaxAge.ValueChanged += new System.EventHandler(this.numericUpDownMaxAge_ValueChanged);
             // 
             // numericUpDownMinAge
             // 
-            this.numericUpDownMinAge.Location = new System.Drawing.Point(782, 152);
+            this.numericUpDownMinAge.Location = new System.Drawing.Point(780, 152);
             this.numericUpDownMinAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMinAge.Name = "numericUpDownMinAge";
-            this.numericUpDownMinAge.Size = new System.Drawing.Size(48, 32);
+            this.numericUpDownMinAge.Size = new System.Drawing.Size(65, 32);
             this.numericUpDownMinAge.TabIndex = 9;
             this.numericUpDownMinAge.Value = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMinAge.ValueChanged += new System.EventHandler(this.numericUpDownMinAge_ValueChanged);
@@ -703,15 +702,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(2053, 1232);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.Controls.Add(this.tabControlFormMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1295, 753);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Desktop Facebook";
-            this.tabControl1.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
+            this.tabControlFormMain.ResumeLayout(false);
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriend)).EndInit();
@@ -761,7 +762,7 @@
         private System.Windows.Forms.Label label2;
 
 		#endregion
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabControl tabControlFormMain;
 		private System.Windows.Forms.TabPage tabPageAnalytics;
         private System.Windows.Forms.TabPage tabPageFindMatch;
         private System.Windows.Forms.TabPage tabPageHome;
