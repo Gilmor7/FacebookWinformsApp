@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
@@ -30,9 +31,9 @@ namespace BasicFacebookFeatures
             {
                 r_User.Login();
                 RelationshipFeature.LoggedInUser = r_User.LoggedInUser;
-                fetchUserInfo();
+                new Thread(fetchUserInfo).Start();
                 changeLoginAndLogoutButtonsState(i_IsLogin: true);
-                fetchDataAndPopulateListBoxes();
+                new Thread(fetchDataAndPopulateListBoxes).Start();
                 showTabPages();
             }
             catch (Exception ex)
@@ -107,11 +108,11 @@ namespace BasicFacebookFeatures
 
         private void fetchDataAndPopulateListBoxes()
         {
-            fetchPostsAndPopulateListBox();
-            fetchFriendsAndPopulateListBox();
-            fetchPagesAndPopulateListBox();
-            fetchAlbumsAndPopulateListBox();
-            fetchEventsAndPopulateListBox();
+            new Thread(fetchPostsAndPopulateListBox).Start();
+            new Thread(fetchFriendsAndPopulateListBox).Start();
+            new Thread(fetchPagesAndPopulateListBox).Start();
+            new Thread(fetchAlbumsAndPopulateListBox).Start();
+            new Thread(fetchEventsAndPopulateListBox).Start();
         }
 
         private void fetchPagesAndPopulateListBox()
