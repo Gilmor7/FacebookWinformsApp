@@ -169,47 +169,6 @@ namespace BasicFacebookFeatures
                 eventsBindingSource.DataSource = r_User.LoggedInUser.Events;
             }
         }
-        
-        private void displaySelectedPagePhoto()
-        {
-            if (listBoxPages.SelectedItems.Count == 1)
-            {
-                Page selectedPage = listBoxPages.SelectedItem as Page;
-                if(selectedPage != null)
-                {
-                    pictureBoxPage.LoadAsync(selectedPage.PictureSmallURL);
-                }
-            }
-        }
-        
-        private void displaySelectedAlbumPhoto()
-        {
-            if (listBoxAlbums.SelectedItems.Count == 1)
-            {
-                Album selectedAlbum = listBoxAlbums.SelectedItem as Album;
-                if(selectedAlbum != null)
-                {
-                    pictureBoxAlbum.LoadAsync(selectedAlbum.PictureSmallURL);
-                }
-            }
-        }
-
-        private void displayPostComments()
-        {
-            Post selectedPost = r_User.LoggedInUser.Posts[listBoxPosts.SelectedIndex];
-            FacebookObjectCollection<Comment> postComments = selectedPost.Comments;
-
-            listBoxPostComments.Items.Clear();
-            if (postComments.Count > 0)
-            {
-                listBoxPostComments.DataSource = postComments;
-                listBoxPostComments.DisplayMember = "Message";
-            }
-            else
-            {
-                listBoxPostComments.Items.Add("No comments available :(");
-            }
-        }
 
         private void postStatus()
         {
