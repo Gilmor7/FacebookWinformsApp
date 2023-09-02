@@ -18,7 +18,8 @@ namespace BasicFacebookFeatures
         private const string k_DefaultSuccessCaption = "Success";
         private const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
         private readonly UserManager r_User = new UserManager();
-        
+        private FriendsAnalyticsFeature m_FriendsAnalyticsFeature;
+
         public FormMain()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace BasicFacebookFeatures
             {
                 r_User.Login();
                 RelationshipFeature.LoggedInUser = r_User.LoggedInUser;
+                m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature(r_User.LoggedInUser);
                 new Thread(fetchUserInfo).Start();
                 changeLoginAndLogoutButtonsState(i_IsLogin: true);
                 new Thread(fetchDataAndPopulateListBoxes).Start();
@@ -212,61 +214,6 @@ namespace BasicFacebookFeatures
         {
            postStatus();
         }
-
-        private void ButtonSelectFriend_Click(object sender, EventArgs e)
-        {
-            showSelectedFriendAnalytics();
-        }
-
-        private void showSelectedFriendAnalytics()
-        {
-            if (listBoxFriendsAnalytics.SelectedItems.Count == 1 && listBoxFriendsAnalytics.SelectedItem is User selectedFriend)
-            {
-                string numOfLikesStr = k_DefaultServerErrorMessage;
-                string numOfCommentsStr = k_DefaultServerErrorMessage;
-                string numOfAllStr = k_DefaultServerErrorMessage;
-                
-                try
-                {
-                    //PictureBoxFriendsAnalytics.LoadAsync(selectedFriend.PictureNormalURL);
-                }
-                catch (Exception )
-                {
-                    MessageBox.Show("Couldn't fetch friend's profile picture", k_DefaultErrorCaption);
-                }
-
-                try
-                {
-                    int numOfLikes = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                        r_User.LoggedInUser,
-                        selectedFriend,
-                        eEngagmentType.Likes);
-                    int numOfComments = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                        r_User.LoggedInUser,
-                        selectedFriend,
-                        eEngagmentType.Comments);
-                    int numOfAll = numOfLikes + numOfComments;
-
-                    numOfLikesStr = numOfLikes.ToString();
-                    numOfCommentsStr = numOfComments.ToString();
-                    numOfAllStr = $"The user {selectedFriend.Name} has {numOfAll} engagements with you";
-                }
-                catch(FacebookOAuthException)
-                {
-                    MessageBox.Show("Couldn't fetch friend's analytics, there is an issue with the server", k_DefaultErrorCaption);
-                }
-                catch(Exception)
-                {
-                    MessageBox.Show("Couldn't fetch friend's analytics, unknown error occured", k_DefaultErrorCaption);
-                }
-                finally
-                {
-                    //LabelLikesNum.Text = numOfLikesStr;
-                    //LabelCommentsNum.Text = numOfCommentsStr;
-                    //LabelOverallEngagments.Text = numOfAllStr;
-                }
-            }
-        }
         
         private void ListBoxRelationship_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -365,6 +312,26 @@ namespace BasicFacebookFeatures
         private void FormMain_Shown(object sender, EventArgs e)
         {
             MessageBox.Show("New tabs with extra features will be available after login", "Welcome!");
+        }
+
+        private void listBoxFriendsAnalytics_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // when we will seperate this to another form, we might need to change this if statement
+            if(listBoxFriendsAnalytics.SelectedItems.Count == 1 && tabControlFormMain.SelectedTab == tabPageAnalytics)
+            {
+                try
+                {
+                    User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
+                    if (selectedFriend != null)
+                    {
+                        m_FriendsAnalyticsFeature.UpdateInternalEngagmentsBasedOnSelectedFriend(selectedFriend);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Couldn't fetch analytics, unknown error occured", k_DefaultErrorCaption);
+                }
+            }
         }
     }
 }
