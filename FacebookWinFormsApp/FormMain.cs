@@ -177,6 +177,10 @@ namespace BasicFacebookFeatures
         {
             populateListBoxWithFriends(listBoxFriends);
             populateListBoxWithFriends(listBoxRelationship);
+            listBoxFriendsAnalytics.Invoke(new Action(() =>
+            {
+                userBindingSource.DataSource = r_User.LoggedInUser.Friends;
+            }));
         }
 
         private void populateListBoxWithFriends(ListBox i_ListBox)
