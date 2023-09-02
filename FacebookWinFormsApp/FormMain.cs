@@ -73,23 +73,14 @@ namespace BasicFacebookFeatures
 
         private void fetchUserInfo()
         {
-            labelUserName.Invoke(new Action(() =>
-                {
-                    labelUserName.Text = $"Hello, {r_User.LoggedInUser.Name}";
-                    pictureBoxProfile.LoadAsync(r_User.LoggedInUser.PictureNormalURL);
-
-
-                    if (r_User.LoggedInUser.Posts.Count > 0 && r_User.LoggedInUser.Posts[0].Message != null)
-                    {
-                        textBoxStatus.Text = r_User.LoggedInUser.Posts[0].Message;
-                    }
-                    else
-                    {
-                        textBoxStatus.Text = "This is my first status!";
-                    }
-
-                    textBoxStatus.SelectionLength = 0;
-                }));
+            if(labelUserName.InvokeRequired)
+            {
+                labelUserName.Invoke(new Action(() => userBindingSource.DataSource = r_User.LoggedInUser));
+            }
+            else
+            {
+                labelUserName.Text = r_User.LoggedInUser.Name;
+            }
         }
 
         private void handleLogout()
@@ -147,11 +138,11 @@ namespace BasicFacebookFeatures
         {
             if(listBoxFriends.InvokeRequired)
             {
-                listBoxFriends.Invoke(new Action(() => userBindingSource.DataSource = r_User.LoggedInUser.Friends));
+                listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.DataSource = r_User.LoggedInUser.Friends));
             }
             else
             {
-                userBindingSource.DataSource = r_User.LoggedInUser.Friends;
+                userFriendsBindingSource.DataSource = r_User.LoggedInUser.Friends;
             }
         }
 
