@@ -73,13 +73,15 @@ namespace BasicFacebookFeatures
 
         private void fetchUserInfo()
         {
+            User user = r_User.LoggedInUser;
+
             if(labelUserName.InvokeRequired)
             {
-                labelUserName.Invoke(new Action(() => userBindingSource.DataSource = r_User.LoggedInUser));
+                labelUserName.Invoke(new Action(() => userBindingSource.DataSource = user));
             }
             else
             {
-                labelUserName.Text = r_User.LoggedInUser.Name;
+                userBindingSource.DataSource = user;
             }
         }
 
@@ -112,61 +114,71 @@ namespace BasicFacebookFeatures
 
         private void fetchPagesAndPopulateListBox()
         {
+            FacebookObjectCollection<Page> likedPages = r_User.LoggedInUser.LikedPages;
+
             if(listBoxPages.InvokeRequired)
             {
-                listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = r_User.LoggedInUser.LikedPages));
+                listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = likedPages));
             }
             else
             {
-                pageBindingSource.DataSource = r_User.LoggedInUser.LikedPages;
+                pageBindingSource.DataSource = likedPages;
             }
         }
         
         private void fetchAlbumsAndPopulateListBox()
         {
+            FacebookObjectCollection<Album> albums = r_User.LoggedInUser.Albums;
+
             if(listBoxAlbums.InvokeRequired)
             {
-                listBoxAlbums.Invoke(new Action(() => albumsBindingSource.DataSource = r_User.LoggedInUser.Albums));
+                listBoxAlbums.Invoke(new Action(() => albumsBindingSource.DataSource = albums));
             }
             else
             {
-                albumsBindingSource.DataSource = r_User.LoggedInUser.Albums;
+                albumsBindingSource.DataSource = albums;
             }
         }
 
         private void fetchAndPopulateUserFriendsListBoxes()
         {
+            FacebookObjectCollection<User> friends = r_User.LoggedInUser.Friends;
+
             if(listBoxFriends.InvokeRequired)
             {
-                listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.DataSource = r_User.LoggedInUser.Friends));
+                listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.DataSource = friends));
             }
             else
             {
-                userFriendsBindingSource.DataSource = r_User.LoggedInUser.Friends;
+                userFriendsBindingSource.DataSource = friends;
             }
         }
 
         private void fetchPostsAndPopulateListBox()
         {
+            FacebookObjectCollection<Post> posts = r_User.LoggedInUser.Posts;
+
             if(listBoxPosts.InvokeRequired)
             {
-                listBoxPosts.Invoke(new Action(() => postedItemBindingSource.DataSource = r_User.LoggedInUser.Posts));
+                listBoxPosts.Invoke(new Action(() => postedItemBindingSource.DataSource = posts));
             }
             else
             {
-                postedItemBindingSource.DataSource = r_User.LoggedInUser.Posts;
+                postedItemBindingSource.DataSource = posts;
             }
         }
 
         private void fetchEventsAndPopulateListBox()
         {
+            FacebookObjectCollection<Event> events = r_User.LoggedInUser.Events;
+
             if(listBoxEvents.InvokeRequired)
             {
-                listBoxEvents.Invoke(new Action(() => eventsBindingSource.DataSource = r_User.LoggedInUser.Events));
+                listBoxEvents.Invoke(new Action(() => eventsBindingSource.DataSource = events));
             }
             else
             {
-                eventsBindingSource.DataSource = r_User.LoggedInUser.Events;
+                eventsBindingSource.DataSource = events;
             }
         }
 
