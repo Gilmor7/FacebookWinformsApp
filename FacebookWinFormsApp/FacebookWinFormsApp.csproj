@@ -89,7 +89,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationLogic\Features\FriendsAnalyticsFeature\eEngagmentType.cs" />
     <Compile Include="ApplicationLogic\Features\FriendsAnalyticsFeature\FriendsAnalyticsFeature.cs" />
     <Compile Include="ApplicationLogic\Features\RelationshipFeature\RelationshipFeature.cs" />
     <Compile Include="ApplicationLogic\Proxies\PostProxy.cs" />
@@ -135,6 +134,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="BasicFacebookFeatures.Features.FriendsAnalyticsFeature.FriendsAnalyticsFeature.datasource" />
+    <None Include="BasicFacebookFeatures.Features.RelationshipFeature.RelationshipFeature.datasource" />
+    <None Include="BasicFacebookFeatures.Features.RelationshipFeature.RelationshipFeature1.datasource" />
+    <None Include="BasicFacebookFeatures.Features.RelationshipFeature.RelationshipFeature2.datasource" />
     <None Include="FacebookWrapper.ObjectModel.Event.datasource" />
     <None Include="FacebookWrapper.ObjectModel.Page.datasource" />
     <None Include="FacebookWrapper.ObjectModel.PostedItem.datasource" />
