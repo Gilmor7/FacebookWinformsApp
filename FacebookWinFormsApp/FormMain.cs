@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
+using BasicFacebookFeatures.ApplicationLogic.Proxies;
 using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
 using BasicFacebookFeatures.Features.RelationshipFeature;
 using Facebook;
@@ -158,7 +160,12 @@ namespace BasicFacebookFeatures
 
         private void fetchPostsAndPopulateListBox()
         {
-            FacebookObjectCollection<Post> posts = r_User.LoggedInUser.Posts;
+            FacebookObjectCollection<PostProxy> posts = new FacebookObjectCollection<PostProxy>();
+            
+            foreach(Post post in r_User.LoggedInUser.Posts)
+            {
+                posts.Add(new PostProxy(post));
+            }
 
             if(listBoxPosts.InvokeRequired)
             {
@@ -330,6 +337,35 @@ namespace BasicFacebookFeatures
                 catch (Exception)
                 {
                     MessageBox.Show("Couldn't fetch analytics, unknown error occured", k_DefaultErrorCaption);
+                }
+            }
+        }
+
+        private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            new Thread(updateCommentsBasedOnSelectedPost).Start();
+        }
+
+        private void updateCommentsBasedOnSelectedPost()
+        {
+            if(listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is PostProxy selectedPost)
+            {
+                FacebookObjectCollection<Comment> comments = selectedPost.Comments;
+
+                if(comments.Count == 0)
+                {
+                    commentsBindingSource.DataSource = new List<string>() { "No comments to show" };
+                }
+                else
+                {
+                    if(listBoxPostComments.InvokeRequired)
+                    {
+                        listBoxPostComments.Invoke(new Action(() => commentsBindingSource.DataSource = comments));
+                    }
+                    else
+                    {
+                        commentsBindingSource.DataSource = comments;
+                    }   
                 }
             }
         }
