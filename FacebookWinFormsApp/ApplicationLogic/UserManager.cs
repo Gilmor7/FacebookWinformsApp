@@ -4,8 +4,9 @@ using FacebookWrapper;
 
 namespace BasicFacebookFeatures.ApplicationLogic
 {
-    public class UserManager
+    public sealed class UserManager
     {
+        private static readonly object sr_CreationLockContext = new object();
         private const string k_AppId = "1444657766108962";
         private readonly string[] r_Permissions = new string[]
         {
@@ -26,6 +27,25 @@ namespace BasicFacebookFeatures.ApplicationLogic
         };
 
         private LoginResult m_LoginResult = null;
+        private static UserManager s_This = null;
+        public static UserManager Instance
+        {
+            get
+            {
+                if (s_This == null)
+                {
+                    lock (sr_CreationLockContext)
+                    {
+                        if (s_This == null)
+                        {
+                            s_This = new UserManager();
+                        }
+                    }
+                }
+
+                return s_This;
+            }
+        }
         public User LoggedInUser
         {
             get
