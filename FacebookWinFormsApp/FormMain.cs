@@ -18,7 +18,8 @@ namespace BasicFacebookFeatures
         private const string k_DefaultSuccessCaption = "Success";
         private const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
         private readonly UserManager r_User = new UserManager();
-        
+        private FriendsAnalyticsFeature m_FriendsAnalyticsFeature;
+
         public FormMain()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace BasicFacebookFeatures
             {
                 r_User.Login();
                 RelationshipFeature.LoggedInUser = r_User.LoggedInUser;
+                m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature(r_User.LoggedInUser);
                 new Thread(fetchUserInfo).Start();
                 changeLoginAndLogoutButtonsState(i_IsLogin: true);
                 new Thread(fetchDataAndPopulateListBoxes).Start();
@@ -73,19 +75,16 @@ namespace BasicFacebookFeatures
 
         private void fetchUserInfo()
         {
-            labelUserName.Text = $"Hello, {r_User.LoggedInUser.Name}";
-            pictureBoxProfile.LoadAsync(r_User.LoggedInUser.PictureNormalURL);
+            User user = r_User.LoggedInUser;
 
-            if (r_User.LoggedInUser.Posts.Count > 0 && r_User.LoggedInUser.Posts[0].Message != null)
+            if(labelUserName.InvokeRequired)
             {
-                textBoxStatus.Text = r_User.LoggedInUser.Posts[0].Message;
+                labelUserName.Invoke(new Action(() => userBindingSource.DataSource = user));
             }
             else
             {
-                textBoxStatus.Text = "This is my first status!";
+                userBindingSource.DataSource = user;
             }
-
-            textBoxStatus.SelectionLength = 0;
         }
 
         private void handleLogout()
@@ -109,7 +108,7 @@ namespace BasicFacebookFeatures
         private void fetchDataAndPopulateListBoxes()
         {
             new Thread(fetchPostsAndPopulateListBox).Start();
-            new Thread(fetchFriendsAndPopulateListBox).Start();
+            new Thread(fetchAndPopulateUserFriendsListBoxes).Start();
             new Thread(fetchPagesAndPopulateListBox).Start();
             new Thread(fetchAlbumsAndPopulateListBox).Start();
             new Thread(fetchEventsAndPopulateListBox).Start();
@@ -117,189 +116,71 @@ namespace BasicFacebookFeatures
 
         private void fetchPagesAndPopulateListBox()
         {
-            listBoxPages.Items.Clear();
-            listBoxPages.DisplayMember = k_DefaultListBoxDisplayMember;
-            
-            try
-            {
-                foreach (Page page in r_User.LoggedInUser.LikedPages)
-                {
-                    listBoxPages.Items.Add(page);
-                }
+            FacebookObjectCollection<Page> likedPages = r_User.LoggedInUser.LikedPages;
 
-                if (listBoxPages.Items.Count == 0)
-                {
-                    listBoxPages.Items.Add("There are no liked pages");
-                }
-            }
-            catch (Exception)
+            if(listBoxPages.InvokeRequired)
             {
-                listBoxPages.Items.Add("Couldn't fetch liked pages");
+                listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = likedPages));
+            }
+            else
+            {
+                pageBindingSource.DataSource = likedPages;
             }
         }
         
         private void fetchAlbumsAndPopulateListBox()
         {
-            listBoxAlbums.Items.Clear();
-            listBoxAlbums.DisplayMember = k_DefaultListBoxDisplayMember;
-            
-            try
-            {
-                foreach (Album album in r_User.LoggedInUser.Albums)
-                {
-                    listBoxAlbums.Items.Add(album);
-                }
+            FacebookObjectCollection<Album> albums = r_User.LoggedInUser.Albums;
 
-                if (listBoxAlbums.Items.Count == 0)
-                {
-                    listBoxAlbums.Items.Add("There are no albums available");
-                }
-            }
-            catch (Exception)
+            if(listBoxAlbums.InvokeRequired)
             {
-                listBoxAlbums.Items.Add("Couldn't fetch albums");
+                listBoxAlbums.Invoke(new Action(() => albumsBindingSource.DataSource = albums));
+            }
+            else
+            {
+                albumsBindingSource.DataSource = albums;
             }
         }
 
-        private void fetchFriendsAndPopulateListBox()
+        private void fetchAndPopulateUserFriendsListBoxes()
         {
-            listBoxFriends.Items.Clear();
-            listBoxFriendsAnalytics.Items.Clear();
-            listBoxRelationship.Items.Clear();
-            listBoxFriendsAnalytics.DisplayMember = k_DefaultListBoxDisplayMember;
-            listBoxFriends.DisplayMember = k_DefaultListBoxDisplayMember;
-            listBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
-            
-            try
-            {
-                foreach (User friend in r_User.LoggedInUser.Friends)
-                {
-                    listBoxFriends.Items.Add(friend);
-                    listBoxFriendsAnalytics.Items.Add(friend);
-                    listBoxRelationship.Items.Add(friend);
-                }
+            FacebookObjectCollection<User> friends = r_User.LoggedInUser.Friends;
 
-                if (listBoxFriends.Items.Count == 0)
-                {
-                    listBoxFriends.Items.Add("There are no facebook friends available");
-                    listBoxFriendsAnalytics.Items.Add("There are no facebook friends available");
-                    listBoxRelationship.Items.Add("There are no facebook friends available");
-                }
-            }
-            catch (Exception)
+            if(listBoxFriends.InvokeRequired)
             {
-                listBoxFriends.Items.Add("Couldn't fetch facebook friends");
-                listBoxFriendsAnalytics.Items.Add("Couldn't fetch facebook friends");
-                listBoxRelationship.Items.Add("Couldn't fetch facebook friends");
+                listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.DataSource = friends));
+            }
+            else
+            {
+                userFriendsBindingSource.DataSource = friends;
             }
         }
 
         private void fetchPostsAndPopulateListBox()
         {
-            listBoxPosts.Items.Clear();
+            FacebookObjectCollection<Post> posts = r_User.LoggedInUser.Posts;
 
-            try
+            if(listBoxPosts.InvokeRequired)
             {
-                foreach (Post post in r_User.LoggedInUser.Posts)
-                {
-                    if (post.Message != null)
-                    {
-                        listBoxPosts.Items.Add(post.Message);
-                    }
-                    else if (post.Caption != null)
-                    {
-                        listBoxPosts.Items.Add(post.Caption);
-                    }
-                    else
-                    {
-                        listBoxPosts.Items.Add($"[{post.Type}]");
-                    }
-                }
-
-                if (listBoxPosts.Items.Count == 0)
-                {
-                    listBoxPosts.Items.Add("There are no posts available");
-                }
+                listBoxPosts.Invoke(new Action(() => postedItemBindingSource.DataSource = posts));
             }
-            catch (Exception)
+            else
             {
-                listBoxPosts.Items.Add("Couldn't fetch posts");
+                postedItemBindingSource.DataSource = posts;
             }
         }
 
         private void fetchEventsAndPopulateListBox()
         {
-            listBoxEvents.Items.Clear();
-            listBoxEvents.DisplayMember = k_DefaultListBoxDisplayMember;
-            
-            try
-            {
-                foreach (Event facebookEvent in r_User.LoggedInUser.Events)
-                {
-                    listBoxEvents.Items.Add(facebookEvent);
-                }
+            FacebookObjectCollection<Event> events = r_User.LoggedInUser.Events;
 
-                if (listBoxEvents.Items.Count == 0)
-                {
-                    listBoxEvents.Items.Add("There are no events available");
-                }
-            }
-            catch (Exception)
+            if(listBoxEvents.InvokeRequired)
             {
-                listBoxEvents.Items.Add("Couldn't fetch events");
-            }
-        }
-
-        private void displaySelectedFriendPhoto()
-        {
-            if (listBoxFriends.SelectedItems.Count == 1)
-            {
-                User selectedFriend = listBoxFriends.SelectedItem as User;
-                if(selectedFriend != null)
-                {
-                    pictureBoxFriend.LoadAsync(selectedFriend.PictureSmallURL);
-                }
-            }
-        }
-        
-        private void displaySelectedPagePhoto()
-        {
-            if (listBoxPages.SelectedItems.Count == 1)
-            {
-                Page selectedPage = listBoxPages.SelectedItem as Page;
-                if(selectedPage != null)
-                {
-                    pictureBoxPage.LoadAsync(selectedPage.PictureSmallURL);
-                }
-            }
-        }
-        
-        private void displaySelectedAlbumPhoto()
-        {
-            if (listBoxAlbums.SelectedItems.Count == 1)
-            {
-                Album selectedAlbum = listBoxAlbums.SelectedItem as Album;
-                if(selectedAlbum != null)
-                {
-                    pictureBoxAlbum.LoadAsync(selectedAlbum.PictureSmallURL);
-                }
-            }
-        }
-
-        private void displayPostComments()
-        {
-            Post selectedPost = r_User.LoggedInUser.Posts[listBoxPosts.SelectedIndex];
-            FacebookObjectCollection<Comment> postComments = selectedPost.Comments;
-
-            listBoxPostComments.Items.Clear();
-            if (postComments.Count > 0)
-            {
-                listBoxPostComments.DataSource = postComments;
-                listBoxPostComments.DisplayMember = "Message";
+                listBoxEvents.Invoke(new Action(() => eventsBindingSource.DataSource = events));
             }
             else
             {
-                listBoxPostComments.Items.Add("No comments available :(");
+                eventsBindingSource.DataSource = events;
             }
         }
 
@@ -329,84 +210,9 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            displaySelectedFriendPhoto();
-        }
-
-        private void listBoxPages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            displaySelectedPagePhoto();
-        }
-
-        private void listBoxAlbums_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            displaySelectedAlbumPhoto();
-        }
-
         private void buttonPost_Click(object sender, EventArgs e)
         {
            postStatus();
-        }
-
-        private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            displayPostComments();
-        }
-
-        private void ButtonSelectFriend_Click(object sender, EventArgs e)
-        {
-            showSelectedFriendAnalytics();
-        }
-
-        private void showSelectedFriendAnalytics()
-        {
-            if (listBoxFriendsAnalytics.SelectedItems.Count == 1 && listBoxFriendsAnalytics.SelectedItem is User selectedFriend)
-            {
-                string numOfLikesStr = k_DefaultServerErrorMessage;
-                string numOfCommentsStr = k_DefaultServerErrorMessage;
-                string numOfAllStr = k_DefaultServerErrorMessage;
-                
-                try
-                {
-                    PictureBoxFriendsAnalytics.LoadAsync(selectedFriend.PictureNormalURL);
-                }
-                catch (Exception )
-                {
-                    MessageBox.Show("Couldn't fetch friend's profile picture", k_DefaultErrorCaption);
-                }
-
-                try
-                {
-                    int numOfLikes = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                        r_User.LoggedInUser,
-                        selectedFriend,
-                        eEngagmentType.Likes);
-                    int numOfComments = FriendsAnalyticsFeature.GetNumberOfEngagementsFromFriend(
-                        r_User.LoggedInUser,
-                        selectedFriend,
-                        eEngagmentType.Comments);
-                    int numOfAll = numOfLikes + numOfComments;
-
-                    numOfLikesStr = numOfLikes.ToString();
-                    numOfCommentsStr = numOfComments.ToString();
-                    numOfAllStr = $"The user {selectedFriend.Name} has {numOfAll} engagements with you";
-                }
-                catch(FacebookOAuthException)
-                {
-                    MessageBox.Show("Couldn't fetch friend's analytics, there is an issue with the server", k_DefaultErrorCaption);
-                }
-                catch(Exception)
-                {
-                    MessageBox.Show("Couldn't fetch friend's analytics, unknown error occured", k_DefaultErrorCaption);
-                }
-                finally
-                {
-                    LabelLikesNum.Text = numOfLikesStr;
-                    LabelCommentsNum.Text = numOfCommentsStr;
-                    LabelOverallEngagments.Text = numOfAllStr;
-                }
-            }
         }
         
         private void ListBoxRelationship_SelectedIndexChanged(object sender, EventArgs e)
@@ -506,6 +312,26 @@ namespace BasicFacebookFeatures
         private void FormMain_Shown(object sender, EventArgs e)
         {
             MessageBox.Show("New tabs with extra features will be available after login", "Welcome!");
+        }
+
+        private void listBoxFriendsAnalytics_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // when we will seperate this to another form, we might need to change this if statement
+            if(listBoxFriendsAnalytics.SelectedItems.Count == 1 && tabControlFormMain.SelectedTab == tabPageAnalytics)
+            {
+                try
+                {
+                    User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
+                    if (selectedFriend != null)
+                    {
+                        m_FriendsAnalyticsFeature.UpdateInternalEngagmentsBasedOnSelectedFriend(selectedFriend);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Couldn't fetch analytics, unknown error occured", k_DefaultErrorCaption);
+                }
+            }
         }
     }
 }

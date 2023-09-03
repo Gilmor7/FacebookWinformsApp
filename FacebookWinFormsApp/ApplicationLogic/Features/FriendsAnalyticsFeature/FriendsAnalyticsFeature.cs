@@ -1,43 +1,105 @@
 ﻿using System;
+using System.Collections;
+using System.ComponentModel;
+using Facebook;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.Features.FriendsAnalyticsFeature
 {
-    public static class FriendsAnalyticsFeature
+    public class FriendsAnalyticsFeature : INotifyPropertyChanged
     {
-        public static int GetNumberOfEngagementsFromFriend(User i_User, User i_Friend, eEngagmentType i_EngagmentType)
+        private User m_LoggedInUser;
+        private int m_NumOfLikes;
+        private int m_NumOfComments;
+        private int m_NumOfOverallEngagements;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public int NumberOfLikes
         {
-            if (i_User == null || i_Friend == null)
+            get { return m_NumOfLikes; }
+            private set
             {
-                string invalidArgument = i_User == null ? "i_User" : "i_Friend";
-                throw new ArgumentNullException(invalidArgument);
+                m_NumOfLikes = value;
+                OnPropertyChanged("NumberOfLikes");
             }
-            
-            int numberOfEngagments = 0;
+        }
 
-            foreach(Post post in i_User.Posts)
+        public int NumberOfComments
+        {
+            get { return m_NumOfComments; }
+            private set
             {
-                if(i_EngagmentType == eEngagmentType.Likes || i_EngagmentType == eEngagmentType.All)
+                m_NumOfComments = value;
+                OnPropertyChanged("NumberOfComments");
+            }
+        }
+
+        public int NumberOfOverallEngagements
+        {
+            get { return m_NumOfOverallEngagements; }
+            private set
+            {
+                m_NumOfOverallEngagements = value;
+                OnPropertyChanged("NumberOfOverallEngagements");
+            }
+        }
+
+        public FriendsAnalyticsFeature(User i_LoggedInUser)
+        {
+            m_LoggedInUser = i_LoggedInUser;
+        }
+
+        public void UpdateInternalEngagmentsBasedOnSelectedFriend(User i_SelectedFriend)
+        {
+            if(i_SelectedFriend == null)
+            {
+                NumberOfLikes = 0;
+                NumberOfComments = 0;
+                NumberOfOverallEngagements = 0;
+            }
+            else
+            {
+                int numOfLikes = 0;
+                int numOfComments = 0;
+                try
                 {
-                    if(post.LikedBy.Contains(i_Friend))
+                    foreach (Post post in m_LoggedInUser.Posts)
                     {
-                        numberOfEngagments++;
-                    }
-                }
-                
-                if(i_EngagmentType == eEngagmentType.Comments || i_EngagmentType == eEngagmentType.All)
-                {
-                    foreach(Comment comment in post.Comments)
-                    {
-                        if(comment.From.Id == i_Friend.Id)
+                        if (post.LikedBy.Contains(i_SelectedFriend))
                         {
-                            numberOfEngagments++;
+                            numOfLikes++;
                         }
+
+                        foreach (Comment comment in post.Comments)
+                        {
+                            if (comment.From == i_SelectedFriend)
+                            {
+                                numOfComments++;
+                            }
+                        }
+
+                        NumberOfLikes = numOfLikes;
+                        NumberOfComments = numOfComments;
+                        NumberOfOverallEngagements = NumberOfLikes + NumberOfComments;
                     }
                 }
+                catch (Exception e)
+                {
+                    NumberOfLikes = 0;
+                    NumberOfComments = 0;
+                    NumberOfOverallEngagements = 0;
+                    throw new Exception("Error occured while trying to calculate engagements", e);
+                }
             }
+        }
 
-            return numberOfEngagments;
+        protected virtual void OnPropertyChanged(string i_PropertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(i_PropertyName));
+            }
         }
     }
 }
