@@ -29,6 +29,7 @@ namespace BasicFacebookFeatures.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label numberOfCommentsLabel;
             System.Windows.Forms.Label numberOfLikesLabel;
             System.Windows.Forms.Label numberOfOverallEngagementsLabel;
@@ -38,7 +39,7 @@ namespace BasicFacebookFeatures.Forms
             System.Windows.Forms.Label linkLabel;
             System.Windows.Forms.Label nameLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFriendsAnalytics));
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelAnalytics = new System.Windows.Forms.Panel();
             this.numberOfCommentsLabel1 = new System.Windows.Forms.Label();
             this.numberOfLikesLabel1 = new System.Windows.Forms.Label();
             this.numberOfOverallEngagementsLabel1 = new System.Windows.Forms.Label();
@@ -52,6 +53,8 @@ namespace BasicFacebookFeatures.Forms
             this.LabelFriends = new System.Windows.Forms.Label();
             this.listBoxFriendsAnalytics = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.friendsAnalyticsFeatureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             numberOfCommentsLabel = new System.Windows.Forms.Label();
             numberOfLikesLabel = new System.Windows.Forms.Label();
             numberOfOverallEngagementsLabel = new System.Windows.Forms.Label();
@@ -60,9 +63,11 @@ namespace BasicFacebookFeatures.Forms
             emailLabel = new System.Windows.Forms.Label();
             linkLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
-            this.panel2.SuspendLayout();
+            this.panelAnalytics.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.friendsAnalyticsFeatureBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // numberOfCommentsLabel
@@ -137,21 +142,22 @@ namespace BasicFacebookFeatures.Forms
             nameLabel.TabIndex = 10;
             nameLabel.Text = "Name:";
             // 
-            // panel2
+            // panelAnalytics
             // 
-            this.panel2.Controls.Add(numberOfCommentsLabel);
-            this.panel2.Controls.Add(this.numberOfCommentsLabel1);
-            this.panel2.Controls.Add(numberOfLikesLabel);
-            this.panel2.Controls.Add(this.numberOfLikesLabel1);
-            this.panel2.Controls.Add(numberOfOverallEngagementsLabel);
-            this.panel2.Controls.Add(this.numberOfOverallEngagementsLabel1);
-            this.panel2.Location = new System.Drawing.Point(744, 239);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(468, 111);
-            this.panel2.TabIndex = 9;
+            this.panelAnalytics.Controls.Add(numberOfCommentsLabel);
+            this.panelAnalytics.Controls.Add(this.numberOfCommentsLabel1);
+            this.panelAnalytics.Controls.Add(numberOfLikesLabel);
+            this.panelAnalytics.Controls.Add(this.numberOfLikesLabel1);
+            this.panelAnalytics.Controls.Add(numberOfOverallEngagementsLabel);
+            this.panelAnalytics.Controls.Add(this.numberOfOverallEngagementsLabel1);
+            this.panelAnalytics.Location = new System.Drawing.Point(744, 239);
+            this.panelAnalytics.Name = "panelAnalytics";
+            this.panelAnalytics.Size = new System.Drawing.Size(468, 111);
+            this.panelAnalytics.TabIndex = 9;
             // 
             // numberOfCommentsLabel1
             // 
+            this.numberOfCommentsLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.friendsAnalyticsFeatureBindingSource, "NumberOfComments", true));
             this.numberOfCommentsLabel1.Location = new System.Drawing.Point(366, 19);
             this.numberOfCommentsLabel1.Name = "numberOfCommentsLabel1";
             this.numberOfCommentsLabel1.Size = new System.Drawing.Size(100, 23);
@@ -160,6 +166,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // numberOfLikesLabel1
             // 
+            this.numberOfLikesLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.friendsAnalyticsFeatureBindingSource, "NumberOfLikes", true));
             this.numberOfLikesLabel1.Location = new System.Drawing.Point(366, 45);
             this.numberOfLikesLabel1.Name = "numberOfLikesLabel1";
             this.numberOfLikesLabel1.Size = new System.Drawing.Size(100, 23);
@@ -168,6 +175,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // numberOfOverallEngagementsLabel1
             // 
+            this.numberOfOverallEngagementsLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.friendsAnalyticsFeatureBindingSource, "NumberOfOverallEngagements", true));
             this.numberOfOverallEngagementsLabel1.Location = new System.Drawing.Point(366, 71);
             this.numberOfOverallEngagementsLabel1.Name = "numberOfOverallEngagementsLabel1";
             this.numberOfOverallEngagementsLabel1.Size = new System.Drawing.Size(100, 23);
@@ -194,6 +202,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // aboutLabel1
             // 
+            this.aboutLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "About", true));
             this.aboutLabel1.Location = new System.Drawing.Point(167, 138);
             this.aboutLabel1.Name = "aboutLabel1";
             this.aboutLabel1.Size = new System.Drawing.Size(100, 23);
@@ -202,6 +211,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // birthdayTextBox
             // 
+            this.birthdayTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Birthday", true));
             this.birthdayTextBox.Location = new System.Drawing.Point(167, 178);
             this.birthdayTextBox.Name = "birthdayTextBox";
             this.birthdayTextBox.Size = new System.Drawing.Size(100, 26);
@@ -209,6 +219,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // emailLinkLabel
             // 
+            this.emailLinkLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Email", true));
             this.emailLinkLabel.Location = new System.Drawing.Point(168, 224);
             this.emailLinkLabel.Name = "emailLinkLabel";
             this.emailLinkLabel.Size = new System.Drawing.Size(100, 23);
@@ -218,6 +229,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // imageNormalPictureBox
             // 
+            this.imageNormalPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageNormal", true));
             this.imageNormalPictureBox.Location = new System.Drawing.Point(11, 3);
             this.imageNormalPictureBox.Name = "imageNormalPictureBox";
             this.imageNormalPictureBox.Size = new System.Drawing.Size(100, 80);
@@ -227,6 +239,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // linkTextBox
             // 
+            this.linkTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Link", true));
             this.linkTextBox.Location = new System.Drawing.Point(168, 262);
             this.linkTextBox.Name = "linkTextBox";
             this.linkTextBox.Size = new System.Drawing.Size(100, 26);
@@ -234,6 +247,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // nameLabel1
             // 
+            this.nameLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Name", true));
             this.nameLabel1.Location = new System.Drawing.Point(165, 99);
             this.nameLabel1.Name = "nameLabel1";
             this.nameLabel1.Size = new System.Drawing.Size(100, 23);
@@ -253,6 +267,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // listBoxFriendsAnalytics
             // 
+            this.listBoxFriendsAnalytics.DataSource = this.userBindingSource;
             this.listBoxFriendsAnalytics.DisplayMember = "Name";
             this.listBoxFriendsAnalytics.FormattingEnabled = true;
             this.listBoxFriendsAnalytics.ItemHeight = 20;
@@ -273,13 +288,21 @@ namespace BasicFacebookFeatures.Forms
             this.label2.Text = resources.GetString("label2.Text");
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
+            // 
+            // friendsAnalyticsFeatureBindingSource
+            // 
+            this.friendsAnalyticsFeatureBindingSource.DataSource = typeof(BasicFacebookFeatures.Features.FriendsAnalyticsFeature.FriendsAnalyticsFeature);
+            // 
             // FormFriendsAnalytics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.ClientSize = new System.Drawing.Size(1262, 641);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelAnalytics);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.LabelFriends);
             this.Controls.Add(this.listBoxFriendsAnalytics);
@@ -288,18 +311,20 @@ namespace BasicFacebookFeatures.Forms
             this.Name = "FormFriendsAnalytics";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Friends Analytics";
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panelAnalytics.ResumeLayout(false);
+            this.panelAnalytics.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.friendsAnalyticsFeatureBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelAnalytics;
         private System.Windows.Forms.Label numberOfCommentsLabel1;
         private System.Windows.Forms.Label numberOfLikesLabel1;
         private System.Windows.Forms.Label numberOfOverallEngagementsLabel1;
@@ -313,5 +338,7 @@ namespace BasicFacebookFeatures.Forms
         private System.Windows.Forms.Label LabelFriends;
         private System.Windows.Forms.ListBox listBoxFriendsAnalytics;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource friendsAnalyticsFeatureBindingSource;
+        private System.Windows.Forms.BindingSource userBindingSource;
     }
 }

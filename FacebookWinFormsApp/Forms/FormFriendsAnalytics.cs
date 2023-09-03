@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
@@ -14,7 +15,27 @@ namespace BasicFacebookFeatures.Forms
         public FormFriendsAnalytics()
         {
             InitializeComponent();
+            new Thread(dataBindUI).Start();
             m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature(UserManager.Instance.LoggedInUser);
+        }
+
+        private void dataBindUI()
+        {
+            new Thread(dataBindFriends).Start();
+        }
+
+        private void dataBindFriends()
+        {
+            FacebookObjectCollection<User> friends = UserManager.Instance.LoggedInUser.Friends;
+
+            if (listBoxFriendsAnalytics.InvokeRequired)
+            {
+                listBoxFriendsAnalytics.Invoke(new Action(() => listBoxFriendsAnalytics.DataSource = friends));
+            }
+            else
+            {
+                listBoxFriendsAnalytics.DataSource = friends;
+            }
         }
 
         private void listBoxFriendsAnalytics_SelectedIndexChanged(object sender, EventArgs e)

@@ -207,32 +207,32 @@ namespace BasicFacebookFeatures.Forms
         {
            postStatus();
         }
-        
+
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            new Thread(updateCommentsBasedOnSelectedPost).Start();
+            updateCommentsBasedOnSelectedPost();
         }
 
         private void updateCommentsBasedOnSelectedPost()
         {
-            if(listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is PostProxy selectedPost)
+            if (listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is PostProxy selectedPost)
             {
                 FacebookObjectCollection<Comment> comments = selectedPost.Comments;
 
-                if(comments.Count == 0)
+                if (comments.Count == 0)
                 {
                     commentsBindingSource.DataSource = new List<string>() { "No comments to show" };
                 }
                 else
                 {
-                    if(listBoxPostComments.InvokeRequired)
+                    if (listBoxPostComments.InvokeRequired)
                     {
                         listBoxPostComments.Invoke(new Action(() => commentsBindingSource.DataSource = comments));
                     }
                     else
                     {
                         commentsBindingSource.DataSource = comments;
-                    }   
+                    }
                 }
             }
         }
