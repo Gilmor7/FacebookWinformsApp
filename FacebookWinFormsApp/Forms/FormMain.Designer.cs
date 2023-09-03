@@ -377,6 +377,7 @@
             this.listBoxPosts.Size = new System.Drawing.Size(651, 186);
             this.listBoxPosts.TabIndex = 58;
             this.listBoxPosts.ValueMember = "Comments";
+            this.listBoxPosts.SelectedIndexChanged += new System.EventHandler(this.listBoxPosts_SelectedIndexChanged);
             // 
             // buttonPost
             // 
@@ -496,7 +497,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.tabControlFormMain.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion

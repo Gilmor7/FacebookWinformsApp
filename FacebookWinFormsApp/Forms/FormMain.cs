@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using Facebook;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using BasicFacebookFeatures.ApplicationLogic.Proxies;
 
 namespace BasicFacebookFeatures.Forms
 {
@@ -144,7 +146,12 @@ namespace BasicFacebookFeatures.Forms
 
         private void fetchPostsAndPopulateListBox()
         {
-            FacebookObjectCollection<Post> posts = m_LoggeInUser.Posts;
+            FacebookObjectCollection<PostProxy> posts = new FacebookObjectCollection<PostProxy>();
+            
+            foreach(Post post in m_LoggeInUser.Posts)
+            {
+                posts.Add(new PostProxy(post));
+            }
 
             if(listBoxPosts.InvokeRequired)
             {
@@ -199,6 +206,35 @@ namespace BasicFacebookFeatures.Forms
         private void buttonPost_Click(object sender, EventArgs e)
         {
            postStatus();
+        }
+        
+        private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            new Thread(updateCommentsBasedOnSelectedPost).Start();
+        }
+
+        private void updateCommentsBasedOnSelectedPost()
+        {
+            if(listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is PostProxy selectedPost)
+            {
+                FacebookObjectCollection<Comment> comments = selectedPost.Comments;
+
+                if(comments.Count == 0)
+                {
+                    commentsBindingSource.DataSource = new List<string>() { "No comments to show" };
+                }
+                else
+                {
+                    if(listBoxPostComments.InvokeRequired)
+                    {
+                        listBoxPostComments.Invoke(new Action(() => commentsBindingSource.DataSource = comments));
+                    }
+                    else
+                    {
+                        commentsBindingSource.DataSource = comments;
+                    }   
+                }
+            }
         }
 
         private void buttonAnalytics_Click(object sender, EventArgs e)
