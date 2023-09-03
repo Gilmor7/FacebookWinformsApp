@@ -22,6 +22,19 @@ namespace BasicFacebookFeatures.Forms
         private void dataBindUI()
         {
             new Thread(dataBindFriends).Start();
+            new Thread(dataBindAnalysisPanel).Start();
+        }
+
+        private void dataBindAnalysisPanel()
+        {
+            if(panelAnalysis.InvokeRequired)
+            {
+                panelAnalysis.Invoke(new Action(() => friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature));
+            }
+            else
+            {
+                friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature;
+            }
         }
 
         private void dataBindFriends()
@@ -30,11 +43,11 @@ namespace BasicFacebookFeatures.Forms
 
             if (listBoxFriendsAnalytics.InvokeRequired)
             {
-                listBoxFriendsAnalytics.Invoke(new Action(() => listBoxFriendsAnalytics.DataSource = friends));
+                listBoxFriendsAnalytics.Invoke(new Action(() => userBindingSource.DataSource = friends));
             }
             else
             {
-                listBoxFriendsAnalytics.DataSource = friends;
+                userBindingSource.DataSource = friends;
             }
         }
 
@@ -52,7 +65,7 @@ namespace BasicFacebookFeatures.Forms
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Couldn't fetch analytics, unknown error occured", k_DefaultErrorCaption);
+                    MessageBox.Show("Couldn't fetch analytics, unknown error occured. setting values to 0.", k_DefaultErrorCaption);
                 }
             }
         }
