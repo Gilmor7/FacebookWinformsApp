@@ -50,7 +50,7 @@ namespace BasicFacebookFeatures.Features.FriendsAnalyticsFeature
             m_LoggedInUser = i_LoggedInUser;
         }
 
-        public void UpdateInternalEngagmentsBasedOnSelectedFriend(User i_SelectedFriend)
+        public void UpdateInternalEngagementsBasedOnSelectedFriend(User i_SelectedFriend)
         {
             if(i_SelectedFriend == null)
             {

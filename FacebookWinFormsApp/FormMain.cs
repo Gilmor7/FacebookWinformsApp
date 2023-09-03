@@ -324,7 +324,7 @@ namespace BasicFacebookFeatures
                     User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
                     if (selectedFriend != null)
                     {
-                        m_FriendsAnalyticsFeature.UpdateInternalEngagmentsBasedOnSelectedFriend(selectedFriend);
+                        m_FriendsAnalyticsFeature.UpdateInternalEngagementsBasedOnSelectedFriend(selectedFriend);
                     }
                 }
                 catch (Exception)
