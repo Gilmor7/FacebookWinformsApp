@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using BasicFacebookFeatures.ApplicationLogic;
 using FacebookWrapper;
 
 namespace BasicFacebookFeatures
@@ -16,7 +17,8 @@ namespace BasicFacebookFeatures
             FacebookService.s_UseForamttedToStrings = true;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.FormMain());
+            Form mainForm = FormsFactory.CreateForm(FormsFactory.eFormType.FormMain);
+            Application.Run(mainForm);
         }
     }
 }

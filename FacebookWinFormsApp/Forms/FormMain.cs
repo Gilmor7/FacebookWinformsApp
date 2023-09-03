@@ -101,6 +101,18 @@ namespace BasicFacebookFeatures.Forms
             new Thread(fetchAlbumsAndPopulateListBox).Start();
             new Thread(fetchEventsAndPopulateListBox).Start();
         }
+        
+        private void fetchAndPopulateUserFriendsListBoxes()
+        {
+            if(listBoxFriends.InvokeRequired)
+            {
+                listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.DataSource = m_LoggeInUser.Friends));
+            }
+            else
+            {
+                userFriendsBindingSource.DataSource = m_LoggeInUser.Friends;
+            }
+        }
 
         private void fetchPagesAndPopulateListBox()
         {
@@ -191,14 +203,14 @@ namespace BasicFacebookFeatures.Forms
 
         private void buttonAnalytics_Click(object sender, EventArgs e)
         {
-            Form form = new FormFriendsAnalytics();
-            form.ShowDialog();
+            Form formAnalytics = FormsFactory.CreateForm(FormsFactory.eFormType.FormFriendsAnalytics);
+            formAnalytics.ShowDialog();
         }
 
         private void buttonRelationships_Click(object sender, EventArgs e)
         {
-            Form form = new FormRelationships();
-            form.ShowDialog();
+            Form formRelationships = FormsFactory.CreateForm(FormsFactory.eFormType.FormRelationships);
+            formRelationships.ShowDialog();
         }
     }
 }

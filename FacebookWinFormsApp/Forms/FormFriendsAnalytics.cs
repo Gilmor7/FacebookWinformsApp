@@ -16,20 +16,6 @@ namespace BasicFacebookFeatures.Forms
             InitializeComponent();
             m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature(UserManager.Instance.LoggedInUser);
         }
-        
-        private void fetchAndPopulateUserFriendsListBoxes()
-        {
-            FacebookObjectCollection<User> friends = UserManager.Instance.LoggedInUser.Friends;
-            //TODO: Fix data binding
-            //if (listBoxFriendsAnalytics.InvokeRequired)
-           // {
-           //     listBoxFriendsAnalytics.Invoke(new Action(() => userFriendsBindingSource.DataSource = friends));
-          //  }
-           // else
-          //  {
-           //     userFriendsBindingSource.DataSource = friends;
-          //  }
-        }
 
         private void listBoxFriendsAnalytics_SelectedIndexChanged(object sender, EventArgs e)
         {
