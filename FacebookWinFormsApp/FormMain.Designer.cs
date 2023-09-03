@@ -219,7 +219,7 @@
             this.tabControlFormMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlFormMain.Name = "tabControlFormMain";
             this.tabControlFormMain.SelectedIndex = 0;
-            this.tabControlFormMain.Size = new System.Drawing.Size(1328, 744);
+            this.tabControlFormMain.Size = new System.Drawing.Size(1344, 760);
             this.tabControlFormMain.TabIndex = 1;
             // 
             // tabPageHome
@@ -257,7 +257,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 35);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(1320, 705);
+            this.tabPageHome.Size = new System.Drawing.Size(1336, 721);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
             // 
@@ -482,6 +482,7 @@
             this.listBoxPosts.Size = new System.Drawing.Size(651, 186);
             this.listBoxPosts.TabIndex = 58;
             this.listBoxPosts.ValueMember = "Comments";
+            this.listBoxPosts.SelectedIndexChanged += new System.EventHandler(this.listBoxPosts_SelectedIndexChanged);
             // 
             // buttonPost
             // 
@@ -576,7 +577,7 @@
             this.tabPageAnalytics.Location = new System.Drawing.Point(4, 35);
             this.tabPageAnalytics.Name = "tabPageAnalytics";
             this.tabPageAnalytics.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAnalytics.Size = new System.Drawing.Size(1320, 705);
+            this.tabPageAnalytics.Size = new System.Drawing.Size(1336, 721);
             this.tabPageAnalytics.TabIndex = 1;
             this.tabPageAnalytics.Text = "Friends Analytics";
             // 
@@ -754,7 +755,7 @@
             this.tabPageFindMatch.Location = new System.Drawing.Point(4, 35);
             this.tabPageFindMatch.Name = "tabPageFindMatch";
             this.tabPageFindMatch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFindMatch.Size = new System.Drawing.Size(1320, 705);
+            this.tabPageFindMatch.Size = new System.Drawing.Size(1336, 721);
             this.tabPageFindMatch.TabIndex = 2;
             this.tabPageFindMatch.Text = "Find Matches";
             // 
@@ -812,42 +813,22 @@
             // numericUpDownMaxAge
             // 
             this.numericUpDownMaxAge.Location = new System.Drawing.Point(780, 215);
-            this.numericUpDownMaxAge.Maximum = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
-            this.numericUpDownMaxAge.Minimum = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
+            this.numericUpDownMaxAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
+            this.numericUpDownMaxAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMaxAge.Name = "numericUpDownMaxAge";
             this.numericUpDownMaxAge.Size = new System.Drawing.Size(65, 32);
             this.numericUpDownMaxAge.TabIndex = 10;
-            this.numericUpDownMaxAge.Value = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
+            this.numericUpDownMaxAge.Value = new decimal(new int[] { 120, 0, 0, 0 });
             this.numericUpDownMaxAge.ValueChanged += new System.EventHandler(this.numericUpDownMaxAge_ValueChanged);
             // 
             // numericUpDownMinAge
             // 
             this.numericUpDownMinAge.Location = new System.Drawing.Point(780, 152);
-            this.numericUpDownMinAge.Minimum = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
+            this.numericUpDownMinAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMinAge.Name = "numericUpDownMinAge";
             this.numericUpDownMinAge.Size = new System.Drawing.Size(65, 32);
             this.numericUpDownMinAge.TabIndex = 9;
-            this.numericUpDownMinAge.Value = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
+            this.numericUpDownMinAge.Value = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMinAge.ValueChanged += new System.EventHandler(this.numericUpDownMinAge_ValueChanged);
             // 
             // checkBoxSameCity
@@ -954,7 +935,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1328, 744);
+            this.ClientSize = new System.Drawing.Size(1344, 760);
             this.Controls.Add(this.tabControlFormMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -990,7 +971,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxAge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinAge)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         private System.Windows.Forms.Label label1;
