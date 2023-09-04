@@ -153,7 +153,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\facebook_icon-icons.com_53612.ico" />
+    <Content Include="Resources\graph-5_icon-icons.com_58023.ico" />
+    <Content Include="Resources\heart_like_love_twitter_icon_127132.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -31,6 +31,7 @@ namespace BasicFacebookFeatures.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRelationships));
             this.LabelRelationshipFriends = new System.Windows.Forms.Label();
             this.listBoxRelationship = new System.Windows.Forms.ListBox();
             this.LabelRelationshipFeature = new System.Windows.Forms.Label();
@@ -150,22 +151,42 @@ namespace BasicFacebookFeatures.Forms
             // numericUpDownMinAge
             // 
             this.numericUpDownMinAge.Location = new System.Drawing.Point(489, 386);
-            this.numericUpDownMinAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
+            this.numericUpDownMinAge.Minimum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
             this.numericUpDownMinAge.Name = "numericUpDownMinAge";
             this.numericUpDownMinAge.Size = new System.Drawing.Size(65, 26);
             this.numericUpDownMinAge.TabIndex = 25;
-            this.numericUpDownMinAge.Value = new decimal(new int[] { 18, 0, 0, 0 });
+            this.numericUpDownMinAge.Value = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
             this.numericUpDownMinAge.ValueChanged += new System.EventHandler(this.numericUpDownMinAge_ValueChanged);
             // 
             // numericUpDownMaxAge
             // 
             this.numericUpDownMaxAge.Location = new System.Drawing.Point(489, 449);
-            this.numericUpDownMaxAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
-            this.numericUpDownMaxAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
+            this.numericUpDownMaxAge.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.numericUpDownMaxAge.Minimum = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
             this.numericUpDownMaxAge.Name = "numericUpDownMaxAge";
             this.numericUpDownMaxAge.Size = new System.Drawing.Size(65, 26);
             this.numericUpDownMaxAge.TabIndex = 26;
-            this.numericUpDownMaxAge.Value = new decimal(new int[] { 120, 0, 0, 0 });
+            this.numericUpDownMaxAge.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
             this.numericUpDownMaxAge.ValueChanged += new System.EventHandler(this.numericUpDownMaxAge_ValueChanged);
             // 
             // labelMinAge
@@ -239,12 +260,14 @@ namespace BasicFacebookFeatures.Forms
             this.Controls.Add(this.LabelRelationshipFriends);
             this.Controls.Add(this.listBoxRelationship);
             this.Controls.Add(this.LabelRelationshipFeature);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormRelationships";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find Matches";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinAge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxAge)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.Button buttonSubmit;

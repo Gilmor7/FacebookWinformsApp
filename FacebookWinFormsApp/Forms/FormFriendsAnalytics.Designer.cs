@@ -135,7 +135,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // friendsAnalyticsFeatureBindingSource
             // 
-            this.friendsAnalyticsFeatureBindingSource.DataSource = typeof(FriendsAnalyticsFeature);
+            this.friendsAnalyticsFeatureBindingSource.DataSource = typeof(BasicFacebookFeatures.ApplicationLogic.Features.FriendsAnalyticsFeature.FriendsAnalyticsFeature);
             // 
             // userBindingSource
             // 
@@ -301,6 +301,7 @@ namespace BasicFacebookFeatures.Forms
             this.Controls.Add(this.listBoxFriendsAnalytics);
             this.Controls.Add(this.label2);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormFriendsAnalytics";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Friends Analytics";
