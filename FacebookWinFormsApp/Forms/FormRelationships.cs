@@ -17,22 +17,21 @@ namespace BasicFacebookFeatures.Forms
         public FormRelationships()
         {
             InitializeComponent();
-            new Thread(populateFriendsListBox).Start();
+            populateFriendsListBox();
             RelationshipFeature.LoggedInUser = UserManager.Instance.LoggedInUser;
         }
 
         private void populateFriendsListBox()
         {
             FacebookObjectCollection<User> friends = UserManager.Instance.LoggedInUser.Friends;
-            
-            listBoxRelationship.Invoke(new Action(() =>
+            listBoxMatches.Items.Clear();
+            listBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
+
+            foreach (User friend in friends)
             {
-                listBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
-                foreach (User friend in friends)
-                {
-                    listBoxRelationship.Items.Add(friend);
-                }
-            }));
+                listBoxRelationship.Items.Add(friend);
+            }
+
         }
 
         private void ListBoxRelationship_SelectedIndexChanged(object sender, EventArgs e)
