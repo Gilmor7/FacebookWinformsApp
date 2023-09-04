@@ -1,4 +1,6 @@
 ﻿
+using BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature;
+
 namespace BasicFacebookFeatures.Forms
 {
     partial class FormRelationships
@@ -29,12 +31,9 @@ namespace BasicFacebookFeatures.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.LabelRelationshipFriends = new System.Windows.Forms.Label();
             this.listBoxRelationship = new System.Windows.Forms.ListBox();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.LabelRelationshipFeature = new System.Windows.Forms.Label();
-            this.relationshipFeatureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.checkBoxMale = new System.Windows.Forms.CheckBox();
             this.checkBoxFemale = new System.Windows.Forms.CheckBox();
             this.LabelGender = new System.Windows.Forms.Label();
@@ -47,13 +46,9 @@ namespace BasicFacebookFeatures.Forms
             this.labelMaxAge = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxMatches = new System.Windows.Forms.ListBox();
-            this.possibleMatchesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.labelNoMatchesFound = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.relationshipFeatureBindingSource)).BeginInit();
+            this.buttonSubmit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinAge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxAge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.possibleMatchesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // LabelRelationshipFriends
@@ -68,8 +63,6 @@ namespace BasicFacebookFeatures.Forms
             // 
             // listBoxRelationship
             // 
-            this.listBoxRelationship.DataSource = this.userBindingSource;
-            this.listBoxRelationship.DisplayMember = "Name";
             this.listBoxRelationship.FormattingEnabled = true;
             this.listBoxRelationship.ItemHeight = 20;
             this.listBoxRelationship.Location = new System.Drawing.Point(43, 173);
@@ -77,10 +70,6 @@ namespace BasicFacebookFeatures.Forms
             this.listBoxRelationship.Size = new System.Drawing.Size(237, 464);
             this.listBoxRelationship.TabIndex = 17;
             this.listBoxRelationship.SelectedIndexChanged += new System.EventHandler(this.ListBoxRelationship_SelectedIndexChanged);
-            // 
-            // userBindingSource
-            // 
-            this.userBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
             // 
             // LabelRelationshipFeature
             // 
@@ -92,14 +81,9 @@ namespace BasicFacebookFeatures.Forms
             this.LabelRelationshipFeature.TabIndex = 16;
             this.LabelRelationshipFeature.Text = "Find Potential Matches from a Friend\'s Friend List Based on Preferences";
             // 
-            // relationshipFeatureBindingSource
-            // 
-            this.relationshipFeatureBindingSource.DataSource = typeof(BasicFacebookFeatures.Features.RelationshipFeature.RelationshipFeature);
-            // 
             // checkBoxMale
             // 
             this.checkBoxMale.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxMale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.relationshipFeatureBindingSource, "InterestedInMales", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBoxMale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
             this.checkBoxMale.Location = new System.Drawing.Point(326, 173);
             this.checkBoxMale.Name = "checkBoxMale";
@@ -107,11 +91,11 @@ namespace BasicFacebookFeatures.Forms
             this.checkBoxMale.TabIndex = 19;
             this.checkBoxMale.Text = "Male";
             this.checkBoxMale.UseVisualStyleBackColor = true;
+            this.checkBoxMale.CheckedChanged += new System.EventHandler(this.CheckBoxMale_CheckedChanged);
             // 
             // checkBoxFemale
             // 
             this.checkBoxFemale.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxFemale.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.relationshipFeatureBindingSource, "InterestedInFemales", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBoxFemale.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
             this.checkBoxFemale.Location = new System.Drawing.Point(326, 232);
             this.checkBoxFemale.Name = "checkBoxFemale";
@@ -119,6 +103,7 @@ namespace BasicFacebookFeatures.Forms
             this.checkBoxFemale.TabIndex = 20;
             this.checkBoxFemale.Text = "Female";
             this.checkBoxFemale.UseVisualStyleBackColor = true;
+            this.checkBoxFemale.CheckedChanged += new System.EventHandler(this.CheckBoxFemale_CheckedChanged);
             // 
             // LabelGender
             // 
@@ -153,7 +138,6 @@ namespace BasicFacebookFeatures.Forms
             // checkBoxSameCity
             // 
             this.checkBoxSameCity.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxSameCity.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.relationshipFeatureBindingSource, "SameCityLimitPreference", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBoxSameCity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(244)))), ((int)(((byte)(235)))));
             this.checkBoxSameCity.Location = new System.Drawing.Point(326, 582);
             this.checkBoxSameCity.Name = "checkBoxSameCity";
@@ -161,47 +145,28 @@ namespace BasicFacebookFeatures.Forms
             this.checkBoxSameCity.TabIndex = 24;
             this.checkBoxSameCity.Text = "Same city as mine";
             this.checkBoxSameCity.UseVisualStyleBackColor = true;
+            this.checkBoxSameCity.CheckedChanged += new System.EventHandler(this.checkBoxSameCity_CheckedChanged);
             // 
             // numericUpDownMinAge
             // 
-            this.numericUpDownMinAge.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.relationshipFeatureBindingSource, "MinAgePreference", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.numericUpDownMinAge.Location = new System.Drawing.Point(489, 386);
-            this.numericUpDownMinAge.Minimum = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
+            this.numericUpDownMinAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMinAge.Name = "numericUpDownMinAge";
             this.numericUpDownMinAge.Size = new System.Drawing.Size(65, 26);
             this.numericUpDownMinAge.TabIndex = 25;
-            this.numericUpDownMinAge.Value = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
+            this.numericUpDownMinAge.Value = new decimal(new int[] { 18, 0, 0, 0 });
+            this.numericUpDownMinAge.ValueChanged += new System.EventHandler(this.numericUpDownMinAge_ValueChanged);
             // 
             // numericUpDownMaxAge
             // 
-            this.numericUpDownMaxAge.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.relationshipFeatureBindingSource, "MaxAgePreference", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.numericUpDownMaxAge.Location = new System.Drawing.Point(489, 449);
-            this.numericUpDownMaxAge.Maximum = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
-            this.numericUpDownMaxAge.Minimum = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
+            this.numericUpDownMaxAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
+            this.numericUpDownMaxAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numericUpDownMaxAge.Name = "numericUpDownMaxAge";
             this.numericUpDownMaxAge.Size = new System.Drawing.Size(65, 26);
             this.numericUpDownMaxAge.TabIndex = 26;
-            this.numericUpDownMaxAge.Value = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
+            this.numericUpDownMaxAge.Value = new decimal(new int[] { 120, 0, 0, 0 });
+            this.numericUpDownMaxAge.ValueChanged += new System.EventHandler(this.numericUpDownMaxAge_ValueChanged);
             // 
             // labelMinAge
             // 
@@ -235,8 +200,6 @@ namespace BasicFacebookFeatures.Forms
             // 
             // listBoxMatches
             // 
-            this.listBoxMatches.DataSource = this.possibleMatchesBindingSource;
-            this.listBoxMatches.DisplayMember = "Name";
             this.listBoxMatches.FormattingEnabled = true;
             this.listBoxMatches.ItemHeight = 20;
             this.listBoxMatches.Location = new System.Drawing.Point(692, 173);
@@ -244,23 +207,15 @@ namespace BasicFacebookFeatures.Forms
             this.listBoxMatches.Size = new System.Drawing.Size(237, 464);
             this.listBoxMatches.TabIndex = 29;
             // 
-            // possibleMatchesBindingSource
+            // buttonSubmit
             // 
-            this.possibleMatchesBindingSource.DataMember = "PossibleMatches";
-            this.possibleMatchesBindingSource.DataSource = this.relationshipFeatureBindingSource;
-            // 
-            // labelNoMatchesFound
-            // 
-            this.labelNoMatchesFound.AutoSize = true;
-            this.labelNoMatchesFound.DataBindings.Add(new System.Windows.Forms.Binding("Visible", this.relationshipFeatureBindingSource, "IsNoMatchesFound", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.labelNoMatchesFound.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNoMatchesFound.ForeColor = System.Drawing.Color.Coral;
-            this.labelNoMatchesFound.Location = new System.Drawing.Point(36, 673);
-            this.labelNoMatchesFound.Name = "labelNoMatchesFound";
-            this.labelNoMatchesFound.Size = new System.Drawing.Size(943, 40);
-            this.labelNoMatchesFound.TabIndex = 31;
-            this.labelNoMatchesFound.Text = "No matches have been found based on those preferences";
-            this.labelNoMatchesFound.Visible = false;
+            this.buttonSubmit.Location = new System.Drawing.Point(692, 669);
+            this.buttonSubmit.Name = "buttonSubmit";
+            this.buttonSubmit.Size = new System.Drawing.Size(237, 48);
+            this.buttonSubmit.TabIndex = 31;
+            this.buttonSubmit.Text = "Do The Magic!";
+            this.buttonSubmit.UseVisualStyleBackColor = true;
+            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
             // 
             // FormRelationships
             // 
@@ -268,7 +223,7 @@ namespace BasicFacebookFeatures.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.ClientSize = new System.Drawing.Size(1013, 773);
-            this.Controls.Add(this.labelNoMatchesFound);
+            this.Controls.Add(this.buttonSubmit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxMatches);
             this.Controls.Add(this.labelMaxAge);
@@ -287,22 +242,17 @@ namespace BasicFacebookFeatures.Forms
             this.Name = "FormRelationships";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Find Matches";
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.relationshipFeatureBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinAge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxAge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.possibleMatchesBindingSource)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.Button buttonSubmit;
 
         #endregion
         private System.Windows.Forms.Label LabelRelationshipFriends;
         private System.Windows.Forms.ListBox listBoxRelationship;
         private System.Windows.Forms.Label LabelRelationshipFeature;
-        private System.Windows.Forms.BindingSource userBindingSource;
-        private System.Windows.Forms.BindingSource relationshipFeatureBindingSource;
         private System.Windows.Forms.CheckBox checkBoxMale;
         private System.Windows.Forms.CheckBox checkBoxFemale;
         private System.Windows.Forms.Label LabelGender;
@@ -315,7 +265,5 @@ namespace BasicFacebookFeatures.Forms
         private System.Windows.Forms.Label labelMaxAge;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxMatches;
-        private System.Windows.Forms.BindingSource possibleMatchesBindingSource;
-        private System.Windows.Forms.Label labelNoMatchesFound;
     }
 }

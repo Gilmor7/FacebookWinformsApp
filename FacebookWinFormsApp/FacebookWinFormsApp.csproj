@@ -135,8 +135,6 @@
     </Compile>
     <None Include="BasicFacebookFeatures.Features.FriendsAnalyticsFeature.FriendsAnalyticsFeature.datasource" />
     <None Include="BasicFacebookFeatures.Features.RelationshipFeature.RelationshipFeature.datasource" />
-    <None Include="BasicFacebookFeatures.Features.RelationshipFeature.RelationshipFeature1.datasource" />
-    <None Include="BasicFacebookFeatures.Features.RelationshipFeature.RelationshipFeature2.datasource" />
     <None Include="FacebookWrapper.ObjectModel.Event.datasource" />
     <None Include="FacebookWrapper.ObjectModel.Page.datasource" />
     <None Include="FacebookWrapper.ObjectModel.PostedItem.datasource" />

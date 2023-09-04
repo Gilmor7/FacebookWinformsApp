@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
-using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
+using BasicFacebookFeatures.ApplicationLogic.Features.FriendsAnalyticsFeature;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.Forms

@@ -1,4 +1,6 @@
 ﻿
+using BasicFacebookFeatures.ApplicationLogic.Features.FriendsAnalyticsFeature;
+
 namespace BasicFacebookFeatures.Forms
 {
     partial class FormFriendsAnalytics
@@ -133,7 +135,7 @@ namespace BasicFacebookFeatures.Forms
             // 
             // friendsAnalyticsFeatureBindingSource
             // 
-            this.friendsAnalyticsFeatureBindingSource.DataSource = typeof(BasicFacebookFeatures.Features.FriendsAnalyticsFeature.FriendsAnalyticsFeature);
+            this.friendsAnalyticsFeatureBindingSource.DataSource = typeof(FriendsAnalyticsFeature);
             // 
             // userBindingSource
             // 
