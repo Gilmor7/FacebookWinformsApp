@@ -1,35 +1,50 @@
 using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
 {
-    public static class RelationshipFeature
+    public class RelationshipFeature : INotifyPropertyChanged
     {
-        private static readonly int sr_MinAgeLimit = 18;
-        private static readonly int sr_MaxAgeLimit = 120;
-        
-        private static int s_MinAgePreference = sr_MinAgeLimit;
-        private static int s_MaxAgePreference = sr_MaxAgeLimit;
-        
-        public static User LoggedInUser { get; set; } = null;
-        public static User SelectedFriend { get; set; } = null;
-        public static bool InterestedInMales { get; set; } = false;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public static bool InterestedInFemales { get; set; } = false;
+        protected virtual void OnPropertyChanged(string i_PropertyName)
+        {
+            updatePossibleMatchesBasedOnPreferences();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(i_PropertyName));
+        }
 
-        public static bool SameCityLimitPreference { get; set; } = false;
-        
-        public static int MinAgePreference
+        private const int k_MinAgeLimit = 18;
+        private const int k_MaxAgeLimit = 120;
+
+        private User m_LoggedInUser;
+        private User m_SelectedFriend;
+        private bool m_IsIntrestedInMale;
+        private bool m_IsIntrestedInFemale;
+        private bool m_IsIntrestedInSameCity;
+        private int m_MinAgePreference = k_MinAgeLimit;
+        private int m_MaxAgePreference = k_MaxAgeLimit;
+        private FacebookObjectCollection<User> m_PossibleMatches;
+        private bool m_NoMatchesFound;
+
+        public int MinAgePreference
         {
             get
             {
-                return s_MinAgePreference;
+                return m_MinAgePreference;
             }
             set
             {
-                if(value >= sr_MinAgeLimit && value <= sr_MaxAgeLimit)
+                if (value >= k_MinAgeLimit && value <= k_MaxAgeLimit)
                 {
-                    s_MinAgePreference = value;
+                    if(value > MaxAgePreference)
+                    {
+                        MaxAgePreference = value;
+                    }
+
+                    m_MinAgePreference = value;
+                    OnPropertyChanged("MinAgePreference");
                 }
                 else
                 {
@@ -37,18 +52,39 @@ namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
                 }
             }
         }
-        
-        public static int MaxAgePreference
+
+        public bool NoMatchesFound
         {
             get
             {
-                return s_MaxAgePreference;
+                return m_NoMatchesFound;
+            }
+            private set
+            {
+                m_NoMatchesFound = value;
+            }
+        }
+
+        public int MaxAgePreference
+        {
+            get
+            {
+                return m_MaxAgePreference;
             }
             set
             {
-                if(value >= sr_MinAgeLimit && value <= sr_MaxAgeLimit)
+                if (value >= k_MinAgeLimit && value <= k_MaxAgeLimit)
                 {
-                    s_MaxAgePreference = value;
+                    if(value < MinAgePreference)
+                    {
+                        m_MaxAgePreference = MinAgePreference;
+                    }
+                    else
+                    {
+                        m_MaxAgePreference = value;
+                    }
+
+                    OnPropertyChanged("MaxAgePreference");
                 }
                 else
                 {
@@ -57,77 +93,163 @@ namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
             }
         }
 
-        public static FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
+        public bool IsIntrestedInMale
         {
-            throwExceptionIfParametersAreNull();
-            
-            FacebookObjectCollection<User> matches = new FacebookObjectCollection<User>();
-
-            foreach (User possibleMatchUser in SelectedFriend.Friends)
+            get
             {
-                if(checkIfPossibleMatchIsDistinct(possibleMatchUser) && checkIfMatchPreferencesAreMet(possibleMatchUser))
-                {
-                    matches.Add(possibleMatchUser);
-                }
+                return m_IsIntrestedInMale;
             }
-            
-            return matches;
+
+            set
+            {
+                m_IsIntrestedInMale = value;
+                OnPropertyChanged("IsIntrestedInMale");
+            }
         }
 
-        private static bool checkIfPossibleMatchIsDistinct(User i_PossibleMatchUser)
+        public bool IsIntrestedInFemale
         {
-            bool isPossibleMatchIsTheLoggedInUser = i_PossibleMatchUser.Id == LoggedInUser.Id;
-            bool isPossibleMatchInLoggedInUserFriends = LoggedInUser.Friends.Contains(i_PossibleMatchUser);
+            get
+            {
+                return m_IsIntrestedInFemale;
+            }
             
+            set
+            {
+                m_IsIntrestedInFemale = value;
+                OnPropertyChanged("IsIntrestedInFemale");
+            }
+        }
+
+        public bool IsIntrestedInSameCity
+        {
+            get
+            {
+                return m_IsIntrestedInSameCity;
+            }
+
+            set
+            {
+                m_IsIntrestedInSameCity = value;
+                OnPropertyChanged("IsIntrestedInSameCity");
+            }
+        }
+
+        public User SelectedFriend
+        {
+            get
+            {
+                return m_SelectedFriend;
+            }
+
+            set
+            {
+                m_SelectedFriend = value;
+                OnPropertyChanged("SelectedFriend");
+            }
+        }
+
+        public User LoggedUser
+        {
+            get
+            {
+                return m_LoggedInUser;
+            }
+
+            set
+            {
+                m_LoggedInUser = value;
+                OnPropertyChanged("LoggedUser");
+            }
+        }
+
+        public FacebookObjectCollection<User> PossibleMatches
+        {
+            get
+            {
+                return m_PossibleMatches;
+            }
+
+            private set
+            {
+                m_PossibleMatches = value;
+            }
+        }
+
+        private void updatePossibleMatchesBasedOnPreferences()
+        {
+            FacebookObjectCollection<User> matches;
+
+            if(SelectedFriend == null || LoggedUser == null)
+            {
+                matches = null;
+            }
+            else
+            {
+                matches = new FacebookObjectCollection<User>();
+
+                foreach (User possibleMatchUser in SelectedFriend.Friends)
+                {
+                    if (checkIfPossibleMatchIsDistinct(possibleMatchUser) && checkIfMatchPreferencesAreMet(possibleMatchUser))
+                    {
+                        matches.Add(possibleMatchUser);
+                    }
+                }
+            }
+
+            if (matches == null || matches.Count == 0)
+            {
+                NoMatchesFound = true;
+            }
+            else
+            {
+                NoMatchesFound = false;
+            }
+
+            PossibleMatches = matches;
+        }
+
+        private bool checkIfPossibleMatchIsDistinct(User i_PossibleMatchUser)
+        {
+            bool isPossibleMatchIsTheLoggedInUser = i_PossibleMatchUser.Id == LoggedUser.Id;
+            bool isPossibleMatchInLoggedInUserFriends = LoggedUser.Friends.Contains(i_PossibleMatchUser);
+
             return !isPossibleMatchIsTheLoggedInUser && !isPossibleMatchInLoggedInUserFriends;
         }
 
-        private static void throwExceptionIfParametersAreNull()
-        {
-            if(LoggedInUser == null)
-            {
-                throw new ArgumentNullException("LoggedInUser");
-            }
-            
-            if(SelectedFriend == null)
-            {
-                throw new ArgumentNullException("SelectedFriend");
-            }
-        }
-
-        private static bool checkIfMatchPreferencesAreMet(User i_PossibleMatch)
+        private bool checkIfMatchPreferencesAreMet(User i_PossibleMatch)
         {
             bool isSingle = i_PossibleMatch.RelationshipStatus == User.eRelationshipStatus.Single;
             bool isPreferencedGender = checkGenderPreferences(i_PossibleMatch.Gender);
             bool isHomeTownPreferenceConditionMet = checkSameCityPreference(i_PossibleMatch);
             bool isAgePreferenceMet = checkIfAgePreferenceIsMet(i_PossibleMatch);
-            
+
             return isSingle && isPreferencedGender && isHomeTownPreferenceConditionMet && isAgePreferenceMet;
         }
-        
-        private static bool checkGenderPreferences(User.eGender? i_Gender)
+
+        private bool checkGenderPreferences(User.eGender? i_Gender)
         {
-            return i_Gender != null && 
-                   (InterestedInMales && i_Gender == User.eGender.male ||
-                    InterestedInFemales && i_Gender == User.eGender.female);
+            return i_Gender != null &&
+                   (IsIntrestedInMale && i_Gender == User.eGender.male ||
+                    IsIntrestedInFemale && i_Gender == User.eGender.female);
         }
-        
-        private static bool checkSameCityPreference(User i_PossibleMatch)
+
+        private bool checkSameCityPreference(User i_PossibleMatch)
         {
-            return !SameCityLimitPreference || i_PossibleMatch.Location.Name == SelectedFriend.Location.Name;
+            return !IsIntrestedInSameCity || i_PossibleMatch.Location.Name == SelectedFriend.Location.Name;
         }
-        
-        private static bool checkIfAgePreferenceIsMet(User i_PossibleMatch)
+
+        private bool checkIfAgePreferenceIsMet(User i_PossibleMatch)
         {
             bool isAgePreferenceMet = false;
-            
-            if(i_PossibleMatch.Birthday != null)
+
+            if (i_PossibleMatch.Birthday != null)
             {
                 DateTime birthday = DateTime.Parse(i_PossibleMatch.Birthday);
                 int age = DateTime.Today.Year - birthday.Year;
                 isAgePreferenceMet = age >= MinAgePreference && age <= MaxAgePreference;
             }
-            
+
             return isAgePreferenceMet;
         }
     }
