@@ -39,25 +39,25 @@
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.friendsAnalyticsFeatureBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPageHome = new System.Windows.Forms.TabPage();
+            this.listBoxEvents = new System.Windows.Forms.ListBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.listBoxAlbums = new System.Windows.Forms.ListBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.listBoxPages = new System.Windows.Forms.ListBox(); ;
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.listBoxFriends = new System.Windows.Forms.ListBox();
             this.buttonRelationships = new System.Windows.Forms.Button();
             this.buttonAnalytics = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelPostsTitle = new System.Windows.Forms.Label();
             this.labelEventsTitle = new System.Windows.Forms.Label();
             this.labelAlbumsTitle = new System.Windows.Forms.Label();
             this.labelPagesTitle = new System.Windows.Forms.Label();
             this.labelFriendsTitle = new System.Windows.Forms.Label();
             this.listBoxPostComments = new System.Windows.Forms.ListBox();
-            this.pictureBoxPage = new System.Windows.Forms.PictureBox();
-            this.pictureBoxAlbum = new System.Windows.Forms.PictureBox();
-            this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.labelExtendView3 = new System.Windows.Forms.Label();
-            this.listBoxPages = new System.Windows.Forms.ListBox();
             this.labelExtendView2 = new System.Windows.Forms.Label();
-            this.listBoxFriends = new System.Windows.Forms.ListBox();
             this.labelExtendView1 = new System.Windows.Forms.Label();
             this.listBoxPosts = new System.Windows.Forms.ListBox();
             this.buttonPost = new System.Windows.Forms.Button();
@@ -77,9 +77,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.friendsAnalyticsFeatureBindingSource)).BeginInit();
             this.tabPageHome.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabControlFormMain.SuspendLayout();
             this.SuspendLayout();
@@ -120,25 +120,25 @@
             this.tabPageHome.AutoScroll = true;
             this.tabPageHome.AutoScrollMargin = new System.Drawing.Size(50, 50);
             this.tabPageHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
+            this.tabPageHome.Controls.Add(this.listBoxEvents);
+            this.tabPageHome.Controls.Add(this.pictureBox3);
+            this.tabPageHome.Controls.Add(this.listBoxAlbums);
+            this.tabPageHome.Controls.Add(this.pictureBox2);
+            this.tabPageHome.Controls.Add(this.listBoxPages);
+            this.tabPageHome.Controls.Add(this.pictureBox1);
+            this.tabPageHome.Controls.Add(this.listBoxFriends);
             this.tabPageHome.Controls.Add(this.buttonRelationships);
             this.tabPageHome.Controls.Add(this.buttonAnalytics);
             this.tabPageHome.Controls.Add(this.label3);
-            this.tabPageHome.Controls.Add(this.pictureBox1);
             this.tabPageHome.Controls.Add(this.labelPostsTitle);
             this.tabPageHome.Controls.Add(this.labelEventsTitle);
             this.tabPageHome.Controls.Add(this.labelAlbumsTitle);
             this.tabPageHome.Controls.Add(this.labelPagesTitle);
             this.tabPageHome.Controls.Add(this.labelFriendsTitle);
             this.tabPageHome.Controls.Add(this.listBoxPostComments);
-            this.tabPageHome.Controls.Add(this.pictureBoxPage);
-            this.tabPageHome.Controls.Add(this.pictureBoxAlbum);
-            this.tabPageHome.Controls.Add(this.listBoxEvents);
             this.tabPageHome.Controls.Add(this.label5);
-            this.tabPageHome.Controls.Add(this.listBoxAlbums);
             this.tabPageHome.Controls.Add(this.labelExtendView3);
-            this.tabPageHome.Controls.Add(this.listBoxPages);
             this.tabPageHome.Controls.Add(this.labelExtendView2);
-            this.tabPageHome.Controls.Add(this.listBoxFriends);
             this.tabPageHome.Controls.Add(this.labelExtendView1);
             this.tabPageHome.Controls.Add(this.listBoxPosts);
             this.tabPageHome.Controls.Add(this.buttonPost);
@@ -155,6 +155,81 @@
             this.tabPageHome.Size = new System.Drawing.Size(1343, 771);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "Home";
+            // 
+            // listBoxEvents
+            // 
+            this.listBoxEvents.FormattingEnabled = true;
+            this.listBoxEvents.ItemHeight = 26;
+            this.listBoxEvents.Location = new System.Drawing.Point(982, 519);
+            this.listBoxEvents.Name = "listBoxEvents";
+            this.listBoxEvents.Size = new System.Drawing.Size(289, 212);
+            this.listBoxEvents.TabIndex = 87;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.pictureBox3.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.albumsBindingSource, "ImageAlbum", true));
+            this.pictureBox3.Location = new System.Drawing.Point(878, 665);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(89, 80);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 86;
+            this.pictureBox3.TabStop = false;
+            // 
+            // listBoxAlbums
+            // 
+            this.listBoxAlbums.DataSource = this.albumsBindingSource;
+            this.listBoxAlbums.DisplayMember = "Name";
+            this.listBoxAlbums.FormattingEnabled = true;
+            this.listBoxAlbums.ItemHeight = 26;
+            this.listBoxAlbums.Location = new System.Drawing.Point(666, 519);
+            this.listBoxAlbums.Name = "listBoxAlbums";
+            this.listBoxAlbums.Size = new System.Drawing.Size(289, 212);
+            this.listBoxAlbums.TabIndex = 85;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.pictureBox2.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.pageBindingSource, "ImageNormal", true));
+            this.pictureBox2.Location = new System.Drawing.Point(564, 665);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(89, 80);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 84;
+            this.pictureBox2.TabStop = false;
+            // 
+            // listBoxPages
+            // 
+            this.listBoxPages.DataSource = this.pageBindingSource;
+            this.listBoxPages.DisplayMember = "Name";
+            this.listBoxPages.FormattingEnabled = true;
+            this.listBoxPages.ItemHeight = 26;
+            this.listBoxPages.Location = new System.Drawing.Point(344, 519);
+            this.listBoxPages.Name = "listBoxPages";
+            this.listBoxPages.Size = new System.Drawing.Size(289, 212);
+            this.listBoxPages.TabIndex = 83;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
+            this.pictureBox1.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userFriendsBindingSource, "ImageNormal", true));
+            this.pictureBox1.Location = new System.Drawing.Point(249, 665);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(89, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 82;
+            this.pictureBox1.TabStop = false;
+            // 
+            // listBoxFriends
+            // 
+            this.listBoxFriends.DataSource = this.userFriendsBindingSource;
+            this.listBoxFriends.DisplayMember = "Name";
+            this.listBoxFriends.FormattingEnabled = true;
+            this.listBoxFriends.ItemHeight = 26;
+            this.listBoxFriends.Location = new System.Drawing.Point(18, 519);
+            this.listBoxFriends.Name = "listBoxFriends";
+            this.listBoxFriends.Size = new System.Drawing.Size(289, 212);
+            this.listBoxFriends.TabIndex = 81;
             // 
             // buttonRelationships
             // 
@@ -193,17 +268,6 @@
             this.label3.TabIndex = 78;
             this.label3.Text = "Logged as:";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
-            this.pictureBox1.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userFriendsBindingSource, "ImageNormal", true));
-            this.pictureBox1.Location = new System.Drawing.Point(249, 665);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(89, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 77;
-            this.pictureBox1.TabStop = false;
-            // 
             // labelPostsTitle
             // 
             this.labelPostsTitle.AutoSize = true;
@@ -216,7 +280,7 @@
             // labelEventsTitle
             // 
             this.labelEventsTitle.AutoSize = true;
-            this.labelEventsTitle.Location = new System.Drawing.Point(968, 447);
+            this.labelEventsTitle.Location = new System.Drawing.Point(977, 447);
             this.labelEventsTitle.Name = "labelEventsTitle";
             this.labelEventsTitle.Size = new System.Drawing.Size(85, 26);
             this.labelEventsTitle.TabIndex = 75;
@@ -261,39 +325,6 @@
             this.listBoxPostComments.Size = new System.Drawing.Size(289, 160);
             this.listBoxPostComments.TabIndex = 71;
             // 
-            // pictureBoxPage
-            // 
-            this.pictureBoxPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
-            this.pictureBoxPage.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.pageBindingSource, "ImageNormal", true));
-            this.pictureBoxPage.Location = new System.Drawing.Point(559, 665);
-            this.pictureBoxPage.Name = "pictureBoxPage";
-            this.pictureBoxPage.Size = new System.Drawing.Size(89, 80);
-            this.pictureBoxPage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPage.TabIndex = 69;
-            this.pictureBoxPage.TabStop = false;
-            // 
-            // pictureBoxAlbum
-            // 
-            this.pictureBoxAlbum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
-            this.pictureBoxAlbum.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.albumsBindingSource, "ImageAlbum", true));
-            this.pictureBoxAlbum.Location = new System.Drawing.Point(871, 665);
-            this.pictureBoxAlbum.Name = "pictureBoxAlbum";
-            this.pictureBoxAlbum.Size = new System.Drawing.Size(89, 80);
-            this.pictureBoxAlbum.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxAlbum.TabIndex = 68;
-            this.pictureBoxAlbum.TabStop = false;
-            // 
-            // listBoxEvents
-            // 
-            this.listBoxEvents.DataSource = this.eventsBindingSource;
-            this.listBoxEvents.DisplayMember = "Name";
-            this.listBoxEvents.FormattingEnabled = true;
-            this.listBoxEvents.ItemHeight = 26;
-            this.listBoxEvents.Location = new System.Drawing.Point(973, 519);
-            this.listBoxEvents.Name = "listBoxEvents";
-            this.listBoxEvents.Size = new System.Drawing.Size(289, 212);
-            this.listBoxEvents.TabIndex = 66;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -303,17 +334,6 @@
             this.label5.Size = new System.Drawing.Size(301, 22);
             this.label5.TabIndex = 65;
             this.label5.Text = "(Click on an album to view it\'s cover)";
-            // 
-            // listBoxAlbums
-            // 
-            this.listBoxAlbums.DataSource = this.albumsBindingSource;
-            this.listBoxAlbums.DisplayMember = "Name";
-            this.listBoxAlbums.FormattingEnabled = true;
-            this.listBoxAlbums.ItemHeight = 26;
-            this.listBoxAlbums.Location = new System.Drawing.Point(659, 519);
-            this.listBoxAlbums.Name = "listBoxAlbums";
-            this.listBoxAlbums.Size = new System.Drawing.Size(289, 212);
-            this.listBoxAlbums.TabIndex = 64;
             // 
             // labelExtendView3
             // 
@@ -325,17 +345,6 @@
             this.labelExtendView3.TabIndex = 63;
             this.labelExtendView3.Text = "(Click on a page to view it\'s picture)";
             // 
-            // listBoxPages
-            // 
-            this.listBoxPages.DataSource = this.pageBindingSource;
-            this.listBoxPages.DisplayMember = "Name";
-            this.listBoxPages.FormattingEnabled = true;
-            this.listBoxPages.ItemHeight = 26;
-            this.listBoxPages.Location = new System.Drawing.Point(344, 519);
-            this.listBoxPages.Name = "listBoxPages";
-            this.listBoxPages.Size = new System.Drawing.Size(289, 212);
-            this.listBoxPages.TabIndex = 62;
-            // 
             // labelExtendView2
             // 
             this.labelExtendView2.AutoSize = true;
@@ -345,17 +354,6 @@
             this.labelExtendView2.Size = new System.Drawing.Size(299, 22);
             this.labelExtendView2.TabIndex = 61;
             this.labelExtendView2.Text = "(Click on a friend to view his picture)";
-            // 
-            // listBoxFriends
-            // 
-            this.listBoxFriends.DataSource = this.userFriendsBindingSource;
-            this.listBoxFriends.DisplayMember = "Name";
-            this.listBoxFriends.FormattingEnabled = true;
-            this.listBoxFriends.ItemHeight = 26;
-            this.listBoxFriends.Location = new System.Drawing.Point(28, 519);
-            this.listBoxFriends.Name = "listBoxFriends";
-            this.listBoxFriends.Size = new System.Drawing.Size(289, 212);
-            this.listBoxFriends.TabIndex = 60;
             // 
             // labelExtendView1
             // 
@@ -493,9 +491,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.friendsAnalyticsFeatureBindingSource)).EndInit();
             this.tabPageHome.ResumeLayout(false);
             this.tabPageHome.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.tabControlFormMain.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -513,22 +511,15 @@
         private System.Windows.Forms.BindingSource friendsAnalyticsFeatureBindingSource;
         private System.Windows.Forms.TabPage tabPageHome;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelPostsTitle;
         private System.Windows.Forms.Label labelEventsTitle;
         private System.Windows.Forms.Label labelAlbumsTitle;
         private System.Windows.Forms.Label labelPagesTitle;
         private System.Windows.Forms.Label labelFriendsTitle;
         private System.Windows.Forms.ListBox listBoxPostComments;
-        private System.Windows.Forms.PictureBox pictureBoxPage;
-        private System.Windows.Forms.PictureBox pictureBoxAlbum;
-        private System.Windows.Forms.ListBox listBoxEvents;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListBox listBoxAlbums;
         private System.Windows.Forms.Label labelExtendView3;
-        private System.Windows.Forms.ListBox listBoxPages;
         private System.Windows.Forms.Label labelExtendView2;
-        private System.Windows.Forms.ListBox listBoxFriends;
         private System.Windows.Forms.Label labelExtendView1;
         private System.Windows.Forms.ListBox listBoxPosts;
         private System.Windows.Forms.Button buttonPost;
@@ -541,6 +532,13 @@
         private System.Windows.Forms.TabControl tabControlFormMain;
         private System.Windows.Forms.Button buttonRelationships;
         private System.Windows.Forms.Button buttonAnalytics;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ListBox listBoxFriends;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ListBox listBoxPages;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.ListBox listBoxAlbums;
+        private System.Windows.Forms.ListBox listBoxEvents;
     }
 }
 

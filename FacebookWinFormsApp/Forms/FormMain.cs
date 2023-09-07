@@ -10,7 +10,7 @@ using BasicFacebookFeatures.ApplicationLogic.Proxies;
 
 namespace BasicFacebookFeatures.Forms
 {
-    public partial class FormMain : Form
+    public partial class FormMain : FormProxy
     {
         private const string k_NoUserLoggedInMessage = "No user logged in yet";
         private const string k_DefaultErrorCaption = "Error";
@@ -146,11 +146,11 @@ namespace BasicFacebookFeatures.Forms
 
         private void fetchPostsAndPopulateListBox()
         {
-            FacebookObjectCollection<PostProxy> posts = new FacebookObjectCollection<PostProxy>();
+            FacebookObjectCollection<Post> posts = new FacebookObjectCollection<Post>();
             
             foreach(Post post in m_LoggeInUser.Posts)
             {
-                posts.Add(new PostProxy(post));
+                posts.Add(post);
             }
 
             if(listBoxPosts.InvokeRequired)
@@ -215,7 +215,7 @@ namespace BasicFacebookFeatures.Forms
 
         private void updateCommentsBasedOnSelectedPost()
         {
-            if (listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is PostProxy selectedPost)
+            if (listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is Post selectedPost)
             {
                 FacebookObjectCollection<Comment> comments = selectedPost.Comments;
 
