@@ -17,7 +17,6 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
 
         public FormProxy()
         {
-            initializeTimer();
         }
 
         private void initializeTimer()
@@ -32,23 +31,43 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
             m_TimeSpentOnForm++;
         }
 
-        protected override void OnClick(EventArgs e)
-        {
-            m_NumberOfClickesOnForm++;
-            base.OnClick(e);
-        }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
+            saveDataToFile();
+        }
 
+        private void handleClick(object sender, EventArgs e)
+        {
+            m_NumberOfClickesOnForm++;
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            initializeTimer();
+            attachClickHandlersToAllControlslControls(this);
+        }
+
+        private void saveDataToFile()
+        {
             string fileName = $"{this.Name}Data.txt";
-
-            string dataToWrite = $"Time Spent: {m_TimeSpentOnForm}, Number of Clicks: {m_NumberOfClickesOnForm}";
+            string dataToWrite = $"Time Spent (seconds): {m_TimeSpentOnForm}, Number of Clicks: {m_NumberOfClickesOnForm}";
 
             using (StreamWriter writer = new StreamWriter(fileName))
             {
                 writer.WriteLine(dataToWrite);
+            }
+        }
+
+        private void attachClickHandlersToAllControlslControls(Control parent)
+        {
+            parent.Click += handleClick;
+
+            foreach (Control control in parent.Controls)
+            {
+                attachClickHandlersToAllControlslControls(control);
             }
         }
     }
