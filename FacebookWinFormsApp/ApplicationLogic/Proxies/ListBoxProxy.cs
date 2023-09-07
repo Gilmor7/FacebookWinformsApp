@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Proxies
@@ -16,7 +16,7 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            if(Items.Count == 0)
+            if (Items.Count == 0)
             {
                 e.Graphics.DrawString(k_EmptyListBoxMessage, Font, System.Drawing.Brushes.Black, 0, 0);
             }
