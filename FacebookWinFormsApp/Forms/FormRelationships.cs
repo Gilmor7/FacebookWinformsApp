@@ -1,7 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
-using BasicFacebookFeatures.Features.RelationshipFeature;
+using BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature;
+using BasicFacebookFeatures.ApplicationLogic.Proxies;
 using Facebook;
 using FacebookWrapper.ObjectModel;
 
@@ -11,11 +14,26 @@ namespace BasicFacebookFeatures.Forms
     {
         private const string k_DefaultListBoxDisplayMember = "Name";
         private const string k_DefaultErrorCaption = "Error";
+        private readonly IRelationShipFeature r_RelationshipFeature = new RelationshipCacheProxy();
 
         public FormRelationships()
         {
             InitializeComponent();
-            RelationshipFeature.LoggedInUser = UserManager.Instance.LoggedInUser;
+            populateFriendsListBox();
+            r_RelationshipFeature.LoggedInUser = UserManager.Instance.LoggedInUser;
+        }
+
+        private void populateFriendsListBox()
+        {
+            FacebookObjectCollection<User> friends = UserManager.Instance.LoggedInUser.Friends;
+            listBoxMatches.Items.Clear();
+            listBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
+
+            foreach (User friend in friends)
+            {
+                listBoxRelationship.Items.Add(friend);
+            }
+
         }
 
         private void ListBoxRelationship_SelectedIndexChanged(object sender, EventArgs e)
@@ -25,7 +43,7 @@ namespace BasicFacebookFeatures.Forms
                 User selectedFriend = listBoxRelationship.SelectedItem as User;
                 if (selectedFriend != null)
                 {
-                    RelationshipFeature.SelectedFriend = selectedFriend;
+                    r_RelationshipFeature.SelectedFriend = selectedFriend;
                 }
             }
         }
@@ -43,29 +61,29 @@ namespace BasicFacebookFeatures.Forms
 
         private void CheckBoxMale_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.InterestedInMales = checkBoxMale.Checked;
+            r_RelationshipFeature.InterestedInMales = checkBoxMale.Checked;
         }
 
         private void CheckBoxFemale_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.InterestedInFemales = checkBoxFemale.Checked;
+            r_RelationshipFeature.InterestedInFemales = checkBoxFemale.Checked;
         }
 
         private void checkBoxSameCity_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.SameCityLimitPreference = checkBoxSameCity.Checked;
+            r_RelationshipFeature.SameCityLimitPreference = checkBoxSameCity.Checked;
         }
 
         private void numericUpDownMinAge_ValueChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.MinAgePreference = (int)numericUpDownMinAge.Value;
             lowerMaxAgeToMinAgeIfNeeded();
+            r_RelationshipFeature.MinAgePreference = (int)numericUpDownMinAge.Value;
         }
 
         private void numericUpDownMaxAge_ValueChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.MaxAgePreference = (int)numericUpDownMaxAge.Value;
             lowerMaxAgeToMinAgeIfNeeded();
+            r_RelationshipFeature.MaxAgePreference = (int)numericUpDownMaxAge.Value;
         }
 
         private void buttonSubmit_Click(object sender, EventArgs e)
@@ -77,7 +95,7 @@ namespace BasicFacebookFeatures.Forms
         {
             try
             {
-                FacebookObjectCollection<User> matches = RelationshipFeature.FindMatchesBasedOnPreferences();
+                FacebookObjectCollection<User> matches = r_RelationshipFeature.FindMatchesBasedOnPreferences();
                 listBoxMatches.Items.Clear();
                 listBoxMatches.DisplayMember = k_DefaultListBoxDisplayMember;
 

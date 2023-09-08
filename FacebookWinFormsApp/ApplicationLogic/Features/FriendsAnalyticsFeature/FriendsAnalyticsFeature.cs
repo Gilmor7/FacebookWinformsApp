@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Features.FriendsAnalyticsFeature
+namespace BasicFacebookFeatures.ApplicationLogic.Features.FriendsAnalyticsFeature
 {
     public class FriendsAnalyticsFeature : INotifyPropertyChanged
     {

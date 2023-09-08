@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
-using BasicFacebookFeatures.Features.FriendsAnalyticsFeature;
+using BasicFacebookFeatures.ApplicationLogic.Features.FriendsAnalyticsFeature;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.Forms
@@ -14,7 +15,40 @@ namespace BasicFacebookFeatures.Forms
         public FormFriendsAnalytics()
         {
             InitializeComponent();
+            new Thread(dataBindUI).Start();
             m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature(UserManager.Instance.LoggedInUser);
+        }
+
+        private void dataBindUI()
+        {
+            new Thread(dataBindFriends).Start();
+            new Thread(dataBindAnalysisPanel).Start();
+        }
+
+        private void dataBindAnalysisPanel()
+        {
+            if(panelAnalysis.InvokeRequired)
+            {
+                panelAnalysis.Invoke(new Action(() => friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature));
+            }
+            else
+            {
+                friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature;
+            }
+        }
+
+        private void dataBindFriends()
+        {
+            FacebookObjectCollection<User> friends = UserManager.Instance.LoggedInUser.Friends;
+
+            if (listBoxFriendsAnalytics.InvokeRequired)
+            {
+                listBoxFriendsAnalytics.Invoke(new Action(() => userBindingSource.DataSource = friends));
+            }
+            else
+            {
+                userBindingSource.DataSource = friends;
+            }
         }
 
         private void listBoxFriendsAnalytics_SelectedIndexChanged(object sender, EventArgs e)
@@ -31,7 +65,7 @@ namespace BasicFacebookFeatures.Forms
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Couldn't fetch analytics, unknown error occured", k_DefaultErrorCaption);
+                    MessageBox.Show("Couldn't fetch analytics, unknown error occured. setting values to 0.", k_DefaultErrorCaption);
                 }
             }
         }
