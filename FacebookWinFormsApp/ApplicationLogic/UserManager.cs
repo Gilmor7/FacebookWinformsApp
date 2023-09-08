@@ -28,6 +28,13 @@ namespace BasicFacebookFeatures.ApplicationLogic
 
         private LoginResult m_LoginResult = null;
         private static UserManager s_This = null;
+
+        private UserManager()
+        {
+            
+        }
+        
+
         public static UserManager Instance
         {
             get

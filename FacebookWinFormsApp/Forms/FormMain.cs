@@ -16,6 +16,11 @@ namespace BasicFacebookFeatures.Forms
         private const string k_DefaultErrorCaption = "Error";
         private const string k_DefaultSuccessCaption = "Success";
         private const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
+
+        private readonly Form r_FormAnalytics =
+            FormsFactory.CreateForm(FormsFactory.eFormType.FormFriendsAnalytics);
+        private readonly Form r_RelationshipsForm =
+            FormsFactory.CreateForm(FormsFactory.eFormType.FormRelationships);
         
         private User m_LoggeInUser = null;
 
@@ -257,14 +262,12 @@ namespace BasicFacebookFeatures.Forms
 
         private void buttonAnalytics_Click(object sender, EventArgs e)
         {
-            Form formAnalytics = FormsFactory.CreateForm(FormsFactory.eFormType.FormFriendsAnalytics);
-            formAnalytics.ShowDialog();
+            r_FormAnalytics.ShowDialog();
         }
 
         private void buttonRelationships_Click(object sender, EventArgs e)
         {
-            Form formRelationships = FormsFactory.CreateForm(FormsFactory.eFormType.FormRelationships);
-            formRelationships.ShowDialog();
+            r_RelationshipsForm.ShowDialog();
         }
     }
 }
