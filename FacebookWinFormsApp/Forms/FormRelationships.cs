@@ -13,12 +13,13 @@ namespace BasicFacebookFeatures.Forms
     {
         private const string k_DefaultListBoxDisplayMember = "Name";
         private const string k_DefaultErrorCaption = "Error";
+        private readonly RelationshipFeature r_RelationshipFeature = new RelationshipFeature();
 
         public FormRelationships()
         {
             InitializeComponent();
             populateFriendsListBox();
-            RelationshipFeature.LoggedInUser = UserManager.Instance.LoggedInUser;
+            r_RelationshipFeature.LoggedInUser = UserManager.Instance.LoggedInUser;
         }
 
         private void populateFriendsListBox()
@@ -41,7 +42,7 @@ namespace BasicFacebookFeatures.Forms
                 User selectedFriend = listBoxRelationship.SelectedItem as User;
                 if (selectedFriend != null)
                 {
-                    RelationshipFeature.SelectedFriend = selectedFriend;
+                    r_RelationshipFeature.SelectedFriend = selectedFriend;
                 }
             }
         }
@@ -59,29 +60,29 @@ namespace BasicFacebookFeatures.Forms
 
         private void CheckBoxMale_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.InterestedInMales = checkBoxMale.Checked;
+            r_RelationshipFeature.InterestedInMales = checkBoxMale.Checked;
         }
 
         private void CheckBoxFemale_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.InterestedInFemales = checkBoxFemale.Checked;
+            r_RelationshipFeature.InterestedInFemales = checkBoxFemale.Checked;
         }
 
         private void checkBoxSameCity_CheckedChanged(object sender, EventArgs e)
         {
-            RelationshipFeature.SameCityLimitPreference = checkBoxSameCity.Checked;
+            r_RelationshipFeature.SameCityLimitPreference = checkBoxSameCity.Checked;
         }
 
         private void numericUpDownMinAge_ValueChanged(object sender, EventArgs e)
         {
             lowerMaxAgeToMinAgeIfNeeded();
-            RelationshipFeature.MinAgePreference = (int)numericUpDownMinAge.Value;
+            r_RelationshipFeature.MinAgePreference = (int)numericUpDownMinAge.Value;
         }
 
         private void numericUpDownMaxAge_ValueChanged(object sender, EventArgs e)
         {
             lowerMaxAgeToMinAgeIfNeeded();
-            RelationshipFeature.MaxAgePreference = (int)numericUpDownMaxAge.Value;
+            r_RelationshipFeature.MaxAgePreference = (int)numericUpDownMaxAge.Value;
         }
 
         private void buttonSubmit_Click(object sender, EventArgs e)
@@ -93,7 +94,7 @@ namespace BasicFacebookFeatures.Forms
         {
             try
             {
-                FacebookObjectCollection<User> matches = RelationshipFeature.FindMatchesBasedOnPreferences();
+                FacebookObjectCollection<User> matches = r_RelationshipFeature.FindMatchesBasedOnPreferences();
                 listBoxMatches.Items.Clear();
                 listBoxMatches.DisplayMember = k_DefaultListBoxDisplayMember;
 
