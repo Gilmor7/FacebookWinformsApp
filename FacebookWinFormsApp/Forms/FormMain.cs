@@ -107,10 +107,10 @@ namespace BasicFacebookFeatures.Forms
             new Thread(fetchPagesAndPopulateListBox).Start();
             new Thread(fetchAlbumsAndPopulateListBox).Start();
             new Thread(fetchEventsAndPopulateListBox).Start();
-            new Thread(InitializeCommentsListBox).Start();
+            new Thread(initializeCommentsListBox).Start();
         }
 
-        private void InitializeCommentsListBox()
+        private void initializeCommentsListBox()
         {
             listBoxPostComments.DisplayMember = "Message";
         }
