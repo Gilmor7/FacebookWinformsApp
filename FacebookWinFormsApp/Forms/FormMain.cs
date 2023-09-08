@@ -106,54 +106,42 @@ namespace BasicFacebookFeatures.Forms
         private void fetchAndPopulateUserFriendsListBox()
         {
             FacebookObjectCollection<User> friends = m_LoggeInUser.Friends;
-            userFriendsBindingSource.DataSource = new FacebookObjectCollection<User>();
 
-            foreach (User friend in friends)
+            if (listBoxFriends.InvokeRequired)
             {
-                if (listBoxFriends.InvokeRequired)
-                {
-                    listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.Add(friend)));
-                }
-                else
-                {
-                    userFriendsBindingSource.Add(friend);
-                }
+                listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.DataSource = friends));
+            }
+            else
+            {
+                userFriendsBindingSource.DataSource = friends;
             }
         }
 
         private void fetchPagesAndPopulateListBox()
         {
             FacebookObjectCollection<Page> likedPages = m_LoggeInUser.LikedPages;
-            pageBindingSource.DataSource = new FacebookObjectCollection<Page>();
-
-            foreach(Page page in likedPages)
+            
+            if(listBoxPages.InvokeRequired)
             {
-                if(listBoxPages.InvokeRequired)
-                {
-                    listBoxPages.Invoke(new Action(() => pageBindingSource.Add(page)));
-                }
-                else
-                {
-                    pageBindingSource.Add(page);
-                }
+                listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = likedPages));
+            }
+            else
+            {
+                pageBindingSource.DataSource = likedPages;
             }
         }
         
         private void fetchAlbumsAndPopulateListBox()
         {
             FacebookObjectCollection<Album> albums = m_LoggeInUser.Albums;
-            albumsBindingSource.DataSource = new FacebookObjectCollection<Album>();
-
-            foreach (Album album in albums)
+            
+            if(listBoxAlbums.InvokeRequired)
             {
-                if (listBoxPages.InvokeRequired)
-                {
-                    listBoxPages.Invoke(new Action(() => albumsBindingSource.Add(album)));
-                }
-                else
-                {
-                    albumsBindingSource.Add(album);
-                }
+                listBoxAlbums.Invoke(new Action(() => albumsBindingSource.DataSource = albums));
+            }
+            else
+            {
+                albumsBindingSource.DataSource = albums;
             }
         }
 
@@ -178,18 +166,14 @@ namespace BasicFacebookFeatures.Forms
         private void fetchEventsAndPopulateListBox()
         {
             FacebookObjectCollection<Event> events = m_LoggeInUser.Events;
-            eventsBindingSource.DataSource = new FacebookObjectCollection<Event>();
-
-            foreach (Event fbEvent in events)
+            
+            if(listBoxEvents.InvokeRequired)
             {
-                if (listBoxEvents.InvokeRequired)
-                {
-                    listBoxEvents.Invoke(new Action(() => eventsBindingSource.Add(fbEvent)));
-                }
-                else
-                {
-                    eventsBindingSource.Add(fbEvent);
-                }
+                listBoxEvents.Invoke(new Action(() => eventsBindingSource.DataSource = events));
+            }
+            else
+            {
+                eventsBindingSource.DataSource = events;
             }
         }
 
