@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature;
+using BasicFacebookFeatures.ApplicationLogic.Proxies;
 using Facebook;
 using FacebookWrapper.ObjectModel;
 
@@ -13,7 +14,7 @@ namespace BasicFacebookFeatures.Forms
     {
         private const string k_DefaultListBoxDisplayMember = "Name";
         private const string k_DefaultErrorCaption = "Error";
-        private readonly RelationshipFeature r_RelationshipFeature = new RelationshipFeature();
+        private readonly RelationshipFeature r_RelationshipFeature = new RelationshipCacheProxy();
 
         public FormRelationships()
         {

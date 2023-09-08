@@ -62,13 +62,25 @@ namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
 
             foreach (User possibleMatchUser in SelectedFriend.Friends)
             {
-                if(checkIfPossibleMatchIsDistinct(possibleMatchUser) && checkIfMatchPreferencesAreMet(possibleMatchUser))
+                if(IsPotentialMatch(possibleMatchUser))
                 {
                     matches.Add(possibleMatchUser);
                 }
             }
             
             return matches;
+        }
+        
+        public bool IsPotentialMatch(User i_PossibleMatch)
+        {
+            User previousSelectedFriend = SelectedFriend;
+            SelectedFriend = i_PossibleMatch;
+            throwExceptionIfParametersAreNull();
+            
+            bool isPotentialMatch = checkIfPossibleMatchIsDistinct(i_PossibleMatch) && checkIfMatchPreferencesAreMet(i_PossibleMatch);
+            SelectedFriend = previousSelectedFriend;
+
+            return isPotentialMatch;
         }
 
         private bool checkIfPossibleMatchIsDistinct(User i_PossibleMatchUser)
@@ -95,11 +107,11 @@ namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
         private bool checkIfMatchPreferencesAreMet(User i_PossibleMatch)
         {
             bool isSingle = i_PossibleMatch.RelationshipStatus == User.eRelationshipStatus.Single;
-            bool isPreferencedGender = checkGenderPreferences(i_PossibleMatch.Gender);
+            bool isPreferenceGender = checkGenderPreferences(i_PossibleMatch.Gender);
             bool isHomeTownPreferenceConditionMet = checkSameCityPreference(i_PossibleMatch);
             bool isAgePreferenceMet = checkIfAgePreferenceIsMet(i_PossibleMatch);
             
-            return isSingle && isPreferencedGender && isHomeTownPreferenceConditionMet && isAgePreferenceMet;
+            return isSingle && isPreferenceGender && isHomeTownPreferenceConditionMet && isAgePreferenceMet;
         }
         
         private bool checkGenderPreferences(User.eGender? i_Gender)
