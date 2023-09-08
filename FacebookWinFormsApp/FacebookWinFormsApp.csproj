@@ -90,9 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLogic\Features\FriendsAnalyticsFeature\FriendsAnalyticsFeature.cs" />
+    <Compile Include="ApplicationLogic\Features\RelationshipFeature\IRelationShipFeature.cs" />
     <Compile Include="ApplicationLogic\Features\RelationshipFeature\RelationshipFeature.cs" />
-    <Compile Include="ApplicationLogic\Proxies\PostProxy.cs" />
     <Compile Include="ApplicationLogic\FormsFactory.cs" />
+    <Compile Include="ApplicationLogic\Proxies\RelationshipCacheProxy.cs" />
     <Compile Include="ApplicationLogic\UserManager.cs" />
     <Compile Include="Forms\FormFriendsAnalytics.cs">
       <SubType>Form</SubType>

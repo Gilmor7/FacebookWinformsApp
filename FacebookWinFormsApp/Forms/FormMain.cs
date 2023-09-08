@@ -102,78 +102,101 @@ namespace BasicFacebookFeatures.Forms
             new Thread(fetchPagesAndPopulateListBox).Start();
             new Thread(fetchAlbumsAndPopulateListBox).Start();
             new Thread(fetchEventsAndPopulateListBox).Start();
+            new Thread(InitializeCommentsListBox).Start();
         }
-        
+
+        private void InitializeCommentsListBox()
+        {
+            listBoxPostComments.DisplayMember = "Message";
+        }
+
         private void fetchAndPopulateUserFriendsListBoxes()
         {
-            if(listBoxFriends.InvokeRequired)
+            FacebookObjectCollection<User> friends = m_LoggeInUser.Friends;
+            userFriendsBindingSource.DataSource = new FacebookObjectCollection<User>();
+
+            foreach (User friend in friends)
             {
-                listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.DataSource = m_LoggeInUser.Friends));
-            }
-            else
-            {
-                userFriendsBindingSource.DataSource = m_LoggeInUser.Friends;
+                if (listBoxFriends.InvokeRequired)
+                {
+                    listBoxFriends.Invoke(new Action(() => userFriendsBindingSource.Add(friend)));
+                }
+                else
+                {
+                    userFriendsBindingSource.Add(friend);
+                }
             }
         }
 
         private void fetchPagesAndPopulateListBox()
         {
             FacebookObjectCollection<Page> likedPages = m_LoggeInUser.LikedPages;
+            pageBindingSource.DataSource = new FacebookObjectCollection<Page>();
 
-            if(listBoxPages.InvokeRequired)
+            foreach(Page page in likedPages)
             {
-                listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = likedPages));
-            }
-            else
-            {
-                pageBindingSource.DataSource = likedPages;
+                   if(listBoxPages.InvokeRequired)
+                {
+                    listBoxPages.Invoke(new Action(() => pageBindingSource.Add(page)));
+                }
+                else
+                {
+                    pageBindingSource.Add(page);
+                }
             }
         }
         
         private void fetchAlbumsAndPopulateListBox()
         {
             FacebookObjectCollection<Album> albums = m_LoggeInUser.Albums;
+            albumsBindingSource.DataSource = new FacebookObjectCollection<Album>();
 
-            if(listBoxAlbums.InvokeRequired)
+            foreach (Album album in albums)
             {
-                listBoxAlbums.Invoke(new Action(() => albumsBindingSource.DataSource = albums));
-            }
-            else
-            {
-                albumsBindingSource.DataSource = albums;
+                if (listBoxPages.InvokeRequired)
+                {
+                    listBoxPages.Invoke(new Action(() => albumsBindingSource.Add(album)));
+                }
+                else
+                {
+                    albumsBindingSource.Add(album);
+                }
             }
         }
 
         private void fetchPostsAndPopulateListBox()
         {
-            FacebookObjectCollection<PostProxy> posts = new FacebookObjectCollection<PostProxy>();
-            
-            foreach(Post post in m_LoggeInUser.Posts)
-            {
-                posts.Add(new PostProxy(post));
-            }
+            FacebookObjectCollection<Post> posts = m_LoggeInUser.Posts;
+            listBoxPosts.DisplayMember = "Message";
 
-            if(listBoxPosts.InvokeRequired)
+            foreach(Post post in posts)
             {
-                listBoxPosts.Invoke(new Action(() => postedItemBindingSource.DataSource = posts));
-            }
-            else
-            {
-                postedItemBindingSource.DataSource = posts;
+                if(listBoxPosts.InvokeRequired)
+                {
+                    listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(post)));
+                }
+                else
+                {
+                    listBoxPosts.Items.Add(post);
+                }
             }
         }
 
         private void fetchEventsAndPopulateListBox()
         {
             FacebookObjectCollection<Event> events = m_LoggeInUser.Events;
+            eventsBindingSource.DataSource = new FacebookObjectCollection<Event>();
 
-            if(listBoxEvents.InvokeRequired)
+            foreach (Event fbEvent in events)
             {
-                listBoxEvents.Invoke(new Action(() => eventsBindingSource.DataSource = events));
-            }
-            else
-            {
-                eventsBindingSource.DataSource = events;
+                if (listBoxEvents.InvokeRequired)
+                {
+                    listBoxEvents.Invoke(new Action(() => eventsBindingSource.Add(fbEvent)));
+                }
+                else
+                {
+                    eventsBindingSource.Add(fbEvent);
+                }
             }
         }
 
@@ -215,24 +238,19 @@ namespace BasicFacebookFeatures.Forms
 
         private void updateCommentsBasedOnSelectedPost()
         {
-            if (listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is PostProxy selectedPost)
+            if (listBoxPosts.SelectedItems.Count == 1 && listBoxPosts.SelectedItem is Post selectedPost)
             {
                 FacebookObjectCollection<Comment> comments = selectedPost.Comments;
 
+                listBoxPostComments.Items.Clear();
+                foreach (Comment comment in comments)
+                {
+                    listBoxPostComments.Items.Add(comment);
+                }
+
                 if (comments.Count == 0)
                 {
-                    commentsBindingSource.DataSource = new List<string>() { "No comments to show" };
-                }
-                else
-                {
-                    if (listBoxPostComments.InvokeRequired)
-                    {
-                        listBoxPostComments.Invoke(new Action(() => commentsBindingSource.DataSource = comments));
-                    }
-                    else
-                    {
-                        commentsBindingSource.DataSource = comments;
-                    }
+                    listBoxPostComments.Items.Add("No comments to show");
                 }
             }
         }
