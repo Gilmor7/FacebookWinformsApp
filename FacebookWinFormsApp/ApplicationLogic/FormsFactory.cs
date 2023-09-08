@@ -4,7 +4,7 @@ using BasicFacebookFeatures.Forms;
 
 namespace BasicFacebookFeatures.ApplicationLogic
 {
-    public class FormsFactory
+    public static class FormsFactory
     {
         public static Form CreateForm(eFormType i_FormType)
         {
