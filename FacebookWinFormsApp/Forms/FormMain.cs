@@ -103,7 +103,7 @@ namespace BasicFacebookFeatures.Forms
         private void fetchDataAndPopulateListBoxes()
         {
             new Thread(fetchPostsAndPopulateListBox).Start();
-            new Thread(fetchAndPopulateUserFriendsListBoxes).Start();
+            new Thread(fetchAndPopulateUserFriendsListBox).Start();
             new Thread(fetchPagesAndPopulateListBox).Start();
             new Thread(fetchAlbumsAndPopulateListBox).Start();
             new Thread(fetchEventsAndPopulateListBox).Start();
@@ -115,7 +115,7 @@ namespace BasicFacebookFeatures.Forms
             listBoxPostComments.DisplayMember = "Message";
         }
 
-        private void fetchAndPopulateUserFriendsListBoxes()
+        private void fetchAndPopulateUserFriendsListBox()
         {
             FacebookObjectCollection<User> friends = m_LoggeInUser.Friends;
             userFriendsBindingSource.DataSource = new FacebookObjectCollection<User>();
