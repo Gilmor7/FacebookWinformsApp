@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature;
@@ -12,8 +10,6 @@ namespace BasicFacebookFeatures.Forms
 {
     public partial class FormRelationships : Form
     {
-        private const string k_DefaultListBoxDisplayMember = "Name";
-        private const string k_DefaultErrorCaption = "Error";
         private readonly IRelationShipFeature r_RelationshipFeature = new RelationshipCacheProxy();
 
         public FormRelationships()
@@ -27,7 +23,7 @@ namespace BasicFacebookFeatures.Forms
         {
             FacebookObjectCollection<User> friends = UserManager.Instance.LoggedInUser.Friends;
             listBoxMatches.Items.Clear();
-            listBoxRelationship.DisplayMember = k_DefaultListBoxDisplayMember;
+            listBoxRelationship.DisplayMember = ApplicationMessages.k_DefaultListBoxDisplayMember;
 
             foreach (User friend in friends)
             {
@@ -97,7 +93,7 @@ namespace BasicFacebookFeatures.Forms
             {
                 FacebookObjectCollection<User> matches = r_RelationshipFeature.FindMatchesBasedOnPreferences();
                 listBoxMatches.Items.Clear();
-                listBoxMatches.DisplayMember = k_DefaultListBoxDisplayMember;
+                listBoxMatches.DisplayMember = ApplicationMessages.k_DefaultListBoxDisplayMember;
 
                 if (matches.Count > 0)
                 {
@@ -113,15 +109,15 @@ namespace BasicFacebookFeatures.Forms
             }
             catch (ArgumentNullException)
             {
-                MessageBox.Show("You have to select a friend first", k_DefaultErrorCaption);
+                MessageBox.Show("You have to select a friend first", ApplicationMessages.k_DefaultErrorCaption);
             }
             catch (FacebookOAuthException)
             {
-                MessageBox.Show("Couldn't fetch matches, there is an issue with the server", k_DefaultErrorCaption);
+                MessageBox.Show("Couldn't fetch matches, there is an issue with the server", ApplicationMessages.k_DefaultErrorCaption);
             }
             catch (Exception)
             {
-                MessageBox.Show("Couldn't fetch matches, unknown error occured", k_DefaultErrorCaption);
+                MessageBox.Show("Couldn't fetch matches, unknown error occured", ApplicationMessages.k_DefaultErrorCaption);
             }
         }
     }

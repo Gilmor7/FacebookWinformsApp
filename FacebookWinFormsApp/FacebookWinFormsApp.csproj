@@ -95,6 +95,7 @@
     <Compile Include="ApplicationLogic\FormsFactory.cs" />
     <Compile Include="ApplicationLogic\Proxies\RelationshipCacheProxy.cs" />
     <Compile Include="ApplicationLogic\UserManager.cs" />
+    <Compile Include="Forms\ApplicationMessages.cs" />
     <Compile Include="Forms\FormFriendsAnalytics.cs">
       <SubType>Form</SubType>
     </Compile>

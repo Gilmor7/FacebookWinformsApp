@@ -9,7 +9,6 @@ namespace BasicFacebookFeatures.Forms
 {
     public partial class FormFriendsAnalytics : Form
     {
-        private const string k_DefaultErrorCaption = "Error";
         private FriendsAnalyticsFeature m_FriendsAnalyticsFeature;
 
         public FormFriendsAnalytics()
@@ -65,7 +64,7 @@ namespace BasicFacebookFeatures.Forms
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Couldn't fetch analytics, unknown error occured. setting values to 0.", k_DefaultErrorCaption);
+                    MessageBox.Show("Couldn't fetch analytics, unknown error occured. setting values to 0.", ApplicationMessages.k_DefaultErrorCaption);
                 }
             }
         }

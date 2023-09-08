@@ -1,32 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using Facebook;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using BasicFacebookFeatures.ApplicationLogic.Proxies;
 
 namespace BasicFacebookFeatures.Forms
 {
     public partial class FormMain : Form
     {
-        private const string k_NoUserLoggedInMessage = "No user logged in yet";
-        private const string k_DefaultErrorCaption = "Error";
-        private const string k_DefaultSuccessCaption = "Success";
-        private const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
-
-        private readonly Form r_FormAnalytics;
-        private readonly Form r_RelationshipsForm;
-        
         private User m_LoggeInUser = null;
 
         public FormMain()
         {
             InitializeComponent();
-            r_FormAnalytics = FormsFactory.CreateForm(FormsFactory.eFormType.FormFriendsAnalytics);
-            r_RelationshipsForm = FormsFactory.CreateForm(FormsFactory.eFormType.FormRelationships);
             FacebookService.s_CollectionLimit = 25;
         }
 
@@ -85,7 +73,7 @@ namespace BasicFacebookFeatures.Forms
         private void handleLogout()
         {
             UserManager.Instance.Logout();
-            labelUserName.Text = k_NoUserLoggedInMessage;
+            labelUserName.Text = ApplicationMessages.k_NoUserLoggedInMessage;
             changeButtonsStateAccordingToConnectionStatus(i_IsLogin: false);
         }
         
@@ -140,7 +128,7 @@ namespace BasicFacebookFeatures.Forms
 
             foreach(Page page in likedPages)
             {
-                   if(listBoxPages.InvokeRequired)
+                if(listBoxPages.InvokeRequired)
                 {
                     listBoxPages.Invoke(new Action(() => pageBindingSource.Add(page)));
                 }
@@ -212,7 +200,7 @@ namespace BasicFacebookFeatures.Forms
                 if (m_LoggeInUser != null)
                 {
                     m_LoggeInUser.PostStatus(textBoxStatus.Text);
-                    MessageBox.Show("The status was Posted!", k_DefaultSuccessCaption);
+                    MessageBox.Show("The status was Posted!", ApplicationMessages.k_DefaultSuccessCaption);
                     fetchPostsAndPopulateListBox();
                 }
                 else
@@ -223,11 +211,11 @@ namespace BasicFacebookFeatures.Forms
             }
             catch (FacebookOAuthException)
             {
-                MessageBox.Show(k_DefaultServerErrorMessage, k_DefaultErrorCaption);
+                MessageBox.Show(ApplicationMessages.k_DefaultServerErrorMessage, ApplicationMessages.k_DefaultErrorCaption);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, k_DefaultErrorCaption);
+                MessageBox.Show(ex.Message, ApplicationMessages.k_DefaultErrorCaption);
             }
         }
 
@@ -262,12 +250,14 @@ namespace BasicFacebookFeatures.Forms
 
         private void buttonAnalytics_Click(object sender, EventArgs e)
         {
-            r_FormAnalytics.ShowDialog();
+            Form formAnalytics = FormsFactory.CreateForm(FormsFactory.eFormType.FormFriendsAnalytics);
+            formAnalytics.ShowDialog();
         }
 
         private void buttonRelationships_Click(object sender, EventArgs e)
         {
-            r_RelationshipsForm.ShowDialog();
+            Form formRelationships = FormsFactory.CreateForm(FormsFactory.eFormType.FormRelationships);
+            formRelationships.ShowDialog();
         }
     }
 }
