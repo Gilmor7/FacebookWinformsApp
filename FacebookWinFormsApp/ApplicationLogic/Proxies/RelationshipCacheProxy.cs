@@ -4,18 +4,103 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Proxies
 {
-    public class RelationshipCacheProxy : RelationshipFeature
+    public class RelationshipCacheProxy : IRelationShipFeature
     {
         private Dictionary<string, FacebookObjectCollection<User>> m_Cache = new Dictionary<string, FacebookObjectCollection<User>>();
+        private RelationshipFeature m_RelationshipFeature = new RelationshipFeature();
 
-        public new FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
+        public User LoggedInUser
+        {
+            get
+            {
+                return m_RelationshipFeature.LoggedInUser;
+            }
+            set
+            {
+                m_RelationshipFeature.LoggedInUser = value;
+            }
+        }
+
+        public User SelectedFriend
+        {
+            get
+            {
+                return m_RelationshipFeature.SelectedFriend;
+            }
+            set
+            {
+                m_RelationshipFeature.SelectedFriend = value;
+            }
+        }
+
+        public bool InterestedInMales
+        {
+            get
+            {
+                return m_RelationshipFeature.InterestedInMales;
+            }
+            set
+            {
+                m_RelationshipFeature.InterestedInMales = value;
+            }
+        }
+
+        public bool InterestedInFemales
+        {
+            get
+            {
+                return m_RelationshipFeature.InterestedInFemales;
+            }
+            set
+            {
+                m_RelationshipFeature.InterestedInFemales = value;
+            }
+        }
+
+        public bool SameCityLimitPreference
+        {
+            get
+            {
+                return m_RelationshipFeature.SameCityLimitPreference;
+            }
+            set
+            {
+                m_RelationshipFeature.SameCityLimitPreference = value;
+            }
+        }
+
+        public int MinAgePreference
+        {
+            get
+            {
+                return m_RelationshipFeature.MinAgePreference;
+            }
+            set
+            {
+                m_RelationshipFeature.MinAgePreference = value;
+            }
+        }
+
+        public int MaxAgePreference
+        {
+            get
+            {
+                return m_RelationshipFeature.MaxAgePreference;
+            }
+            set
+            {
+                m_RelationshipFeature.MaxAgePreference = value;
+            }
+        }
+
+        public FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
         {
             FacebookObjectCollection<User> selectedUserFriends = getFriendsFromCacheOrSelectedFriend();
             FacebookObjectCollection<User> matches = new FacebookObjectCollection<User>();
             
             foreach(User friend in selectedUserFriends)
             {
-                if (base.IsPotentialMatch(friend))
+                if (m_RelationshipFeature.IsPotentialMatch(friend))
                 {
                     matches.Add(friend);
                 }
@@ -24,15 +109,20 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
             return matches;
         }
 
+        public bool IsPotentialMatch(User i_Friend)
+        {
+            return m_RelationshipFeature.IsPotentialMatch(i_Friend);
+        }
+
         private FacebookObjectCollection<User> getFriendsFromCacheOrSelectedFriend()
         {
             FacebookObjectCollection<User> selectedUserFriends;
-            bool cacheRetrievalSuccess = m_Cache.TryGetValue(SelectedFriend.Id, out selectedUserFriends);
+            bool cacheRetrievalSuccess = m_Cache.TryGetValue(m_RelationshipFeature.SelectedFriend.Id, out selectedUserFriends);
 
             if (!cacheRetrievalSuccess)
             {
-                selectedUserFriends = SelectedFriend.Friends;
-                m_Cache.Add(SelectedFriend.Id, selectedUserFriends);
+                selectedUserFriends = m_RelationshipFeature.SelectedFriend.Friends;
+                m_Cache.Add(m_RelationshipFeature.SelectedFriend.Id, selectedUserFriends);
             }
 
             return selectedUserFriends;

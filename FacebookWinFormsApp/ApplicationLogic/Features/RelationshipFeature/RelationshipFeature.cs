@@ -3,7 +3,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
 {
-    public class RelationshipFeature
+    public class RelationshipFeature : IRelationShipFeature
     {
         private const int k_MinAgeLimit = 18;
         private const int k_MaxAgeLimit = 120;

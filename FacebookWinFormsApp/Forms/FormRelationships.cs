@@ -14,7 +14,7 @@ namespace BasicFacebookFeatures.Forms
     {
         private const string k_DefaultListBoxDisplayMember = "Name";
         private const string k_DefaultErrorCaption = "Error";
-        private readonly RelationshipFeature r_RelationshipFeature = new RelationshipCacheProxy();
+        private readonly IRelationShipFeature r_RelationshipFeature = new RelationshipCacheProxy();
 
         public FormRelationships()
         {
