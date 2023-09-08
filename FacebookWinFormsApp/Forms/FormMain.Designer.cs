@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.userFriendsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.commentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.postedItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.albumsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.eventsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -69,8 +67,6 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.tabControlFormMain = new System.Windows.Forms.TabControl();
             ((System.ComponentModel.ISupportInitialize)(this.userFriendsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.postedItemBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.albumsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource)).BeginInit();
@@ -87,15 +83,6 @@
             // userFriendsBindingSource
             // 
             this.userFriendsBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
-            // 
-            // commentsBindingSource
-            // 
-            this.commentsBindingSource.DataMember = "Comments";
-            this.commentsBindingSource.DataSource = this.postedItemBindingSource;
-            // 
-            // postedItemBindingSource
-            // 
-            this.postedItemBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.PostedItem);
             // 
             // pageBindingSource
             // 
@@ -252,8 +239,6 @@
             // listBoxPostComments
             // 
             this.listBoxPostComments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(200)))), ((int)(((byte)(228)))));
-            this.listBoxPostComments.DataSource = this.commentsBindingSource;
-            this.listBoxPostComments.DisplayMember = "Message";
             this.listBoxPostComments.FormattingEnabled = true;
             this.listBoxPostComments.ItemHeight = 26;
             this.listBoxPostComments.Location = new System.Drawing.Point(973, 202);
@@ -369,15 +354,12 @@
             // 
             // listBoxPosts
             // 
-            this.listBoxPosts.DataSource = this.postedItemBindingSource;
-            this.listBoxPosts.DisplayMember = "Message";
             this.listBoxPosts.FormattingEnabled = true;
             this.listBoxPosts.ItemHeight = 26;
             this.listBoxPosts.Location = new System.Drawing.Point(392, 150);
             this.listBoxPosts.Name = "listBoxPosts";
             this.listBoxPosts.Size = new System.Drawing.Size(651, 186);
             this.listBoxPosts.TabIndex = 58;
-            this.listBoxPosts.ValueMember = "Comments";
             this.listBoxPosts.SelectedIndexChanged += new System.EventHandler(this.listBoxPosts_SelectedIndexChanged);
             // 
             // buttonPost
@@ -484,8 +466,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Desktop Facebook";
             ((System.ComponentModel.ISupportInitialize)(this.userFriendsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commentsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.postedItemBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.albumsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource)).EndInit();
@@ -507,8 +487,6 @@
         private System.Windows.Forms.BindingSource albumsBindingSource;
         private System.Windows.Forms.BindingSource eventsBindingSource;
         private System.Windows.Forms.BindingSource pageBindingSource;
-        private System.Windows.Forms.BindingSource postedItemBindingSource;
-        private System.Windows.Forms.BindingSource commentsBindingSource;
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.BindingSource friendsAnalyticsFeatureBindingSource;
         private System.Windows.Forms.TabPage tabPageHome;
