@@ -17,16 +17,16 @@ namespace BasicFacebookFeatures.Forms
         private const string k_DefaultSuccessCaption = "Success";
         private const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
 
-        private readonly Form r_FormAnalytics =
-            FormsFactory.CreateForm(FormsFactory.eFormType.FormFriendsAnalytics);
-        private readonly Form r_RelationshipsForm =
-            FormsFactory.CreateForm(FormsFactory.eFormType.FormRelationships);
+        private readonly Form r_FormAnalytics;
+        private readonly Form r_RelationshipsForm;
         
         private User m_LoggeInUser = null;
 
         public FormMain()
         {
             InitializeComponent();
+            r_FormAnalytics = FormsFactory.CreateForm(FormsFactory.eFormType.FormFriendsAnalytics);
+            r_RelationshipsForm = FormsFactory.CreateForm(FormsFactory.eFormType.FormRelationships);
             FacebookService.s_CollectionLimit = 25;
         }
 
