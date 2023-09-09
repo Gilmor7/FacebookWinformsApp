@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature;
 using FacebookWrapper.ObjectModel;
@@ -95,6 +96,7 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
 
         public FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
         {
+            throwExcpetionIfUsersAreNull();
             FacebookObjectCollection<User> selectedUserFriends = getFriendsFromCacheOrSelectedFriend();
             FacebookObjectCollection<User> matches = new FacebookObjectCollection<User>();
             
@@ -126,6 +128,19 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
             }
 
             return selectedUserFriends;
+        }
+
+        private void throwExcpetionIfUsersAreNull()
+        {
+            if(m_RelationshipFeature.LoggedInUser == null)
+            {
+                throw new ArgumentNullException("LoggedInUser", "LoggedInUser is null");
+            }
+
+            if(m_RelationshipFeature.SelectedFriend == null)
+            {
+                throw new ArgumentNullException("SelectedFriend", "SelectedFriend is null");
+            }
         }
     }
 }
