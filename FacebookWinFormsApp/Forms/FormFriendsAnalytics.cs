@@ -3,6 +3,7 @@ using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using BasicFacebookFeatures.ApplicationLogic.Features.FriendsAnalyticsFeature;
+using BasicFacebookFeatures.ApplicationLogic.Strategy;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.Forms
@@ -10,30 +11,22 @@ namespace BasicFacebookFeatures.Forms
     public partial class FormFriendsAnalytics : Form
     {
         private FriendsAnalyticsFeature m_FriendsAnalyticsFeature;
+        private object m_LockObject = new object();
+        private ThreadLocal<FriendsAnalyticsFeature> m_ThreadLocalFriendsAnalyticsFeature =
+            new ThreadLocal<FriendsAnalyticsFeature>(() => new FriendsAnalyticsFeature());
+
 
         public FormFriendsAnalytics()
         {
             InitializeComponent();
             new Thread(dataBindUI).Start();
-            m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature(UserManager.Instance.LoggedInUser);
+            m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature();
+            m_FriendsAnalyticsFeature.LoggedInUser = UserManager.Instance.LoggedInUser;
         }
 
         private void dataBindUI()
         {
             new Thread(dataBindFriends).Start();
-            new Thread(dataBindAnalysisPanel).Start();
-        }
-
-        private void dataBindAnalysisPanel()
-        {
-            if(panelAnalysis.InvokeRequired)
-            {
-                panelAnalysis.Invoke(new Action(() => friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature));
-            }
-            else
-            {
-                friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature;
-            }
         }
 
         private void dataBindFriends()
@@ -54,17 +47,50 @@ namespace BasicFacebookFeatures.Forms
         {
             if (listBoxFriendsAnalytics.SelectedItems.Count == 1)
             {
-                try
+                User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
+                if (selectedFriend != null)
                 {
-                    User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
-                    if (selectedFriend != null)
-                    {
-                        m_FriendsAnalyticsFeature.UpdateInternalEngagementsBasedOnSelectedFriend(selectedFriend);
-                    }
+                    m_FriendsAnalyticsFeature.SelectedFriend = selectedFriend;
+                    new Thread(updateDisplayableData).Start();
                 }
-                catch (Exception)
+            }
+        }
+        
+        private void updateDisplayableData()
+        {
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPostLikesCount, new LikesOnPostAnalytics(null))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPostCommentsCount, new CommentsOnPostAnalytics(null))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPhotosLikesCount, new LikesOnPhotosAnalytics(null))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelLikesCount, new LikesOnPhotosAnalytics(new LikesOnPostAnalytics(null)))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPostEngagementsCount, new LikesOnPostAnalytics(new CommentsOnPostAnalytics(null)))).Start();
+        }
+
+        private void updateAnalyticLabelBasedOnStrategy(Label i_LabelToUpdate, IAnalyticsStrategy i_AnalyticsStrategy)
+        {
+            string textToDisplay = string.Empty;
+
+            try
+            {
+                FriendsAnalyticsFeature friendsAnalyticsFeature = m_ThreadLocalFriendsAnalyticsFeature.Value;
+                friendsAnalyticsFeature.LoggedInUser = m_FriendsAnalyticsFeature.LoggedInUser;
+                friendsAnalyticsFeature.SelectedFriend = m_FriendsAnalyticsFeature.SelectedFriend;
+                friendsAnalyticsFeature.AnalyticsStrategy = i_AnalyticsStrategy;
+                textToDisplay = friendsAnalyticsFeature.GetAnalyticsData().ToString();
+            }
+            catch (Exception e)
+            {
+                textToDisplay = "N/A";
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                if(i_LabelToUpdate.InvokeRequired)
                 {
-                    MessageBox.Show("Couldn't fetch analytics, unknown error occured. setting values to 0.", ApplicationMessages.k_DefaultErrorCaption);
+                    i_LabelToUpdate.Invoke(new Action(() => i_LabelToUpdate.Text = textToDisplay));
+                }
+                else
+                {
+                    i_LabelToUpdate.Text = textToDisplay;
                 }
             }
         }
