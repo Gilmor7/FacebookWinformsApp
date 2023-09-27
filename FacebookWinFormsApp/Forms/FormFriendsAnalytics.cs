@@ -3,6 +3,7 @@ using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.ApplicationLogic;
 using BasicFacebookFeatures.ApplicationLogic.Features.FriendsAnalyticsFeature;
+using BasicFacebookFeatures.ApplicationLogic.Strategy;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.Forms
@@ -15,25 +16,13 @@ namespace BasicFacebookFeatures.Forms
         {
             InitializeComponent();
             new Thread(dataBindUI).Start();
-            m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature(UserManager.Instance.LoggedInUser);
+            m_FriendsAnalyticsFeature = new FriendsAnalyticsFeature();
+            m_FriendsAnalyticsFeature.LoggedInUser = UserManager.Instance.LoggedInUser;
         }
 
         private void dataBindUI()
         {
             new Thread(dataBindFriends).Start();
-            new Thread(dataBindAnalysisPanel).Start();
-        }
-
-        private void dataBindAnalysisPanel()
-        {
-            if(panelAnalysis.InvokeRequired)
-            {
-                panelAnalysis.Invoke(new Action(() => friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature));
-            }
-            else
-            {
-                friendsAnalyticsFeatureBindingSource.DataSource = m_FriendsAnalyticsFeature;
-            }
         }
 
         private void dataBindFriends()
@@ -59,14 +48,35 @@ namespace BasicFacebookFeatures.Forms
                     User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
                     if (selectedFriend != null)
                     {
-                        m_FriendsAnalyticsFeature.UpdateInternalEngagementsBasedOnSelectedFriend(selectedFriend);
+                        m_FriendsAnalyticsFeature.SelectedFriend = selectedFriend;
+                        updateDisplayableData();
                     }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Couldn't fetch analytics, unknown error occured. setting values to 0.", ApplicationMessages.k_DefaultErrorCaption);
+                    MessageBox.Show("Couldn't fetch analytics, unknown error occured.", ApplicationMessages.k_DefaultErrorCaption);
                 }
             }
+        }
+        
+        private void updateDisplayableData()
+        {
+            updateLikesCount();
+            updateCommentsCount();
+        }
+
+        private void updateLikesCount()
+        {
+            m_FriendsAnalyticsFeature.AnalyticsStrategy = new LikesAnalyticsStrategy();
+            int likesCount = m_FriendsAnalyticsFeature.GetAnalyticsData();
+            labelLikesCount.Text = likesCount.ToString();
+        }
+        
+        private void updateCommentsCount()
+        {
+            m_FriendsAnalyticsFeature.AnalyticsStrategy = new CommentsAnalyticsStrategy();
+            int commentsCount = m_FriendsAnalyticsFeature.GetAnalyticsData();
+            labelCommentsCount.Text = commentsCount.ToString();
         }
     }
 }
