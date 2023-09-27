@@ -89,14 +89,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationLogic\Decoretor\AnalyticsStrategyDecoretor.cs" />
     <Compile Include="ApplicationLogic\Features\FriendsAnalyticsFeature\FriendsAnalyticsFeature.cs" />
     <Compile Include="ApplicationLogic\Features\RelationshipFeature\IRelationShipFeature.cs" />
     <Compile Include="ApplicationLogic\Features\RelationshipFeature\RelationshipFeature.cs" />
     <Compile Include="ApplicationLogic\FormsFactory.cs" />
     <Compile Include="ApplicationLogic\Proxies\RelationshipCacheProxy.cs" />
-    <Compile Include="ApplicationLogic\Strategy\CommentsAnalyticsStrategy.cs" />
+    <Compile Include="ApplicationLogic\Strategy\CommentsOnPostAnalytics.cs" />
     <Compile Include="ApplicationLogic\Strategy\IAnalyticsStrategy.cs" />
-    <Compile Include="ApplicationLogic\Strategy\LikesAnalyticsStrategy.cs" />
+    <Compile Include="ApplicationLogic\Strategy\LikesOnPhotosAnalytics.cs" />
+    <Compile Include="ApplicationLogic\Strategy\LikesOnPostAnalytics.cs" />
     <Compile Include="ApplicationLogic\UserManager.cs" />
     <Compile Include="Forms\ApplicationMessages.cs" />
     <Compile Include="Forms\FormFriendsAnalytics.cs">

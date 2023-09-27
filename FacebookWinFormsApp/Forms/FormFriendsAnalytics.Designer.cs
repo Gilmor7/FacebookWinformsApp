@@ -41,10 +41,10 @@ namespace BasicFacebookFeatures.Forms
             this.LabelFriends = new System.Windows.Forms.Label();
             this.listBoxFriendsAnalytics = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.labelLikes = new System.Windows.Forms.Label();
-            this.labelComments = new System.Windows.Forms.Label();
-            this.labelLikesCount = new System.Windows.Forms.Label();
-            this.labelCommentsCount = new System.Windows.Forms.Label();
+            this.labelLikesOnPosts = new System.Windows.Forms.Label();
+            this.labelCommentsOnPosts = new System.Windows.Forms.Label();
+            this.labelPostLikesCount = new System.Windows.Forms.Label();
+            this.labelPostCommentsCount = new System.Windows.Forms.Label();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.aboutLabel1 = new System.Windows.Forms.Label();
@@ -53,6 +53,12 @@ namespace BasicFacebookFeatures.Forms
             this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
             this.linkLinkLabel = new System.Windows.Forms.LinkLabel();
             this.nameLabel1 = new System.Windows.Forms.Label();
+            this.labelOverallEngagements = new System.Windows.Forms.Label();
+            this.labelPhotosLikesCount = new System.Windows.Forms.Label();
+            this.labelLikesOnPhotos = new System.Windows.Forms.Label();
+            this.labelNumberOfLikes = new System.Windows.Forms.Label();
+            this.labelLikesCount = new System.Windows.Forms.Label();
+            this.labelPostEngagementsCount = new System.Windows.Forms.Label();
             aboutLabel = new System.Windows.Forms.Label();
             birthdayLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
@@ -98,35 +104,35 @@ namespace BasicFacebookFeatures.Forms
             this.label2.Text = resources.GetString("label2.Text");
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelLikes
+            // labelLikesOnPosts
             // 
-            this.labelLikes.Location = new System.Drawing.Point(747, 253);
-            this.labelLikes.Name = "labelLikes";
-            this.labelLikes.Size = new System.Drawing.Size(213, 33);
-            this.labelLikes.TabIndex = 11;
-            this.labelLikes.Text = "Number Of Likes: ";
+            this.labelLikesOnPosts.Location = new System.Drawing.Point(709, 253);
+            this.labelLikesOnPosts.Name = "labelLikesOnPosts";
+            this.labelLikesOnPosts.Size = new System.Drawing.Size(213, 33);
+            this.labelLikesOnPosts.TabIndex = 11;
+            this.labelLikesOnPosts.Text = "Number Of Likes On Posts:";
             // 
-            // labelComments
+            // labelCommentsOnPosts
             // 
-            this.labelComments.Location = new System.Drawing.Point(747, 320);
-            this.labelComments.Name = "labelComments";
-            this.labelComments.Size = new System.Drawing.Size(173, 21);
-            this.labelComments.TabIndex = 12;
-            this.labelComments.Text = "Number Of Comments:";
+            this.labelCommentsOnPosts.Location = new System.Drawing.Point(709, 299);
+            this.labelCommentsOnPosts.Name = "labelCommentsOnPosts";
+            this.labelCommentsOnPosts.Size = new System.Drawing.Size(250, 25);
+            this.labelCommentsOnPosts.TabIndex = 12;
+            this.labelCommentsOnPosts.Text = "Number Of Comments On Posts:";
             // 
-            // labelLikesCount
+            // labelPostLikesCount
             // 
-            this.labelLikesCount.Location = new System.Drawing.Point(1014, 253);
-            this.labelLikesCount.Name = "labelLikesCount";
-            this.labelLikesCount.Size = new System.Drawing.Size(100, 23);
-            this.labelLikesCount.TabIndex = 13;
+            this.labelPostLikesCount.Location = new System.Drawing.Point(1025, 252);
+            this.labelPostLikesCount.Name = "labelPostLikesCount";
+            this.labelPostLikesCount.Size = new System.Drawing.Size(100, 23);
+            this.labelPostLikesCount.TabIndex = 13;
             // 
-            // labelCommentsCount
+            // labelPostCommentsCount
             // 
-            this.labelCommentsCount.Location = new System.Drawing.Point(1014, 320);
-            this.labelCommentsCount.Name = "labelCommentsCount";
-            this.labelCommentsCount.Size = new System.Drawing.Size(100, 23);
-            this.labelCommentsCount.TabIndex = 14;
+            this.labelPostCommentsCount.Location = new System.Drawing.Point(1025, 296);
+            this.labelPostCommentsCount.Name = "labelPostCommentsCount";
+            this.labelPostCommentsCount.Size = new System.Drawing.Size(100, 23);
+            this.labelPostCommentsCount.TabIndex = 14;
             // 
             // userBindingSource
             // 
@@ -252,17 +258,71 @@ namespace BasicFacebookFeatures.Forms
             this.nameLabel1.TabIndex = 11;
             this.nameLabel1.Text = "label1";
             // 
+            // labelOverallEngagements
+            // 
+            this.labelOverallEngagements.AutoSize = true;
+            this.labelOverallEngagements.Location = new System.Drawing.Point(709, 464);
+            this.labelOverallEngagements.Name = "labelOverallEngagements";
+            this.labelOverallEngagements.Size = new System.Drawing.Size(263, 20);
+            this.labelOverallEngagements.TabIndex = 16;
+            this.labelOverallEngagements.Text = "Number Of Engagements On Posts:";
+            // 
+            // labelPhotosLikesCount
+            // 
+            this.labelPhotosLikesCount.Location = new System.Drawing.Point(1025, 353);
+            this.labelPhotosLikesCount.Name = "labelPhotosLikesCount";
+            this.labelPhotosLikesCount.Size = new System.Drawing.Size(100, 23);
+            this.labelPhotosLikesCount.TabIndex = 17;
+            // 
+            // labelLikesOnPhotos
+            // 
+            this.labelLikesOnPhotos.AutoSize = true;
+            this.labelLikesOnPhotos.Location = new System.Drawing.Point(709, 353);
+            this.labelLikesOnPhotos.Name = "labelLikesOnPhotos";
+            this.labelLikesOnPhotos.Size = new System.Drawing.Size(210, 20);
+            this.labelLikesOnPhotos.TabIndex = 18;
+            this.labelLikesOnPhotos.Text = "Number Of Likes On Photos:";
+            // 
+            // labelNumberOfLikes
+            // 
+            this.labelNumberOfLikes.AutoSize = true;
+            this.labelNumberOfLikes.Location = new System.Drawing.Point(709, 408);
+            this.labelNumberOfLikes.Name = "labelNumberOfLikes";
+            this.labelNumberOfLikes.Size = new System.Drawing.Size(135, 20);
+            this.labelNumberOfLikes.TabIndex = 19;
+            this.labelNumberOfLikes.Text = "Number Of Likes: ";
+            // 
+            // labelLikesCount
+            // 
+            this.labelLikesCount.Location = new System.Drawing.Point(1025, 408);
+            this.labelLikesCount.Name = "labelLikesCount";
+            this.labelLikesCount.Size = new System.Drawing.Size(100, 23);
+            this.labelLikesCount.TabIndex = 20;
+            // 
+            // labelPostEngagementsCount
+            // 
+            this.labelPostEngagementsCount.Location = new System.Drawing.Point(1025, 464);
+            this.labelPostEngagementsCount.Name = "labelPostEngagementsCount";
+            this.labelPostEngagementsCount.Size = new System.Drawing.Size(100, 23);
+            this.labelPostEngagementsCount.TabIndex = 21;
+            // 
             // FormFriendsAnalytics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(169)))));
             this.ClientSize = new System.Drawing.Size(1288, 641);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.labelCommentsCount);
+            this.Controls.Add(this.labelPostEngagementsCount);
             this.Controls.Add(this.labelLikesCount);
-            this.Controls.Add(this.labelComments);
-            this.Controls.Add(this.labelLikes);
+            this.Controls.Add(this.labelNumberOfLikes);
+            this.Controls.Add(this.labelLikesOnPhotos);
+            this.Controls.Add(this.labelPhotosLikesCount);
+            this.Controls.Add(this.labelOverallEngagements);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.labelPostCommentsCount);
+            this.Controls.Add(this.labelPostLikesCount);
+            this.Controls.Add(this.labelCommentsOnPosts);
+            this.Controls.Add(this.labelLikesOnPosts);
             this.Controls.Add(this.LabelFriends);
             this.Controls.Add(this.listBoxFriendsAnalytics);
             this.Controls.Add(this.label2);
@@ -276,13 +336,14 @@ namespace BasicFacebookFeatures.Forms
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageNormalPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
-        private System.Windows.Forms.Label labelLikes;
-        private System.Windows.Forms.Label labelComments;
-        private System.Windows.Forms.Label labelLikesCount;
-        private System.Windows.Forms.Label labelCommentsCount;
+        private System.Windows.Forms.Label labelLikesOnPosts;
+        private System.Windows.Forms.Label labelCommentsOnPosts;
+        private System.Windows.Forms.Label labelPostLikesCount;
+        private System.Windows.Forms.Label labelPostCommentsCount;
 
         #endregion
         private System.Windows.Forms.Label LabelFriends;
@@ -296,5 +357,11 @@ namespace BasicFacebookFeatures.Forms
         private System.Windows.Forms.PictureBox imageNormalPictureBox;
         private System.Windows.Forms.LinkLabel linkLinkLabel;
         private System.Windows.Forms.Label nameLabel1;
+        private System.Windows.Forms.Label labelOverallEngagements;
+        private System.Windows.Forms.Label labelPhotosLikesCount;
+        private System.Windows.Forms.Label labelLikesOnPhotos;
+        private System.Windows.Forms.Label labelNumberOfLikes;
+        private System.Windows.Forms.Label labelLikesCount;
+        private System.Windows.Forms.Label labelPostEngagementsCount;
     }
 }

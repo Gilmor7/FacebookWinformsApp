@@ -4,6 +4,6 @@ namespace BasicFacebookFeatures.ApplicationLogic.Strategy
 {
     public interface IAnalyticsStrategy
     {
-        int GetAnalytics(User i_User, User i_SelectedFriend);
+        int GetAnalytics(User i_LoggedInUser, User i_SelectedFriend);
     }
 }

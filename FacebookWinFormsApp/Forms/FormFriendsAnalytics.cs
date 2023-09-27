@@ -11,6 +11,10 @@ namespace BasicFacebookFeatures.Forms
     public partial class FormFriendsAnalytics : Form
     {
         private FriendsAnalyticsFeature m_FriendsAnalyticsFeature;
+        private object m_LockObject = new object();
+        private ThreadLocal<FriendsAnalyticsFeature> m_ThreadLocalFriendsAnalyticsFeature =
+            new ThreadLocal<FriendsAnalyticsFeature>(() => new FriendsAnalyticsFeature());
+
 
         public FormFriendsAnalytics()
         {
@@ -43,40 +47,52 @@ namespace BasicFacebookFeatures.Forms
         {
             if (listBoxFriendsAnalytics.SelectedItems.Count == 1)
             {
-                try
+                User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
+                if (selectedFriend != null)
                 {
-                    User selectedFriend = listBoxFriendsAnalytics.SelectedItem as User;
-                    if (selectedFriend != null)
-                    {
-                        m_FriendsAnalyticsFeature.SelectedFriend = selectedFriend;
-                        updateDisplayableData();
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Couldn't fetch analytics, unknown error occured.", ApplicationMessages.k_DefaultErrorCaption);
+                    m_FriendsAnalyticsFeature.SelectedFriend = selectedFriend;
+                    new Thread(updateDisplayableData).Start();
                 }
             }
         }
         
         private void updateDisplayableData()
         {
-            updateLikesCount();
-            updateCommentsCount();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPostLikesCount, new LikesOnPostAnalytics(null))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPostCommentsCount, new CommentsOnPostAnalytics(null))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPhotosLikesCount, new LikesOnPhotosAnalytics(null))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelLikesCount, new LikesOnPhotosAnalytics(new LikesOnPostAnalytics(null)))).Start();
+            new Thread(() => updateAnalyticLabelBasedOnStrategy(labelPostEngagementsCount, new LikesOnPostAnalytics(new CommentsOnPostAnalytics(null)))).Start();
         }
 
-        private void updateLikesCount()
+        private void updateAnalyticLabelBasedOnStrategy(Label i_LabelToUpdate, IAnalyticsStrategy i_AnalyticsStrategy)
         {
-            m_FriendsAnalyticsFeature.AnalyticsStrategy = new LikesAnalyticsStrategy();
-            int likesCount = m_FriendsAnalyticsFeature.GetAnalyticsData();
-            labelLikesCount.Text = likesCount.ToString();
-        }
-        
-        private void updateCommentsCount()
-        {
-            m_FriendsAnalyticsFeature.AnalyticsStrategy = new CommentsAnalyticsStrategy();
-            int commentsCount = m_FriendsAnalyticsFeature.GetAnalyticsData();
-            labelCommentsCount.Text = commentsCount.ToString();
+            string textToDisplay = string.Empty;
+
+            try
+            {
+                FriendsAnalyticsFeature friendsAnalyticsFeature = m_ThreadLocalFriendsAnalyticsFeature.Value;
+                friendsAnalyticsFeature.LoggedInUser = m_FriendsAnalyticsFeature.LoggedInUser;
+                friendsAnalyticsFeature.SelectedFriend = m_FriendsAnalyticsFeature.SelectedFriend;
+                friendsAnalyticsFeature.AnalyticsStrategy = i_AnalyticsStrategy;
+                textToDisplay = friendsAnalyticsFeature.GetAnalyticsData().ToString();
+            }
+            catch (Exception e)
+            {
+                textToDisplay = "N/A";
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                if(i_LabelToUpdate.InvokeRequired)
+                {
+                    i_LabelToUpdate.Invoke(new Action(() => i_LabelToUpdate.Text = textToDisplay));
+                }
+                else
+                {
+                    i_LabelToUpdate.Text = textToDisplay;
+                }
+            }
         }
     }
 }
