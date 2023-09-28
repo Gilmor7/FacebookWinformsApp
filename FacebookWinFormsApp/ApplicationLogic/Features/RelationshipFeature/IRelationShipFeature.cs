@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
 {
-    public interface IRelationShipFeature
+    public interface IRelationShipFeature : IEnumerable<User>
     {
         User LoggedInUser { get; set; }
         User SelectedFriend { get; set; }
@@ -12,7 +13,6 @@ namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
         bool SameCityLimitPreference { get; set; }
         int MinAgePreference { get; set; }
         int MaxAgePreference { get; set; }
-        FacebookObjectCollection<User> FindMatchesBasedOnPreferences();
         bool IsPotentialMatch(User i_Friend);
     }
 }

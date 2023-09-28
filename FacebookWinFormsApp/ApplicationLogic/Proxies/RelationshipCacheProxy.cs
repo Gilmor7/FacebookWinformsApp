@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature;
 using FacebookWrapper.ObjectModel;
 
@@ -94,23 +96,6 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
             }
         }
 
-        public FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
-        {
-            throwExcpetionIfUsersAreNull();
-            FacebookObjectCollection<User> selectedUserFriends = getFriendsFromCacheOrSelectedFriend();
-            FacebookObjectCollection<User> matches = new FacebookObjectCollection<User>();
-            
-            foreach(User friend in selectedUserFriends)
-            {
-                if (m_RelationshipFeature.IsPotentialMatch(friend))
-                {
-                    matches.Add(friend);
-                }
-            }
-            
-            return matches;
-        }
-
         public bool IsPotentialMatch(User i_Friend)
         {
             return m_RelationshipFeature.IsPotentialMatch(i_Friend);
@@ -141,6 +126,24 @@ namespace BasicFacebookFeatures.ApplicationLogic.Proxies
             {
                 throw new ArgumentNullException("SelectedFriend", "SelectedFriend is null");
             }
+        }
+
+        public IEnumerator<User> GetEnumerator()
+        {
+            FacebookObjectCollection<User> selectedFriendFriendsList = getFriendsFromCacheOrSelectedFriend();
+            
+            foreach(User possibleMatch in selectedFriendFriendsList)
+            {
+                if(IsPotentialMatch(possibleMatch))
+                {
+                    yield return possibleMatch;
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
