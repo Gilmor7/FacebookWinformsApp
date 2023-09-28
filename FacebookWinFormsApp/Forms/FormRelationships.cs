@@ -91,20 +91,17 @@ namespace BasicFacebookFeatures.Forms
         {
             try
             {
-                FacebookObjectCollection<User> matches = r_RelationshipFeature.FindMatchesBasedOnPreferences();
                 listBoxMatches.Items.Clear();
                 listBoxMatches.DisplayMember = ApplicationMessages.k_DefaultListBoxDisplayMember;
-
-                if (matches.Count > 0)
+                
+                foreach (User match in r_RelationshipFeature)
                 {
-                    foreach (User match in matches)
-                    {
-                        listBoxMatches.Items.Add(match);
-                    }
+                    listBoxMatches.Items.Add(match);
                 }
-                else
+                
+                if (listBoxMatches.Items.Count == 0)
                 {
-                    listBoxMatches.Items.Add("There are no matches for you :(");
+                    listBoxMatches.Items.Add(ApplicationMessages.k_NoMatchesFoundMessage);
                 }
             }
             catch (ArgumentNullException)

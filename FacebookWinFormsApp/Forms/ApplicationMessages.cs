@@ -7,5 +7,6 @@
         public const string k_NoUserLoggedInMessage = "No user logged in yet";
         public const string k_DefaultServerErrorMessage = "an Error occured while trying to reach the Facebook server, please try again later";
         public const string k_DefaultListBoxDisplayMember = "Name";
+        public const string k_NoMatchesFoundMessage = "No matches have been found for you :(";
     }
 }

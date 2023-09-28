@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
@@ -52,23 +54,6 @@ namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
                     throw new ArgumentOutOfRangeException("MaxAgePreference");
                 }
             }
-        }
-
-        public FacebookObjectCollection<User> FindMatchesBasedOnPreferences()
-        {
-            throwExceptionIfParametersAreNull();
-            
-            FacebookObjectCollection<User> matches = new FacebookObjectCollection<User>();
-
-            foreach (User possibleMatchUser in SelectedFriend.Friends)
-            {
-                if(IsPotentialMatch(possibleMatchUser))
-                {
-                    matches.Add(possibleMatchUser);
-                }
-            }
-            
-            return matches;
         }
         
         public bool IsPotentialMatch(User i_PossibleMatch)
@@ -138,6 +123,22 @@ namespace BasicFacebookFeatures.ApplicationLogic.Features.RelationshipFeature
             }
             
             return isAgePreferenceMet;
+        }
+
+        public IEnumerator<User> GetEnumerator()
+        {
+            foreach(User possibleMatch in SelectedFriend.Friends)
+            {
+                if(IsPotentialMatch(possibleMatch))
+                {
+                    yield return possibleMatch;
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
