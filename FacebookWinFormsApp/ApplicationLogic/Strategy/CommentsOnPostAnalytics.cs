@@ -1,4 +1,4 @@
-﻿using BasicFacebookFeatures.ApplicationLogic.Decoretor;
+﻿using BasicFacebookFeatures.ApplicationLogic.Decorator;
 using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Strategy
 {
-    public class CommentsOnPostAnalytics : AnalyticsStrategyDecoretor
+    public class CommentsOnPostAnalytics : AnalyticsStrategyDecorator
     {
         public CommentsOnPostAnalytics(IAnalyticsStrategy i_AnalyticsStrategy) : base(i_AnalyticsStrategy)
         {

@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.ApplicationLogic.Decoretor
+namespace BasicFacebookFeatures.ApplicationLogic.Decorator
 {
-    public abstract class AnalyticsStrategyDecoretor : IAnalyticsStrategy
+    public abstract class AnalyticsStrategyDecorator : IAnalyticsStrategy
     {
         public IAnalyticsStrategy AnalyticsStrategy { get; set; }
 
-        public AnalyticsStrategyDecoretor(IAnalyticsStrategy i_AnalyticsStrategy)
+        public AnalyticsStrategyDecorator(IAnalyticsStrategy i_AnalyticsStrategy)
         {
             AnalyticsStrategy = i_AnalyticsStrategy;
         }
