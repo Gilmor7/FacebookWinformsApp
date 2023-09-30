@@ -89,7 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationLogic\Decoretor\AnalyticsStrategyDecoretor.cs" />
+    <Compile Include="ApplicationLogic\Decoretor\AnalyticsStrategyDecorator.cs" />
     <Compile Include="ApplicationLogic\Features\FriendsAnalyticsFeature\FriendsAnalyticsFeature.cs" />
     <Compile Include="ApplicationLogic\Features\RelationshipFeature\IRelationShipFeature.cs" />
     <Compile Include="ApplicationLogic\Features\RelationshipFeature\RelationshipFeature.cs" />

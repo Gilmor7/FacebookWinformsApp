@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Strategy
 {
-    public class LikesOnPhotosAnalytics : AnalyticsStrategyDecoretor
+    public class LikesOnPhotosAnalytics : AnalyticsStrategyDecorator
     {
         public LikesOnPhotosAnalytics(IAnalyticsStrategy i_AnalyticsStrategy) : base(i_AnalyticsStrategy)
         {

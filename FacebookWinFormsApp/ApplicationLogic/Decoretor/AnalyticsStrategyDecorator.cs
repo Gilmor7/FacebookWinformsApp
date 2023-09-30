@@ -8,11 +8,11 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.ApplicationLogic.Decoretor
 {
-    public abstract class AnalyticsStrategyDecoretor : IAnalyticsStrategy
+    public abstract class AnalyticsStrategyDecorator : IAnalyticsStrategy
     {
         public IAnalyticsStrategy AnalyticsStrategy { get; set; }
 
-        public AnalyticsStrategyDecoretor(IAnalyticsStrategy i_AnalyticsStrategy)
+        public AnalyticsStrategyDecorator(IAnalyticsStrategy i_AnalyticsStrategy)
         {
             AnalyticsStrategy = i_AnalyticsStrategy;
         }
