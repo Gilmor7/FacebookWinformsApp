@@ -80,7 +80,6 @@ namespace BasicFacebookFeatures.Forms
             catch (Exception e)
             {
                 textToDisplay = "N/A";
-                MessageBox.Show(e.Message);
             }
             finally
             {
