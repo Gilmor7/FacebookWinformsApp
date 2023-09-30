@@ -40,9 +40,7 @@ namespace BasicFacebookFeatures.ApplicationLogic.Strategy
                 }
             }
 
-            analyticsCount += AnalyticsStrategy?.GetAnalytics(i_LoggedInUser, i_SelectedFriend) ?? 0;
-
-            return analyticsCount;
+            return analyticsCount + base.GetAnalytics(i_LoggedInUser, i_SelectedFriend);
         }
     }
 }

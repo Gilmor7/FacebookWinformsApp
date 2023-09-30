@@ -14,11 +14,11 @@ namespace BasicFacebookFeatures.ApplicationLogic.Strategy
         {
         }
 
-        public override int GetAnalytics(User i_User, User i_SelectedFriend)
+        public override int GetAnalytics(User i_LoggedInUser, User i_SelectedFriend)
         {
             int analyticsCount = 0;
 
-            foreach (Post post in i_User.Posts)
+            foreach (Post post in i_LoggedInUser.Posts)
             {
                 foreach (Comment comment in post.Comments)
                 {
@@ -29,9 +29,7 @@ namespace BasicFacebookFeatures.ApplicationLogic.Strategy
                 }
             }
 
-            analyticsCount += AnalyticsStrategy?.GetAnalytics(i_User, i_SelectedFriend) ?? 0;
-
-            return analyticsCount;
+            return analyticsCount + base.GetAnalytics(i_LoggedInUser, i_SelectedFriend);
         }
     }
 }

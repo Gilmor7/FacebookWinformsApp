@@ -17,7 +17,10 @@ namespace BasicFacebookFeatures.ApplicationLogic.Decoretor
             AnalyticsStrategy = i_AnalyticsStrategy;
         }
 
-        public abstract int GetAnalytics(User i_LoggedInUser, User i_SelectedFriend);
+        public virtual int GetAnalytics(User i_LoggedInUser, User i_SelectedFriend)
+        {
+            return AnalyticsStrategy?.GetAnalytics(i_LoggedInUser, i_SelectedFriend) ?? 0;
+        }
 
     }
 }
